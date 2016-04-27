@@ -1,6 +1,13 @@
 import pygame, sys
 from Person import *
+from Building import *
+from Scene import *
 from pygame.locals import *
+
+
+# Lots of comments so that it easier to understand, although comments in python does affect overall performance but we
+# just need this to work 
+
 
 # Colors to use in this module
 BLACK = (0,0,0)	
@@ -25,73 +32,48 @@ def main():
 	people = pygame.sprite.Group()
 
 	# Create a scene objects
+	targetTalk = None
+
 	first = Person(50, 50, (0,0))
 	second = Person(50, 50, (300,300))
+	building = Building(80,80,(0,520))
 	second.dialogueChoice(["Will you help me?"])
 	second.dialogueChoice(["Help", "Do not Help"])
 	second.dialogueChoice(["Thanks man", "You suck"])
-	people.add(first, second)
+
+	people.add(first, second, building)
+	people2 = pygame.sprite.Group()
+	people2.add(second, building)
+	talk = False
+	img = pygame.image.load('background.png')
+	scene1  = Scene(DISPLAYSURF,people2,first)
 
 	# Importing cat images just a test snippet
+	"""
 	catImg = pygame.image.load('cat.png')
 	cat2 = pygame.image.load('cat.png')
 	cx = 100
 	cy = 100
 	catx = 10
 	caty = 200
+	"""
 
-	talk = False
+	scene1.run()
 
+	'''	
 	while True:
-		DISPLAYSURF.fill(WHITE)
-		DISPLAYSURF.blit(catImg, (catx,caty))
-		#This for loop checks for any events that occur
+	'''
 
-		# This is for the movement of our sprite
-		keys = pygame.key.get_pressed()
-	
+def collisions(hero, allSprites):
+	for sprite in allSprites:
+		if hero != sprite:
+			if pygame.sprite.collide_rect(hero, sprite):
+				return sprite
 
-		if keys[pygame.K_UP] :
-			first.rect.y -= 5
-			talk = False
-			if pygame.sprite.collide_rect(first, second):
-				talk = True
-				first.rect.y += 5
-		elif keys[pygame.K_DOWN]:
-			first.rect.y += 5
-			talk = False
-			if pygame.sprite.collide_rect(first, second):
-				first.rect.y -= 5
-				talk = True
-		elif keys[pygame.K_RIGHT]:
-			first.rect.x += 5
-			talk = False
-			if pygame.sprite.collide_rect(first, second):
-				first.rect.x -= 5
-				talk = True
-		elif keys[pygame.K_LEFT]:
-			first.rect.x -= 5
-			talk = False
-			if pygame.sprite.collide_rect(first, second):
-				first.rect.x += 5
-				talk = True
+	return None
 
-		people.update()
-		people.draw(DISPLAYSURF)
-
-		# Event key look for
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				pygame.quit()
-				sys.exit()
-			elif event.type == KEYUP:
-				if event.key == K_SPACE and talk:
-					second.getTextBox(DISPLAYSURF)
-
-		#Updates after events have been made
-		pygame.display.update()
-		fpsClock.tick(FPS)
-
+def wallCollide(hero, surface):
+	return  hero.rect.left < 0 or hero.rect.right > surface.get_width() or hero.rect.top < 0 or hero.rect.bottom > surface.get_height()
 
 
 if __name__ == "__main__":

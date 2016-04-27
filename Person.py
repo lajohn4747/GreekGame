@@ -10,13 +10,20 @@ RED = (255, 0, 0)
 
 pygame.init()
 
-# This represents a person
+'''
+	The Person class is a sprite and should be the parent of the Enemy class. A regular person is usually just an object that
+	is able to interact with the hero only through conversation. 
+'''
 class Person(pygame.sprite.Sprite):
 	# This represents a person in our game
 
 	myfont = pygame.font.Font(None, 22)
 	words = []
 	eventTrigger = 0
+
+	'''
+	Initialize a person with their position and width and height to scale according to screen size
+	'''
 	def __init__(self,width,height,pos):
 		# Call the parent class (Sprite) constructor
 		pygame.sprite.Sprite.__init__(self)
@@ -31,10 +38,18 @@ class Person(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.topleft = pos
 
+	# Function to give this person a dialogue script
 	def dialogueChoice(self, text):
 		self.words.append(text)
 
+	# Setting the position of a person in the case they move to a different location
+	def setPosition(self, pos):
+		self.rect.topleft = pos
 
+	'''
+	This is when choices could be made, it handles to choice indicator to show which choice the player is choosing
+	It also determines the outcome of the answer
+	'''
 	def askDecision(self, surface, textSurface, choices, current):
 		arrowX = 50
 		chosen = 0
@@ -60,6 +75,11 @@ class Person(pygame.sprite.Sprite):
 			surface.blit(textSurface, (0,400))
 			pygame.display.update()
 
+
+	'''
+	The way getTextBox works is that there should be a 2d array for dialogue, after pressing SPACE it would then go on to the next piece of 
+	dialogue. If there are choices call askDecision and then change choicePath. ChoicePath then determines what the character should say.
+	'''
 	def getTextBox(self, surface):
 		currentText = 0
 		choicePath = 0
