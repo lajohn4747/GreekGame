@@ -19,7 +19,7 @@ class Person(pygame.sprite.Sprite):
 
 	myfont = pygame.font.Font(None, 22)
 	words = []
-	eventTrigger = 0
+	eventTrigger = {}
 
 	'''
 	Initialize a person with their position and width and height to scale according to screen size
@@ -84,6 +84,8 @@ class Person(pygame.sprite.Sprite):
 		currentText = 0
 		choicePath = 0
 		textbox = pygame.Surface((surface.get_width(), 200))
+		trigger = None
+
 		while True:
 
 			textbox.fill(WHITE)
@@ -93,10 +95,12 @@ class Person(pygame.sprite.Sprite):
 					if event.key == K_SPACE:
 						currentText += 1
 						if currentText > len(self.words)-1:
-							return
+							return trigger
 						makeChoice = len(self.words[currentText])
 						if makeChoice > 1:
 							choicePath = self.askDecision(surface, textbox, makeChoice, currentText)
+							if(self.checkTrigger((currentText,choicePath))):
+								trigger = self.activateTrigger((currentText,choicePath))
 							currentText += 1
 
 			pygame.draw.rect(textbox, (BLACK), (0, 0, textbox.get_width(), textbox.get_height()), 2)
@@ -106,3 +110,15 @@ class Person(pygame.sprite.Sprite):
 
 
 			pygame.display.update()
+
+
+	def activateTrigger(self, currentTextAndChoice):
+		return self.eventTrigger[currentTextAndChoice]
+
+	def setTrigger(self, currentTextAndChoice, newEvent):
+		self.eventTrigger[currentTextAndChoice] = newEvent
+
+	def checkTrigger(self, currentTextAndChoice):
+		if currentTextAndChoice in self.eventTrigger:
+			return True
+		return False

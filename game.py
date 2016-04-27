@@ -1,5 +1,6 @@
 import pygame, sys
 from Person import *
+from Hero import *
 from Building import *
 from Scene import *
 from pygame.locals import *
@@ -31,38 +32,30 @@ def main():
 	DISPLAYSURF.fill(WHITE)
 	people = pygame.sprite.Group()
 
-	# Create a scene objects
-	targetTalk = None
-
-	first = Person(50, 50, (0,0))
+	first = Hero(50, 50, (0,0))
 	second = Person(50, 50, (300,300))
+	third = Person(50,50,(400,200))
+
 	building = Building(80,80,(0,520))
 	second.dialogueChoice(["Will you help me?"])
 	second.dialogueChoice(["Help", "Do not Help"])
 	second.dialogueChoice(["Thanks man", "You suck"])
+	second.setTrigger((1,0),(1,0))
 
-	people.add(first, second, building)
+	people.add(third)
 	people2 = pygame.sprite.Group()
 	people2.add(second, building)
 	talk = False
-	img = pygame.image.load('background.png')
-	scene1  = Scene(DISPLAYSURF,people2,first)
+	img = pygame.image.load('background.png').convert()
+	scene1  = Scene(DISPLAYSURF,people2, first, img)
+	scene2 = Scene(DISPLAYSURF, people, first)
 
-	# Importing cat images just a test snippet
-	"""
-	catImg = pygame.image.load('cat.png')
-	cat2 = pygame.image.load('cat.png')
-	cx = 100
-	cy = 100
-	catx = 10
-	caty = 200
-	"""
-
-	scene1.run()
-
-	'''	
 	while True:
-	'''
+		nextScene = scene1.run()
+		if nextScene == 1:
+			scene2.run()
+
+	#while True:
 
 def collisions(hero, allSprites):
 	for sprite in allSprites:
