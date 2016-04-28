@@ -2,6 +2,7 @@ import pygame, sys
 from Person import *
 from Hero import *
 from Building import *
+from Enemy import *
 from Scene import *
 from pygame.locals import *
 
@@ -21,6 +22,15 @@ BLUE = (0, 0, 255)
 FPS = 60
 fpsClock = pygame.time.Clock()
 
+class Game:
+	def __init__(self, scenes):
+		self.scenes = scenes
+		for i in self.scenes:
+			i.identifyGame(self)
+	def modifyScene(self, sceneNumber, modifyCommand):
+		scene = self.scenes[sceneNumber]
+		scene.remove(modifyCommand)
+
 
 # The main game loop
 def main():
@@ -31,10 +41,12 @@ def main():
 	pygame.display.set_caption('Hero of Greece') # Title
 	DISPLAYSURF.fill(WHITE)
 	people = pygame.sprite.Group()
+	people2 = []
 
 	first = Hero(50, 50, (0,0))
+	first.setSurface(DISPLAYSURF)
 	second = Person(50, 50, (300,300))
-	third = Person(50,50,(400,200))
+	third = Enemy((400,200), 5)
 
 	building = Building(80,80,(0,520))
 	second.dialogueChoice(["Will you help me?"])
@@ -43,30 +55,23 @@ def main():
 	second.setTrigger((1,0),(1,0))
 
 	people.add(third)
-	people2 = pygame.sprite.Group()
-	people2.add(second, building)
+	#people.append(third)
+	people2.append(second)
+	people2.append(building)
 	talk = False
 	img = pygame.image.load('background.png').convert()
-	scene1  = Scene(DISPLAYSURF,people2, first, img)
-	scene2 = Scene(DISPLAYSURF, people, first)
+	scene1  = Scene(DISPLAYSURF,people2, first)
+	scene2 = Scene(DISPLAYSURF, people2, first, people)
+
+	theGame = Game([scene1, scene2])
 
 	while True:
 		nextScene = scene1.run()
+		if nextScene == -1:
+			scene2.remove(0)
+			nextScene = scene1.run()
 		if nextScene == 1:
 			scene2.run()
-
-	#while True:
-
-def collisions(hero, allSprites):
-	for sprite in allSprites:
-		if hero != sprite:
-			if pygame.sprite.collide_rect(hero, sprite):
-				return sprite
-
-	return None
-
-def wallCollide(hero, surface):
-	return  hero.rect.left < 0 or hero.rect.right > surface.get_width() or hero.rect.top < 0 or hero.rect.bottom > surface.get_height()
 
 
 if __name__ == "__main__":
