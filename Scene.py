@@ -5,6 +5,8 @@ from Building import *
 from Enemy import *
 # Color values
 WHITE = (255, 255, 255)
+FPS = 60
+fpsClock = pygame.time.Clock()
 
 '''
 	The scene is the second highest (as of now highest) clas of the game. In this class, the hero is dropped in 
@@ -76,6 +78,7 @@ class Scene:
 							self.hitCollision(weapon)
 
 			pygame.display.update()
+			fpsClock.tick(FPS)
 
 	def getReaction(self, reaction):
 		if reaction:
