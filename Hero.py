@@ -18,6 +18,7 @@ class Weapon(pygame.sprite.Sprite):
 		self.sideImage = pygame.Surface([50,8])
 		self.topImage = pygame.Surface([8,50])
 		self.image.fill(RED)
+		self.health = 10
 
 		# Fetch the rectangle object that has the dimensions of the image
 		# Update the position of this object by setting the values of rect.x and rect.y
@@ -52,16 +53,17 @@ class Hero(Person):
 
 	def setSurface(self, surface):
 		self.surface = surface
+
 	def askDecision(self, surface, textSurface, choices, current):
 		pass
+
 	def getTextBox(self, surface):
 		pass
+
 	def increaseAthena(self,number):
 		self.likeAthena += 1
 
 	def getAction(self):
-		#keys = pygame.key.get_pressed()
-		#if keys[pygame.K_LSHIFT]:
 		if(self.direction == 1):
 			self.weapon.setPositionVertical([self.rect.x, self.rect.top], self.direction)
 			self.surface.blit(self.weapon.image, self.weapon.rect)

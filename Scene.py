@@ -55,13 +55,12 @@ class Scene:
 		while True:
 			self.drawBackground()
 			self.mainSurface.blit(self.hero.image, self.hero.rect)
-			#if weapon:
-			#	self.hitCollision(weapon)
 			talk, change = self.checkMovement(talk)
 			if change > 0:
 				return change
 			#self.spriteGroup.update()
 			#self.spriteGroup.draw(self.mainSurface)
+			self.drawAll()
 			for event in pygame.event.get():
 				if event.type == QUIT:
 					pygame.quit()
@@ -70,12 +69,12 @@ class Scene:
 					if event.key == K_SPACE and talk and self.talkingTo:
 						reaction = self.talkingTo.getTextBox(self.mainSurface)
 						self.getReaction(reaction)
-						self.talkingTo = None
+						#self.talkingTo = None
 					elif event.key == K_LSHIFT:
 						weapon = self.hero.getAction()
 						if weapon:
 							self.hitCollision(weapon)
-			self.drawAll()
+
 			pygame.display.update()
 
 	def getReaction(self, reaction):
@@ -100,7 +99,7 @@ class Scene:
 			self.hero.rect.y -= 5
 			self.hero.direction = 1
 			talk = False
-			if self.wallCollide():
+			if self.wallCollide() or self.walkCollision():
 				self.hero.rect.y += 5
 			talkingTo = self.talkCollisions()
 			if talkingTo:
@@ -112,7 +111,7 @@ class Scene:
 			self.hero.rect.y += 5
 			self.hero.direction = 3
 			talk = False
-			if self.wallCollide():
+			if self.wallCollide() or self.walkCollision():
 				self.hero.rect.y -= 5
 			talkingTo = self.talkCollisions()
 			if talkingTo:
@@ -124,7 +123,7 @@ class Scene:
 			self.hero.rect.x += 5
 			self.hero.direction = 2
 			talk = False
-			if self.wallCollide():
+			if self.wallCollide() or self.walkCollision():
 				self.hero.rect.x -= 5
 			talkingTo = self.talkCollisions()
 			if talkingTo:
@@ -136,7 +135,7 @@ class Scene:
 			self.hero.rect.x -= 5
 			self.hero.direction = 4
 			talk = False
-			if self.wallCollide():
+			if self.wallCollide() or self.walkCollision():
 				self.hero.rect.x += 5
 			talkingTo = self.talkCollisions()
 			if talkingTo:
@@ -170,6 +169,13 @@ class Scene:
 					print(enemy.health)
 					if dead:
 						enemy.kill()
+
+	def walkCollision(self):
+		if self.enemies:
+			for enemy in self.enemies:
+				if pygame.sprite.collide_rect(self.hero, enemy):
+					return True
+		return False
 
 	def talkCollisions(self):
 		for sprite in self.spriteGroup:
