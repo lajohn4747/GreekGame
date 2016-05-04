@@ -28,7 +28,7 @@ class Scene:
 
 	# Scenes are initialized with the main pygame surface, sprites in the scene and a background drop for the room
 	def __init__(self, mainSurface, spriteGroup ,hero, enemyList = None, background = None):
-		self.spriteGroup = spriteGroup
+		self.spriteGroup = spriteGroup[:]
 		self.hero = hero
 		self.background = background
 		self.mainSurface = mainSurface

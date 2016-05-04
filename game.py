@@ -60,7 +60,7 @@ def main():
 	people2.append(building)
 	talk = False
 	img = pygame.image.load('background.png').convert()
-	scene1  = Scene(DISPLAYSURF,people2, first)
+	scene1  = Scene(DISPLAYSURF, people2, first)
 	scene2 = Scene(DISPLAYSURF, people2, first, people)
 
 	theGame = Game([scene1, scene2])
