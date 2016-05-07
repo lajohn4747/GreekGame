@@ -54,7 +54,7 @@ class Scene:
 
 	# This is the function that runs the current scene
 	def run(self):
-		self.hero.setPosition((300,0))
+		self.hero.setPosition((0,0))
 		#talk = False
 		talk = False
 
@@ -176,7 +176,7 @@ class Scene:
 				right_x = transition_point_list[1]
 				top_y = transition_point_list[2]
 				bottom_y = transition_point_list[3]
-				if self.hero.rect.x > left_x and self.hero.rect.x < right_x and self.hero.rect.y > top_y and self.hero.rect.y < bottom_y:
+				if self.hero.rect.x >= left_x and self.hero.rect.x <= right_x and self.hero.rect.y >= top_y and self.hero.rect.y <= bottom_y:
 					print("Transition Occurs", transition_point_key)
 					return transition_point_key
 			return 0
