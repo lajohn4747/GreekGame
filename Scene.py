@@ -27,12 +27,16 @@ class Scene:
 	level = None
 
 	# Scenes are initialized with the main pygame surface, sprites in the scene and a background drop for the room
-	def __init__(self, mainSurface, spriteGroup ,hero, enemyList = None, background = None):
+	def __init__(self, mainSurface, spriteGroup ,hero, enemyList = None, background = None, transition_points = None):
 		self.spriteGroup = spriteGroup[:]
 		self.hero = hero
 		self.background = background
 		self.mainSurface = mainSurface
 		self.enemies = enemyList
+		self.transition_points = transition_points 
+			#dictionary of lists of transition points {1:[left_x, right_x, top_y, bottom_y]}
+			#where the key in the dictioary is which side the hero transitioned on:
+			#1 = top of screen, 2 = left of screen, 3 = bottom of screen, 4 = right of screen
 
 	def identifyGame(self,l):
 		self.level = l
@@ -159,10 +163,23 @@ class Scene:
 			self.enemies.draw(self.mainSurface)
 
 	def transistion(self):
-		if self.hero.rect.bottom > 550 and self.hero.rect.x > 290 and self.hero.rect.x < 310:
-			print("Transition Occurs")
-			return 1
-		return 0
+		if self.transition_points == None:
+			if self.hero.rect.bottom > 550 and self.hero.rect.x > 290 and self.hero.rect.x < 310:
+				print("Transition Occurs")
+				return 1
+			return 0
+		else:
+			for transition_point_key in self.transition_points:
+				transition_point_list = self.transition_points[transition_point_key]
+				#[left_x, right_x, top_y, bottom_y]
+				left_x = transition_point_list[0]
+				right_x = transition_point_list[1]
+				top_y = transition_point_list[2]
+				bottom_y = transition_point_list[3]
+				if self.hero.rect.x > left_x and self.hero.rect.x < right_x and self.hero.rect.y > top_y and self.hero.rect.y < bottom_y:
+					print("Transition Occurs", transition_point_key)
+					return transition_point_key
+			return 0
 
 	def hitCollision(self, weapon):
 		if self.enemies:
@@ -191,3 +208,119 @@ class Scene:
 
 	def remove(self,sprite):
 		del self.spriteGroup[sprite]
+
+
+def getNextScene(current_scene, border):
+	#current_scene is the number of the current scene
+	#border = 1 if the hero crossed the top border, 2 for left, 3 for bottom, 4 for right
+	#returns number of next scene 1-12
+	if current_scene==1:
+		if border==1:
+			return 11
+		elif border==2:
+			return 10
+		elif border==3:
+			return 6
+		elif border==4:
+			return 2
+	elif current_scene==2:
+		if border==1:
+			return "error in scene 2 transition"
+		elif border==2:
+			return 1
+		elif border==3:
+			return 5
+		elif border==4:
+			return 3
+	elif current_scene==3:
+		if border==1:
+			return "error in scene 3 transition"
+		elif border==2:
+			return 2
+		elif border==3:
+			return 4
+		elif border==4:
+			return "error in scene 3 transition"
+	elif current_scene==4:
+		if border==1:
+			return 3
+		elif border==2:
+			return 5
+		elif border==3:
+			return "error in scene 4 transition"
+		elif border==4:
+			return "error in scene 4 transition"
+	elif current_scene==5:
+		if border==1:
+			return 2
+		elif border==2:
+			return 6
+		elif border==3:
+			return "error in scene 5 transition"
+		elif border==4:
+			return 4
+	elif current_scene==6:
+		if border==1:
+			return 1
+		elif border==2:
+			return 7
+		elif border==3:
+			return "error in scene 6 transition"
+		elif border==4:
+			return 5
+	elif current_scene==7:
+		if border==1:
+			return 10
+		elif border==2:
+			return 8
+		elif border==3:
+			return "error in scene 7 transition"
+		elif border==4:
+			return 6
+	elif current_scene==8:
+		if border==1:
+			return 9
+		elif border==2:
+			return "error in scene 8 transition"
+		elif border==3:
+			return "error in scene 8 transition"
+		elif border==4:
+			return 7
+	elif current_scene==9:
+		if border==1:
+			return "error in scene 9 transition"
+		elif border==2:
+			return "error in scene 9 transition"
+		elif border==3:
+			return 8
+		elif border==4:
+			return 10
+	elif current_scene==10:
+		if border==1:
+			return "error in scene 10 transition"
+		elif border==2:
+			return 9
+		elif border==3:
+			return 7
+		elif border==4:
+			return 1
+	elif current_scene==11:
+		if border==1:
+			return 12
+		elif border==2:
+			return "error in scene 11 transition"
+		elif border==3:
+			return 1
+		elif border==4:
+			return "error in scene 11 transition"
+	elif current_scene==12:
+		if border==1:
+			return "error in scene 12 transition"
+		elif border==2:
+			return "error in scene 12 transition"
+		elif border==3:
+			return 11
+		elif border==4:
+			return "error in scene 12 transition"
+	return "error in scene transition"
+
