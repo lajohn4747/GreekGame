@@ -5,6 +5,8 @@ from Building import *
 from Enemy import *
 from Scene import *
 from pygame.locals import *
+from Dialogue import *
+from Question import *
 
 
 # Lots of comments so that it easier to understand, although comments in python does affect overall performance but we
@@ -23,14 +25,24 @@ BLUE = (0, 0, 255)
 FPS = 60
 fpsClock = pygame.time.Clock()
 
+
+
 class Game:
-        def __init__(self, scenes):
+        def __init__(self, scenes, people, surface):
                 self.scenes = scenes
                 for i in self.scenes:
                         i.identifyGame(self)
-        def modifyScene(self, sceneNumber, modifyCommand):
-                scene = self.scenes[sceneNumber]
-                scene.remove(modifyCommand)
+                self.sprites = people
+                self.surface = surface
+        def reaction(self, trigger):
+        	if trigger == "guyThanks":
+        		self.sprites["guy"].addDialogue(Dialogue("Thanks"))
+        		self.sprites["guy"].goToLastDialogue()
+        		self.sprites["guy"].getTextBox(self.surface)
+        	elif trigger == "guyHates":
+        		react = Dialogue("You know that you suck")
+        		react.runText(self.surface)
+
 
 # The main game loop
 def main():
@@ -42,6 +54,8 @@ def main():
 	DISPLAYSURF.fill(WHITE)
 	people = pygame.sprite.Group()
 	people2 = []
+	allSprites  = {}
+
 
 	first = Hero(50, 50, (0,0))
 	first.setSurface(DISPLAYSURF)
@@ -49,10 +63,13 @@ def main():
 	third = Enemy((400,200), 5)
 
 	building = Building(80,80,(0,520))
-	second.dialogueChoice(["Will you help me?"])
-	second.dialogueChoice(["Help", "Do not Help"])
-	second.dialogueChoice(["Thanks man", "You suck"])
-	second.setTrigger((1,0),(1,0))
+	second.addDialogue(Dialogue("Will you help me?"))
+	second.addDialogue(Question("Will you help", ["Help", "Do not Help"], ["guyThanks", "guyHates"]), True)
+	#second.dialogueChoice(["Thanks man", "You suck"])
+	#second.setTrigger((1,0),(1,0))
+	allSprites["guy"] = second
+	allSprites["enemy1"] = third
+
 
 	people.add(third)
 	#people.append(third)
@@ -77,7 +94,7 @@ def main():
 
 	scenes_list = [scene1, scene2, scene3, scene4, scene5, scene6, scene7, scene8, scene9, scene10, scene11, scene12]
 
-	theGame = Game(scenes_list)
+	theGame = Game(scenes_list, allSprites, DISPLAYSURF)
 
 	current_scene = scenes_list[0]
 	current_scene_num = 1
@@ -88,13 +105,6 @@ def main():
 			new_scene_num = getNextScene(current_scene_num, state_of_current_scene)
 			current_scene_num = new_scene_num
 			current_scene = scenes_list[new_scene_num-1]
-			#print(current_scene)
-		# nextScene = scene1.run()
-		# if nextScene == -1:
-		# 	scene2.remove(0)
-		# 	nextScene = scene1.run()
-		# if nextScene == 1:
-		# 	scene2.run()
 
 
 if __name__ == "__main__":

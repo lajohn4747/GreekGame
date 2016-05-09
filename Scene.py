@@ -66,6 +66,7 @@ class Scene:
                 talk = False
 
                 while True:
+                        #print(self.spriteGroup[0].dialogueNumber)
                         if not self.pause:
                                 self.drawBackground()
                                 self.mainSurface.blit(self.hero.image, self.hero.rect)
@@ -88,9 +89,10 @@ class Scene:
                                                 else:
                                                         self.unpaused()
                                         if event.key == K_SPACE and talk and self.talkingTo:
-                                                reaction = self.talkingTo.getTextBox(self.mainSurface)
-                                                self.getReaction(reaction)
-                                                #self.talkingTo = None
+                                                trigger = self.talkingTo.getTextBox(self.mainSurface)
+                                                if trigger:
+                                                        self.level.reaction(trigger)
+                                                trigger = None
                                         elif event.key == K_LSHIFT:
                                                 weapon = self.hero.getAction()
                                                 if weapon:
