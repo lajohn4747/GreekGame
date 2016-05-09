@@ -66,7 +66,7 @@ class Scene:
                 self.sceneTrigger = trigger
         # This is the function that runs the current scene
         def run(self):
-                self.hero.setPosition((0,0))
+                self.hero.setPosition((300,300))
                 #talk = False
                 talk = False
 
@@ -196,10 +196,10 @@ class Scene:
                         for transition_point_key in self.transition_points:
                                 transition_point_list = self.transition_points[transition_point_key]
                                 #[left_x, right_x, top_y, bottom_y]
-                                left_x = transition_point_list[0]
+                                left_x = transition_point_list[0] - 5
                                 right_x = transition_point_list[1]
-                                top_y = transition_point_list[2]
-                                bottom_y = transition_point_list[3]
+                                top_y = transition_point_list[2] - 5
+                                bottom_y = transition_point_list[3] + 5
                                 if self.hero.rect.x >= left_x and self.hero.rect.x <= right_x and self.hero.rect.y >= top_y and self.hero.rect.y <= bottom_y:
                                         print("Transition Occurs", transition_point_key)
                                         return transition_point_key

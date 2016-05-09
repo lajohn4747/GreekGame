@@ -29,12 +29,13 @@ fpsClock = pygame.time.Clock()
 
 
 class Game:
-        def __init__(self, scenes, people, surface):
+        def __init__(self, scenes, people, surface, hero):
                 self.scenes = scenes
                 for i in self.scenes:
                         i.identifyGame(self)
                 self.sprites = people
                 self.surface = surface
+                self.hero = hero
         def reaction(self, trigger):
         	if trigger == "guyThanks":
         		self.sprites["guy"].addDialogue(Dialogue("Thanks"))
@@ -44,7 +45,9 @@ class Game:
         		react = Dialogue("You know that you suck")
         		react.runText(self.surface)
         	elif trigger == "beginning":
-        		starting = CutScene(self.scenes[0], [(self.sprites["guy"],"moveUp",50), (self.sprites["guy"],"moveLeft", 50), (self.sprites["guy"],"talk","I have lost my cat")])
+        		starting = CutScene(self.scenes[0], [(self.sprites["guy"],"moveUp",self.hero.rect.top), (self.sprites["guy"],"moveLeft", self.hero.rect.right), (self.sprites["guy"],"talk"," Out of the way--out of the way, please! I need to hide.\
+        		  Grey-eyed Athena have mercy, I must leave before the guards catch up! Let me pass! "), (self.hero, "question", "What do you say", ["Slow down. Tell me what happened", "I don't think so! What did you do?"],\
+        		  ["NiceAthena", "NoChange"])])
         		starting.runScene()
 
 
@@ -61,16 +64,17 @@ def main():
 	allSprites  = {}
 
 
-	first = Hero(50, 50, (0,0))
+	# Adding buildings 
+	scene1TopLeftBlock = Building(200,200,(0,0))
+
+	first = Hero(50, 50, (300,300))
 	first.setSurface(DISPLAYSURF)
-	second = Person(50, 50, (300,300))
+	second = Person(50, 50, (550,400))
 	third = Enemy((400,200), 5)
 
 	building = Building(80,80,(0,520))
 	second.addDialogue(Dialogue("Will you help me?"))
 	second.addDialogue(Question("Will you help", ["Help", "Do not Help"], ["guyThanks", "guyHates"]), True)
-	#second.dialogueChoice(["Thanks man", "You suck"])
-	#second.setTrigger((1,0),(1,0))
 	allSprites["guy"] = second
 	allSprites["enemy1"] = third
 	allSprites["Hero"] = first
@@ -84,7 +88,7 @@ def main():
 	img = pygame.image.load('background.png').convert()
 	#scene1  = Scene(DISPLAYSURF, people2, first)
 	#scene2 = Scene(DISPLAYSURF, people2, first, people)																			
-	scene1 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,324,0,100], 2:[0,100,250,324], 3:[325,399,500,600], 4:[500,600,325,399]}, entranceTrigger = "beginning")
+	scene1 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,324,0,0], 2:[0,0,350,400], 3:[290,350,550,600], 4:[500,600,325,399]}, entranceTrigger = "beginning")
 	scene2 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('athens_city.png').convert(), transition_points = {2:[0,100,325,399], 3:[325,399,500,600], 4:[500,600,250,324]})
 	scene3 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('fran_copy_paste.png').convert(), transition_points = {2:[0,100,250,324], 3:[325,399,500,600]})
 	scene4 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[325,399,0,100], 2:[0,100,250,324]})
@@ -99,7 +103,7 @@ def main():
 
 	scenes_list = [scene1, scene2, scene3, scene4, scene5, scene6, scene7, scene8, scene9, scene10, scene11, scene12]
 
-	theGame = Game(scenes_list, allSprites, DISPLAYSURF)
+	theGame = Game(scenes_list, allSprites, DISPLAYSURF, first)
 
 	current_scene = scenes_list[0]
 	current_scene_num = 1

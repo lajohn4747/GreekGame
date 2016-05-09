@@ -2,7 +2,7 @@ import pygame, sys
 from pygame.locals import *
 
 from Scene import *
-
+from Question import *
 FPS = 60
 fpsClock = pygame.time.Clock()
 
@@ -62,5 +62,8 @@ class CutScene:
 			elif action == "talk":
 				talking = Dialogue(i[2])
 				talking.runText(self.mainSurface)
+			elif action == "question":
+				question = Question(i[2],i[3],i[4])
+				trigger = question.runQuestion(self.mainSurface)
 
 

@@ -11,6 +11,7 @@ RED = (255, 0, 0)
 pygame.init()
 
 from Dialogue import *
+
 '''
 	The Person class is a sprite and should be the parent of the Enemy class. A regular person is usually just an object that
 	is able to interact with the hero only through conversation. 
