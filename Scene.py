@@ -21,12 +21,13 @@ class Scene:
         Transition positions such that if we enter by surpassing the Y or X values, then we must move on to a different scene into 
         the level
         ''' 
-        entrancePointsX = []
-        entrancePointsY = []
-        talkingTo = None
-        level = None
+        
         # Scenes are initialized with the main pygame surface, sprites in the scene and a background drop for the room
         def __init__(self, mainSurface, spriteGroup ,hero, enemyList = None, background = None, transition_points = None):
+                self.entrancePointsX = []
+                self.entrancePointsY = []
+                self.talkingTo = None
+                self.level = None
                 self.spriteGroup = spriteGroup[:]
                 self.hero = hero
                 self.background = background

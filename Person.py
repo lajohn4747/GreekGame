@@ -19,15 +19,14 @@ class Person(pygame.sprite.Sprite):
 	# This represents a person in our game
 
 	myfont = pygame.font.Font(None, 22)
-	words = []
-	eventTrigger = {}
-	dialogueNumber = 0
-	combine = {}
 
 	'''
 	Initialize a person with their position and width and height to scale according to screen size
 	'''
 	def __init__(self,width,height,pos):
+		self.words = []
+		self.dialogueNumber = 0
+		self.combine = {}
 		# Call the parent class (Sprite) constructor
 		pygame.sprite.Sprite.__init__(self)
 

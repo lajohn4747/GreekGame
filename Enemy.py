@@ -7,9 +7,10 @@ WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 
 class Enemy(pygame.sprite.Sprite):
-	width = 50
-	height = 50
+	
 	def __init__(self, pos, health):
+		self.width = 50
+		self.height = 50
 		# Call the parent class (Sprite) constructor
 		pygame.sprite.Sprite.__init__(self)
 
