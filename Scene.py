@@ -3,6 +3,7 @@ import pygame
 from Person import *
 from Building import *
 from Enemy import *
+from CutScene import *
 # Color values
 WHITE = (255, 255, 255)
 FPS = 60
@@ -28,7 +29,7 @@ class Scene:
                 self.entrancePointsY = []
                 self.talkingTo = None
                 self.level = None
-                self.spriteGroup = spriteGroup[:]
+                self.spriteGroup = spriteGroup
                 self.hero = hero
                 self.background = background
                 self.mainSurface = mainSurface
@@ -175,8 +176,8 @@ class Scene:
 
         def drawAll(self):
                 for i in self.spriteGroup:
-                        i.update()
-                        self.mainSurface.blit(i.image,i.rect)
+                        self.spriteGroup[i].update()
+                        self.mainSurface.blit(self.spriteGroup[i].image,self.spriteGroup[i].rect)
                 if self.enemies:
                         self.enemies.draw(self.mainSurface)
 
@@ -217,12 +218,13 @@ class Scene:
 
         def talkCollisions(self):
                 for sprite in self.spriteGroup:
-                        if pygame.sprite.collide_rect(self.hero, sprite):
-                                return sprite
+                        if pygame.sprite.collide_rect(self.hero, self.spriteGroup[sprite]):
+                                return self.spriteGroup[sprite]
                 return None
 
         def wallCollide(self):
                 return  self.hero.rect.left < 0 or self.hero.rect.right > self.mainSurface.get_width() or self.hero.rect.top < 0 or self.hero.rect.bottom > self.mainSurface.get_height()
+
 
         def remove(self,sprite):
                 del self.spriteGroup[sprite]

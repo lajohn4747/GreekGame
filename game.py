@@ -53,7 +53,7 @@ def main():
 	pygame.display.set_caption('Hero of Greece') # Title
 	DISPLAYSURF.fill(WHITE)
 	people = pygame.sprite.Group()
-	people2 = []
+	people2 = {}
 	allSprites  = {}
 
 
@@ -73,8 +73,8 @@ def main():
 
 	people.add(third)
 	#people.append(third)
-	people2.append(second)
-	people2.append(building)
+	people2["guy"] = second
+	people2["building"] = building
 	talk = False
 	img = pygame.image.load('background.png').convert()
 	#scene1  = Scene(DISPLAYSURF, people2, first)
