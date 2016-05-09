@@ -8,10 +8,9 @@ WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 
 class Weapon(pygame.sprite.Sprite):
-	pos = (0,0)
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
-
+		self.pos = (0,0)
 		# Create an image of the block, and fill it with a color.
 		# This could also be an image loaded from the disk.
 		self.image = pygame.Surface([8, 50])
@@ -45,12 +44,13 @@ class Weapon(pygame.sprite.Sprite):
 class Hero(Person):
 	likeAthena = 0
 	direction = 1
-	#weapon = pygame.Surface([8,50])
 	weaponSide = pygame.Surface([50,8])
 	weaponSide.fill(RED)
-	#weapon.fill(RED)
 	weapon = Weapon()
 
+	seenScene = {}
+	def checkScene(self, scene):
+		seenScene[scene] = True
 	def setSurface(self, surface):
 		self.surface = surface
 

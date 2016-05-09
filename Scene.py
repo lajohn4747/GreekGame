@@ -24,7 +24,7 @@ class Scene:
         ''' 
         
         # Scenes are initialized with the main pygame surface, sprites in the scene and a background drop for the room
-        def __init__(self, mainSurface, spriteGroup ,hero, enemyList = None, background = None, transition_points = None):
+        def __init__(self, mainSurface, spriteGroup ,hero, enemyList = None, background = None, transition_points = None, entranceTrigger = None):
                 self.entrancePointsX = []
                 self.entrancePointsY = []
                 self.talkingTo = None
@@ -39,6 +39,7 @@ class Scene:
                         #dictionary of lists of transition points {1:[left_x, right_x, top_y, bottom_y]}
                         #where the key in the dictioary is which side the hero transitioned on:
                         #1 = top of screen, 2 = left of screen, 3 = bottom of screen, 4 = right of screen
+                self.sceneTrigger = entranceTrigger
 
         def identifyGame(self,l):
                 self.level = l
@@ -61,6 +62,8 @@ class Scene:
                 self.pause = False
                 print("pause no more")
 
+        def setTrigger(self, trigger):
+                self.sceneTrigger = trigger
         # This is the function that runs the current scene
         def run(self):
                 self.hero.setPosition((0,0))
@@ -68,15 +71,12 @@ class Scene:
                 talk = False
 
                 while True:
-                        #print(self.spriteGroup[0].dialogueNumber)
                         if not self.pause:
                                 self.drawBackground()
                                 self.mainSurface.blit(self.hero.image, self.hero.rect)
                                 talk, change = self.checkMovement(talk)
                                 if change > 0:
                                         return change
-                                #self.spriteGroup.update()
-                                #self.spriteGroup.draw(self.mainSurface)
                                 self.drawAll()
                         for event in pygame.event.get():
                                 if event.type == QUIT:
@@ -101,6 +101,11 @@ class Scene:
                                                         self.hitCollision(weapon)
 
                         pygame.display.update()
+
+                        if self.sceneTrigger:
+                                self.level.reaction(self.sceneTrigger)
+                                self.sceneTrigger = None
+                        
                         fpsClock.tick(FPS)
 
         def getReaction(self, reaction):

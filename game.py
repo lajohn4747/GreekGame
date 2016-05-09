@@ -7,6 +7,7 @@ from Scene import *
 from pygame.locals import *
 from Dialogue import *
 from Question import *
+from CutScene import *
 
 
 # Lots of comments so that it easier to understand, although comments in python does affect overall performance but we
@@ -42,6 +43,9 @@ class Game:
         	elif trigger == "guyHates":
         		react = Dialogue("You know that you suck")
         		react.runText(self.surface)
+        	elif trigger == "beginning":
+        		starting = CutScene(self.scenes[0], [(self.sprites["guy"],"moveUp",50), (self.sprites["guy"],"moveLeft", 50), (self.sprites["guy"],"talk","I have lost my cat")])
+        		starting.runScene()
 
 
 # The main game loop
@@ -69,6 +73,7 @@ def main():
 	#second.setTrigger((1,0),(1,0))
 	allSprites["guy"] = second
 	allSprites["enemy1"] = third
+	allSprites["Hero"] = first
 
 
 	people.add(third)
@@ -79,7 +84,7 @@ def main():
 	img = pygame.image.load('background.png').convert()
 	#scene1  = Scene(DISPLAYSURF, people2, first)
 	#scene2 = Scene(DISPLAYSURF, people2, first, people)																			
-	scene1 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,324,0,100], 2:[0,100,250,324], 3:[325,399,500,600], 4:[500,600,325,399]})
+	scene1 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,324,0,100], 2:[0,100,250,324], 3:[325,399,500,600], 4:[500,600,325,399]}, entranceTrigger = "beginning")
 	scene2 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('athens_city.png').convert(), transition_points = {2:[0,100,325,399], 3:[325,399,500,600], 4:[500,600,250,324]})
 	scene3 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('fran_copy_paste.png').convert(), transition_points = {2:[0,100,250,324], 3:[325,399,500,600]})
 	scene4 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[325,399,0,100], 2:[0,100,250,324]})
@@ -98,6 +103,7 @@ def main():
 
 	current_scene = scenes_list[0]
 	current_scene_num = 1
+
 	while True:
 		print(current_scene_num)
 		state_of_current_scene = current_scene.run()
