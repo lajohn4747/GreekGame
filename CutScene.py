@@ -134,7 +134,7 @@ class CutScene:
 				elif i[2] == 4:
 					weapon = pygame.Surface([50, 8])
 					weapon.fill(BLACK)
-					self.mainSurface.blit(weapon, (self.hero.rect.left, self.hero.rect.bottom - 8))
+					self.mainSurface.blit(weapon, (self.hero.rect.left - 50, self.hero.rect.bottom - 8))
 					pygame.display.update()
 				pygame.time.wait(200)
 

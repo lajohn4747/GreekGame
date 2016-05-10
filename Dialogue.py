@@ -39,9 +39,9 @@ class Dialogue:
 
 			pygame.draw.rect(textbox, (BLACK), (0, 0, textbox.get_width(), textbox.get_height()), 2)
 			
-			textbox.blit(self.myfont.render(self.textboxes[currentWords], True, (RED)), (150, 50))
-			textbox.blit(self.myfont.render(self.textboxes[currentWords + 1], True, (RED)), (150, 100))
-			textbox.blit(self.myfont.render(self.textboxes[currentWords + 2], True, (RED)), (150, 150))
+			textbox.blit(self.myfont.render(self.textboxes[currentWords], True, (RED)), (80, 50))
+			textbox.blit(self.myfont.render(self.textboxes[currentWords + 1], True, (RED)), (80, 100))
+			textbox.blit(self.myfont.render(self.textboxes[currentWords + 2], True, (RED)), (80, 150))
 
 
 			surface.blit(textbox, (0,400))

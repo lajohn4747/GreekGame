@@ -61,7 +61,10 @@ class Person(pygame.sprite.Sprite):
 	'''
 	def getTextBox(self, surface):
 		trigger = None
-		textToReturn = self.words[self.dialogueNumber]
+		if len(self.words) > 0:
+			textToReturn = self.words[self.dialogueNumber]
+		else:
+			return 
 		if isinstance(textToReturn, Dialogue):
 			textToReturn.runText(surface)
 		else:

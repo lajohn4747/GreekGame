@@ -73,7 +73,7 @@ class Game:
         		starting = CutScene(self.scenes[0], [(self.sprites["guy"],"murder", 4), (self.sprites["guy"],"talk"," No please! Gyaaa----"), (self.hero, "leave", "guy")])
         		starting.runScene()
         		#self.scenes[0].addEnemy(self.sprites["soldier1"], "soldier1")
-        		self.scenes[0].addSprite(self.sprites["soldier2"], "soldier2")
+        		#self.scenes[0].addSprite(self.sprites["soldier2"], "soldier2")
         	elif trigger == "beginning3-2":
         		self.scenes[0].addSprite(self.sprites["soldier1"], "soldier1")
         		self.scenes[0].addSprite(self.sprites["soldier2"], "soldier2")
@@ -96,6 +96,37 @@ class Game:
         		self.sprites["soldier2"].addDialogue(Dialogue("Hahaha I know you assisted my boy, and as a Spartan I thank you"))
         		self.sprites["soldier1"].getTextBox(self.surface)
 
+        	elif trigger == "Spartan7":
+        		pass
+        	elif trigger == "Spartan3":
+        		pass
+        	elif trigger == "Spartan0":
+        		pass
+        	elif trigger == "Spartan-3":
+        		pass
+        	elif trigger == "Spartan-7":
+        		pass
+        	elif trigger == "Athens7":
+        		pass
+        	elif trigger == "Athens3":
+        		pass
+        	elif trigger == "Athens0":
+        		pass
+        	elif trigger == "Athens-3":
+        		pass
+        	elif trigger == "Athens-7":
+        		pass
+        	elif trigger == "Delphi7":
+        		pass
+        	elif trigger == "Delphi3":
+        		pass
+        	elif trigger == "Delphi0":
+        		pass
+        	elif trigger == "Delphi-3":
+        		pass
+        	elif trigger == "Delphi-7":
+        		pass
+
 
 # The main game loop
 def main():
@@ -115,10 +146,34 @@ def main():
 
 	first = Hero(50, 50, (300,300))
 	first.setSurface(DISPLAYSURF)
+
+
 	second = Person(50, 50, (0,400))
 	soldier1 = Person(50, 50, (0,400))
 	soldier2 = Person(50, 50, (0,470))
 	third = Enemy((400,200), 5)
+
+
+	'''
+	Useless NPC's just giving information abobut the city, they have five different responses based on you likability
+	'''
+	# Spartan People
+	spartanW1 = Person(30, 30, (0, 245))
+	spartanW1.addDialogue(Dialogue("Spartans are a people of honor, maybe you should understand that before entering this city"))
+	spartanW1.addDialogue(Dialogue("You are a scum without honor, how dare you show your face here"))
+	spartanW1.addDialogue(Dialogue("Hello fine warrior, I cannot believe that you are not a native spartan"))
+	allSprites["spartanW1"] = spartanW1
+
+	spartanM1 = Person(30, 30, (200, 500))
+	spartanM1.addDialogue(Dialogue("Hmmm if only were you a more suitable fighter, Sparta would honor you as a hero."))
+	spartanM1.addDialogue(Dialogue("You consider yourself a hero? More a coward than anything."))
+	spartanM1.addDialogue(Dialogue("I speak for the rest of Sparta and I say that you are truly a hero!"))
+	allSprites["spartanM1"] = spartanM1
+
+	scene10People = {}
+	scene10People['spartanW1'] = spartanW1
+	scene10People['spartanM1'] = spartanM1
+
 
 	building = Building(80,80,(0,520))
 	second.addDialogue(Dialogue("Will you help me?"))
@@ -144,7 +199,7 @@ def main():
 	scene7 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('horizontalroad.png').convert(), transition_points = {1:[325,399,0,100], 2:[0,100,325,399], 4:[500,600,250,324]})
 	scene8 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[325,399,0,100], 4:[500,600,325,399]})
 	scene9 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('sparta_helotfarm.png').convert(), transition_points = {3:[325,399,500,600], 4:[500,600,325,399]})
-	scene10= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('sparta_city.png').convert(), transition_points = {2:[0,100,325,399], 3:[325,399,500,600], 4:[500,600,250,324]})
+	scene10= Scene(DISPLAYSURF, scene10People, first, background = pygame.image.load('sparta_city.png').convert(), transition_points = {2:[0,100,325,399], 3:[325,399,500,600], 4:[500,600,250,324]})
 	scene11= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('delphi_city.png').convert(), transition_points = {1:[325,399,0,100], 3:[250,324,500,600]})
 	scene12= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('finalmonster_room_withopening.png').convert(), transition_points = {3:[325,399,500,600]})
 
