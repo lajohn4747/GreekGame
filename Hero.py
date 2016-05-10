@@ -43,6 +43,9 @@ class Weapon(pygame.sprite.Sprite):
 
 class Hero(Person):
 	likeAthena = 0
+	athenaPoints = 0
+	spartaPoints = 0
+	delphiPoints = 0
 	direction = 1
 	weaponSide = pygame.Surface([50,8])
 	weaponSide.fill(RED)
