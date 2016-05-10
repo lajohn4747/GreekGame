@@ -49,6 +49,10 @@ class Game:
         		  Grey-eyed Athena have mercy, I must leave before the guards catch up! Let me pass! "), (self.hero, "question", "What do you say", ["Slow down. Tell me what happened", "I don't think so! What did you do?"],\
         		  ["NiceAthena", "NoChange"])])
         		starting.runScene()
+        	elif trigger == "beginning2-1":
+        		pass
+        	elif trigger == "beginning2-2":
+        		pass
 
 
 # The main game loop
