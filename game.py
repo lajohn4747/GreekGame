@@ -78,7 +78,7 @@ def main():
 
 	building = Building(80,80,(0,520))
 	second.addDialogue(Dialogue("Will you help me?"))
-	second.addDialogue(Question("Will you help", ["Help", "Do not Help"], ["guyThanks", "guyHates"]), True)
+	second.addDialogue(Question("Will you help?", ["Help", "Do not Help"], ["guyThanks", "guyHates"]), True)
 	allSprites["guy"] = second
 	allSprites["enemy1"] = third
 	allSprites["Hero"] = first
