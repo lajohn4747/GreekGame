@@ -131,13 +131,10 @@ def main():
 
 
 	people.add(third)
-	#people.append(third)
 	people2["guy"] = second
 	people2["building"] = building
 	talk = False
-	img = pygame.image.load('background.png').convert()
-	#scene1  = Scene(DISPLAYSURF, people2, first)
-	#scene2 = Scene(DISPLAYSURF, people2, first, people)																			
+	img = pygame.image.load('background.png').convert()																			
 	scene1 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,324,0,0], 2:[0,0,350,400], 3:[290,350,550,600], 4:[500,600,325,399]}, entranceTrigger = "beginning")
 	scene2 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('athens_city.png').convert(), transition_points = {2:[0,100,325,399], 3:[325,399,500,600], 4:[500,600,250,324]})
 	scene3 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('fran_copy_paste.png').convert(), transition_points = {2:[0,100,250,324], 3:[325,399,500,600]})
