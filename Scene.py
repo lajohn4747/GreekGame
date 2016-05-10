@@ -65,7 +65,7 @@ class Scene:
         def addSprite(self, newPerson, name):
                 if name not in self.spriteGroup:
                         self.spriteGroup[name] = newPerson
-        def addEnemy(self, newEnemy, enemy)
+        #def addEnemy(self, newEnemy, enemy):
 
         def paused(self):
                 if self.pause:
