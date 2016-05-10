@@ -65,11 +65,12 @@ class Scene:
         def addSprite(self, newPerson, name):
                 if name not in self.spriteGroup:
                         self.spriteGroup[name] = newPerson
-        def addEnemy(self, newEnemy, enemy)
+        #def addEnemy(self, newEnemy, enemy):w
 
         def paused(self):
                 if self.pause:
-                        self.mainSurface.fill(WHITE)
+                        #self.mainSurface.fill(WHITE)
+                        pygame.draw.rect(self.mainSurface, WHITE, (100,100,400,400),0)
                         #Title
                         meterLabel = largeFont.render('Hero Meter', True, BLACK)
                         self.mainSurface.blit(meterLabel, (220,150))

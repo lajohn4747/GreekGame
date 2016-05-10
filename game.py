@@ -72,7 +72,7 @@ class Game:
         	elif trigger == "beginning3-1":
         		starting = CutScene(self.scenes[0], [(self.sprites["guy"],"murder", 4), (self.sprites["guy"],"talk"," No please! Gyaaa----"), (self.hero, "leave", "guy")])
         		starting.runScene()
-        		self.scenes[0].addEnemy(self.sprites["soldier1"], "soldier1")
+        		#self.scenes[0].addEnemy(self.sprites["soldier1"], "soldier1")
         		self.scenes[0].addSprite(self.sprites["soldier2"], "soldier2")
         	elif trigger == "beginning3-2":
         		self.scenes[0].addSprite(self.sprites["soldier1"], "soldier1")
