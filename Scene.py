@@ -37,7 +37,7 @@ class Scene:
                 self.entrancePointsY = []
                 self.talkingTo = None
                 self.level = None
-                self.spriteGroup = spriteGroup
+                self.spriteGroup = spriteGroup.copy()
                 self.hero = hero
                 self.background = background
                 self.mainSurface = mainSurface
@@ -62,6 +62,10 @@ class Scene:
         # set the entry points for this scene
         def setEntryPoint(point):
                 entrancePoints.append(point)
+        def addSprite(self, newPerson, name):
+                if name not in self.spriteGroup:
+                        self.spriteGroup[name] = newPerson
+        def addEnemy(self, newEnemy, enemy)
 
         def paused(self):
                 if self.pause:

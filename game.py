@@ -37,6 +37,7 @@ class Game:
                 self.surface = surface
                 self.hero = hero
         def reaction(self, trigger):
+
         	if trigger == "guyThanks":
         		self.sprites["guy"].addDialogue(Dialogue("Thanks"))
         		self.sprites["guy"].goToLastDialogue()
@@ -45,14 +46,55 @@ class Game:
         		react = Dialogue("You know that you suck")
         		react.runText(self.surface)
         	elif trigger == "beginning":
-        		starting = CutScene(self.scenes[0], [(self.sprites["guy"],"moveUp",self.hero.rect.top), (self.sprites["guy"],"moveLeft", self.hero.rect.right), (self.sprites["guy"],"talk"," Out of the way--out of the way, please! I need to hide.\
+        		starting = CutScene(self.scenes[0], [(self.sprites["guy"],"moveUp",self.hero.rect.top), \
+        			(self.sprites["guy"],"moveRight", self.hero.rect.left), (self.sprites["guy"],"talk"," Out of the way--out of the way, please! I need to hide.\
         		  Grey-eyed Athena have mercy, I must leave before the guards catch up! Let me pass! "), (self.hero, "question", "What do you say", ["Slow down. Tell me what happened", "I don't think so! What did you do?"],\
-        		  ["NiceAthena", "NoChange"])])
+        		  ["beginning2-1", "beginning2-2"])])
         		starting.runScene()
         	elif trigger == "beginning2-1":
-        		pass
+        		react = Dialogue("Young man: They won’t listen to you, xenoi (foreigner), so I will tell you. I was starving so I stole some food from a slave.\
+        		 They saw me, and I should have been quicker, so...I must hide until the merchant’s temper blows over.  It is in our custom for soldiers-in-training \
+        		 to steal so they can eat, xenoi. The elder commanders say it makes us more wily. You must understand.")
+        		react.runText(self.surface)
+        		decisionAfter = CutScene(self.scenes[0], [(self.hero, "question", "Decision", ["Well as Spartan tradition says - DIE! (kill the thief)", \
+        			"Custom? No you will face justice. (restrain the thief)", "Fine, I have not seen you here (let the thief pass)"], \
+        			["beginning3-1","beginning3-2","beginning3-3"])])
+        		decisionAfter.runScene()
         	elif trigger == "beginning2-2":
-        		pass
+        		react  = Dialogue("Young man: Please, xenoi (foreigner), I’ll talk! I was starving so I stole some food from a merchant. They saw me, and I should have been quicker,\
+        		 so...I must hide until the merchant’s temper blows over. It is in our custom for soldiers-in-training to steal so they can eat, xenoi. \
+        		 The elder commanders say it makes us more wily. You must understand.")
+        		react.runText(self.surface)
+        		decisionAfter = CutScene(self.scenes[0], [(self.hero, "question", "Decision", ["Well as Spartan tradition says - DIE! (kill the thief)", \
+        			"Custom? No you will face justice. (restrain the thief)", "Fine, I have not seen you here (let the thief pass)"], \
+        			["beginning3-1","beginning3-2","beginning3-3"])])
+        		decisionAfter.runScene()
+        	elif trigger == "beginning3-1":
+        		starting = CutScene(self.scenes[0], [(self.sprites["guy"],"murder", 4), (self.sprites["guy"],"talk"," No please! Gyaaa----"), (self.hero, "leave", "guy")])
+        		starting.runScene()
+        		self.scenes[0].addEnemy(self.sprites["soldier1"], "soldier1")
+        		self.scenes[0].addSprite(self.sprites["soldier2"], "soldier2")
+        	elif trigger == "beginning3-2":
+        		self.scenes[0].addSprite(self.sprites["soldier1"], "soldier1")
+        		self.scenes[0].addSprite(self.sprites["soldier2"], "soldier2")
+        		starting = CutScene(self.scenes[0], [(self.sprites["soldier1"], "moveUpTogether", self.sprites["guy"].rect.y - 25, [self.sprites["soldier2"]]),\
+        		 (self.sprites["soldier1"], "moveRightTogether", self.sprites["guy"].rect.x + 10, [self.sprites["soldier2"]]),\
+        		 (self.sprites["guy"], "talk", "Oh no!"), (self.sprites["guy"], "talk", "Boy you have failed, now come back to Sparta to face failure,\
+        			 xenoi, let go of this boy and stay out of our affairs"), (self.sprites["soldier1"], "moveLeftTogether", 0, [self.sprites["soldier2"], self.sprites["guy"]]), \
+        			 (self.sprites["guy"], "leave", "guy"), (self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2")])
+        		starting.runScene()
+        	elif trigger == "beginning3-3":
+        		starting = CutScene(self.scenes[0], [(self.sprites["guy"],"moveDown",400), (self.sprites["guy"],"moveRight", 600), \
+        		 (self.sprites["guy"], "leave", "guy")])
+        		starting.runScene()
+        		self.scenes[0].addSprite(self.sprites["soldier1"], "soldier1")
+        		self.scenes[0].addSprite(self.sprites["soldier2"], "soldier2")
+        		nextCutScene = CutScene(self.scenes[0], [(self.sprites["soldier1"], "moveUpTogether",\
+        			self.hero.rect.y - 25, [self.sprites["soldier2"]]), (self.sprites["soldier1"], "moveRightTogether", self.hero.rect.x - 25, [self.sprites["soldier2"]])])
+        		nextCutScene.runScene()
+        		self.sprites["soldier1"].addDialogue(Dialogue("Hahaha I see the excellent young boy, got away"))
+        		self.sprites["soldier2"].addDialogue(Dialogue("Hahaha I know you assisted my boy, and as a Spartan I thank you"))
+        		self.sprites["soldier1"].getTextBox(self.surface)
 
 
 # The main game loop
@@ -73,7 +115,9 @@ def main():
 
 	first = Hero(50, 50, (300,300))
 	first.setSurface(DISPLAYSURF)
-	second = Person(50, 50, (550,400))
+	second = Person(50, 50, (0,400))
+	soldier1 = Person(50, 50, (0,400))
+	soldier2 = Person(50, 50, (0,470))
 	third = Enemy((400,200), 5)
 
 	building = Building(80,80,(0,520))
@@ -82,6 +126,8 @@ def main():
 	allSprites["guy"] = second
 	allSprites["enemy1"] = third
 	allSprites["Hero"] = first
+	allSprites["soldier1"] = soldier1
+	allSprites["soldier2"] = soldier2
 
 
 	people.add(third)

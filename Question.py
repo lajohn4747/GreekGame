@@ -16,27 +16,27 @@ class Question:
 
 	def runQuestion(self, surface):
 		textSurface = pygame.Surface((surface.get_width(), 200))
-		arrowX = 100
+		arrowX = 90
 		chosen = 0
 		while True:
 			for event in pygame.event.get():
 				if event.type == KEYUP:
 					if event.key == K_DOWN:
-						if(arrowX < 50 * len(self.choices) + 50):
-							arrowX += 50
+						if(arrowX < 30 * len(self.choices) + 90):
+							arrowX += 30
 							chosen += 1
 					elif event.key == K_UP:
-						if(arrowX > 100):
-							arrowX -= 50
+						if(arrowX > 90):
+							arrowX -= 30
 							chosen -= 1
 					elif event.key == K_SPACE:
 						return self.triggers[chosen]
 
 			textSurface.fill(WHITE)
 			pygame.draw.rect(textSurface, ((BLACK)), (0, 0, textSurface.get_width(), textSurface.get_height()), 2)
-			pygame.draw.rect(textSurface, ((BLACK)), (110, arrowX, 20, 20), 2)
-			textSurface.blit(self.myfont.render(self.text, True, (RED)), (150, 50))
+			pygame.draw.rect(textSurface, ((BLACK)), (80, arrowX, 15, 15), 2)
+			textSurface.blit(self.myfont.render(self.text, True, (BLACK)), (100, 30))
 			for i in range(len(self.choices)):
-				textSurface.blit(self.myfont.render(self.choices[i], True, (RED)), (150, 100+50*i))
+				textSurface.blit(self.myfont.render(self.choices[i], True, (BLACK)), (100, 90+30*i))
 			surface.blit(textSurface, (0,400))
 			pygame.display.update()
