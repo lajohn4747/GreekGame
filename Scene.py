@@ -68,17 +68,20 @@ class Scene:
                         self.mainSurface.fill(WHITE)
                         #Title
                         meterLabel = largeFont.render('Hero Meter', True, BLACK)
-                        self.mainSurface.blit(meterLabel, (150,150))
+                        self.mainSurface.blit(meterLabel, (220,150))
                         #Athens's bar
                         pygame.draw.rect(self.mainSurface, BLUE, (200,200,75,25), 0)
+                        pygame.draw.rect(self.mainSurface, BLUE, (200,200,200,25), 5)
                         athensLabel = basicFont.render('Athens', True, BLUE)
                         self.mainSurface.blit(athensLabel, (130,205))
                         #Sparta's bar
                         pygame.draw.rect(self.mainSurface, RED, (200,240,75,25), 0)
+                        pygame.draw.rect(self.mainSurface, RED, (200,240,200,25), 5)
                         spartaLabel = basicFont.render('Sparta', True, RED)
                         self.mainSurface.blit(spartaLabel, (130,245))
                         #Delphi's bar
                         pygame.draw.rect(self.mainSurface, GREEN, (200,280,75,25), 0)
+                        pygame.draw.rect(self.mainSurface, GREEN, (200,280,200,25), 5)
                         delphiLabel = basicFont.render('Delphi', True, GREEN)
                         self.mainSurface.blit(delphiLabel, (130,285))
                         
