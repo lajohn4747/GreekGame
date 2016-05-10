@@ -5,7 +5,15 @@ from Building import *
 from Enemy import *
 from CutScene import *
 # Color values
-WHITE = (255, 255, 255)
+BLACK = (0,0,0) 
+WHITE = (255,255,255)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+#Font
+basicFont = pygame.font.SysFont(None, 24)
+largeFont = pygame.font.SysFont(None, 36)
+
 FPS = 60
 fpsClock = pygame.time.Clock()
 
@@ -58,6 +66,22 @@ class Scene:
         def paused(self):
                 if self.pause:
                         self.mainSurface.fill(WHITE)
+                        #Title
+                        meterLabel = largeFont.render('Hero Meter', True, BLACK)
+                        self.mainSurface.blit(meterLabel, (150,150))
+                        #Athens's bar
+                        pygame.draw.rect(self.mainSurface, BLUE, (200,200,75,25), 0)
+                        athensLabel = basicFont.render('Athens', True, BLUE)
+                        self.mainSurface.blit(athensLabel, (130,205))
+                        #Sparta's bar
+                        pygame.draw.rect(self.mainSurface, RED, (200,240,75,25), 0)
+                        spartaLabel = basicFont.render('Sparta', True, RED)
+                        self.mainSurface.blit(spartaLabel, (130,245))
+                        #Delphi's bar
+                        pygame.draw.rect(self.mainSurface, GREEN, (200,280,75,25), 0)
+                        delphiLabel = basicFont.render('Delphi', True, GREEN)
+                        self.mainSurface.blit(delphiLabel, (130,285))
+                        
         def unpaused(self):
                 self.pause = False
                 print("pause no more")
