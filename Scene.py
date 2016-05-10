@@ -71,25 +71,25 @@ class Scene:
         def paused(self):
                 if self.pause:
                         #self.mainSurface.fill(WHITE)
-                        pygame.draw.rect(self.mainSurface, WHITE, (100,100,400,400),0)
+                        pygame.draw.rect(self.mainSurface, BLACK, (100,100,400,300),0)
                         #Title
-                        meterLabel = largeFont.render('Hero Meter', True, BLACK)
-                        self.mainSurface.blit(meterLabel, (220,150))
+                        meterLabel = largeFont.render('Hero Meter', True, WHITE)
+                        self.mainSurface.blit(meterLabel, (240,150))
                         #Athens's bar
-                        pygame.draw.rect(self.mainSurface, BLUE, (200,200,75,25), 0)
-                        pygame.draw.rect(self.mainSurface, BLUE, (200,200,200,25), 5)
+                        pygame.draw.rect(self.mainSurface, BLUE, (230,200,75,25), 0)
+                        pygame.draw.rect(self.mainSurface, BLUE, (230,200,200,25), 5)
                         athensLabel = basicFont.render('Athens', True, BLUE)
-                        self.mainSurface.blit(athensLabel, (130,205))
+                        self.mainSurface.blit(athensLabel, (160,205))
                         #Sparta's bar
-                        pygame.draw.rect(self.mainSurface, RED, (200,240,75,25), 0)
-                        pygame.draw.rect(self.mainSurface, RED, (200,240,200,25), 5)
+                        pygame.draw.rect(self.mainSurface, RED, (230,240,75,25), 0)
+                        pygame.draw.rect(self.mainSurface, RED, (230,240,200,25), 5)
                         spartaLabel = basicFont.render('Sparta', True, RED)
-                        self.mainSurface.blit(spartaLabel, (130,245))
+                        self.mainSurface.blit(spartaLabel, (160,245))
                         #Delphi's bar
-                        pygame.draw.rect(self.mainSurface, GREEN, (200,280,75,25), 0)
-                        pygame.draw.rect(self.mainSurface, GREEN, (200,280,200,25), 5)
+                        pygame.draw.rect(self.mainSurface, GREEN, (230,280,75,25), 0)
+                        pygame.draw.rect(self.mainSurface, GREEN, (230,280,200,25), 5)
                         delphiLabel = basicFont.render('Delphi', True, GREEN)
-                        self.mainSurface.blit(delphiLabel, (130,285))
+                        self.mainSurface.blit(delphiLabel, (160,285))
                         
         def unpaused(self):
                 self.pause = False

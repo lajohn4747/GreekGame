@@ -42,8 +42,7 @@ class Weapon(pygame.sprite.Sprite):
 
 
 class Hero(Person):
-	likeAthena = 0
-	athenaPoints = 0
+	athensPoints = 0
 	spartaPoints = 0
 	delphiPoints = 0
 	direction = 1
@@ -63,8 +62,13 @@ class Hero(Person):
 	def getTextBox(self, surface):
 		pass
 
-	def increaseAthena(self,number):
-		self.likeAthena += 1
+	def increasePoints(self, city, number):
+		if city == "sparta":
+			self.spartaPoints += number
+		elif city == "athens":
+			self.athensPoints += number
+		elif city == "delphi":
+			self.delphiaPoints += number
 
 	def getAction(self):
 		if(self.direction == 1):
