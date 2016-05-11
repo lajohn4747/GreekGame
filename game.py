@@ -165,6 +165,21 @@ def main():
 	buildingS6 = Building(105,40,(360,315))
 	buildingS7 = Building(85,80,(480,470))
 	buildingS8 = Building(65,105,(530,250))
+
+	#scene 2 buildings
+	buildingA1 = Building(255, 100, (0,0))
+	buildingA2 = Building(255, 75, (0,130))
+	buildingA3 = Building(210, 45, (0,205))
+	buildingA4 = Building(200, 75, (0,295))
+	buildingA5 = Building(55, 130, (0,465))
+	buildingA6 = Building(100, 130, (100,465))
+	buildingA7 = Building(100, 45, (345,550))
+	buildingA8 = Building(90, 100, (505,450))
+	buildingA9 = Building(250, 55, (345,0))
+	buildingA10 = Building(50, 300, (545,80))
+	buildingA11 = Building(150, 130, (350,100))
+	buildingA12 = Building(110, 140, (390,230))
+	
         #people
 	first = Hero(50, 50, (300,300))
 	first.setSurface(DISPLAYSURF)
@@ -186,6 +201,15 @@ def main():
 	scene1People = {}
 	scene1People["scaredW1"] = scaredW1
 	scene1People["scaredM1"] = scaredM1
+	scene1People["building1"] = building1
+	scene1People["building2"] = building2
+	scene1People["building3"] = building3
+	scene1People["building4"] = building4
+	scene1People["building5"] = building5
+	scene1People["building6"] = building6
+	scene1People["building7"] = building7
+	scene1People["building8"] = building8
+	scene1People["building9"] = building9
 
 	Guide = Person(40, 40, (300,0))
 	allSprites["Guide"] = Guide
@@ -223,6 +247,21 @@ def main():
 	scene10People['buildingS7'] = buildingS7
 	scene10People['buildingS8'] = buildingS8
 
+	#stuff for scene 2
+	scene2People = {}
+	scene2People['buildingA1'] = buildingA1
+	scene2People['buildingA2'] = buildingA2
+	scene2People['buildingA3'] = buildingA3
+	scene2People['buildingA4'] = buildingA4
+	scene2People['buildingA5'] = buildingA5
+	scene2People['buildingA6'] = buildingA6
+	scene2People['buildingA7'] = buildingA7
+	scene2People['buildingA8'] = buildingA8
+	scene2People['buildingA9'] = buildingA9
+	scene2People['buildingA10'] = buildingA10
+	scene2People['buildingA11'] = buildingA11
+	scene2People['buildingA12'] = buildingA12
+
 	# Athens People
 	athensW1 = Person(30, 30, (250, 250))
 	athensW1.addDialogue(Dialogue("The blessed Athena believes justice should be settled by the people"))
@@ -258,7 +297,31 @@ def main():
 	scene11People["delphiW1"] = delphiW1
 	scene11People["delphiM1"] = delphiM1
 	scene11People["Guide"] = Guide
-
+	#scene 11 buildings
+	buildingD1 = Building(205, 85, (0,0))
+	buildingD2 = Building(100, 95, (355,0))
+	buildingD3 = Building(85, 95, (510,0))
+	buildingD4 = Building(240, 75, (0,160))
+	buildingD5 = Building(130, 105, (0,235))
+	buildingD6 = Building(80, 75, (170,290))
+	buildingD7 = Building(85, 200, (360,155))
+	buildingD8 = Building(80, 200, (515,150))
+	buildingD9 = Building(130, 125, (0,470))
+	buildingD10 = Building(80, 125, (170,470))
+	buildingD11 = Building(100, 125, (355,470))
+	buildingD12 = Building(85, 105, (510,490))
+	scene11People["buildingD1"] = buildingD1
+	scene11People["buildingD2"] = buildingD2
+	scene11People["buildingD3"] = buildingD3
+	scene11People["buildingD4"] = buildingD4
+	scene11People["buildingD5"] = buildingD5
+	scene11People["buildingD6"] = buildingD6
+	scene11People["buildingD7"] = buildingD7
+	scene11People["buildingD8"] = buildingD8
+	scene11People["buildingD9"] = buildingD9
+	scene11People["buildingD10"] = buildingD10
+	scene11People["buildingD11"] = buildingD11
+	scene11People["buildingD12"] = buildingD12
 
 
 	# Add buildings for all the cities
@@ -302,7 +365,7 @@ def main():
 
 	#hero sprite is 25 pixels wide, 40 tall											
 	scene1 = Scene(DISPLAYSURF, scene1People, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465], 3:[250,350,560,600], 4:[575,600,365,465]}, entranceTrigger = "startScene")
-	scene2 = Scene(DISPLAYSURF, {}, first, background = pygame.image.load('fran_athens_city.png').convert(), transition_points = {2:[0,0,365,465], 3:[250,350,560,600], 4:[575,600,365,465]})
+	scene2 = Scene(DISPLAYSURF, scene2People, first, background = pygame.image.load('fran_athens_city.png').convert(), transition_points = {2:[0,0,365,465], 3:[250,350,560,600], 4:[575,600,365,465]})
 	scene3 = Scene(DISPLAYSURF, {}, first, background = pygame.image.load('rightbottomL.png').convert(), transition_points = {2:[0,0,365,465], 3:[250,350,560,600]})
 	scene4 = Scene(DISPLAYSURF, {}, first, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465]}, entranceTrigger = "beginning")
 	scene5 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[250,350,0,0], 4:[575,600,365,465]})
