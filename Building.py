@@ -15,8 +15,11 @@ class Building(pygame.sprite.Sprite):
 	def __init__(self, width, height, pos):
 		pygame.sprite.Sprite.__init__(self)
 
-		self.image = pygame.Surface([width, height])
-		self.image.fill(RED)
+		self.image = pygame.Surface([width, height],pygame.SRCALPHA, 32)
+		self.image = self.image.convert_alpha()
+		#self.image.fill(RED)
+		#image = pygame.Surface([640,480], pygame.SRCALPHA, 32)
+                #image = image.convert_alpha()
 		self.rect = self.image.get_rect()
 		self.rect.topleft = pos
 

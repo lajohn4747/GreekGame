@@ -142,11 +142,14 @@ def main():
 
 
 	# Adding buildings 
+	#scene1TopLeftBlock = Building(200,200,(0,0))
+
+	#scene one buildings
 	scene1TopLeftBlock = Building(200,200,(0,0))
 
+        #people
 	first = Hero(50, 50, (300,300))
 	first.setSurface(DISPLAYSURF)
-
 
 	second = Person(50, 50, (0,400))
 	soldier1 = Person(50, 50, (0,400))
@@ -155,7 +158,7 @@ def main():
 
 
 	'''
-	Useless NPC's just giving information abobut the city, they have five different responses based on you likability
+	Useless NPC's just giving information about the city, they have five different responses based on you likability
 	'''
 	# Spartan People
 	spartanW1 = Person(30, 30, (0, 245))
