@@ -1,4 +1,5 @@
-import pygame 
+import pygame
+import math
 from Hero import *
 
 BLUE = (0, 0, 255)
@@ -32,3 +33,11 @@ class Enemy(pygame.sprite.Sprite):
 		if self.health < 0 :
 			return True
 		return False
+	def chasePlayer(self, player):
+		# find normalized direction vector (dx, dy) between enemy and player
+		dx, dy = self.rect.x - player.rect.x, self.rect.y - player.rect.y
+		dist = math.hypot(dx, dy)
+		dx, dy = dx / dist, dy / dist
+		# move along this normalized vector towards the player at current speed
+		self.rect.x += dx * self.speed
+		self.rect.y += dy * self.speed
