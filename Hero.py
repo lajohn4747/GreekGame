@@ -57,11 +57,12 @@ class Hero(Person):
 		# Update the position of this object by setting the values of rect.x and rect.y
 		self.rect = self.image.get_rect()
 		self.rect.topleft = pos
+		self.athensPoints = 0
+		self.spartaPoints = 0
+		self.delphiPoints = 0
 		
 
-	athensPoints = 0
-	spartaPoints = 0
-	delphiPoints = 0
+	
 	direction = 1
 	weaponSide = pygame.Surface([50,8])
 	weaponSide.fill(RED)
