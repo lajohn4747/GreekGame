@@ -183,7 +183,6 @@ def main():
         #people
 	first = Hero(50, 50, (300,300))
 	first.setSurface(DISPLAYSURF)
-
 	second = Person(50, 50, (0,400))
 	soldier1 = Person(50, 50, (0,400))
 	soldier2 = Person(50, 50, (0,470))
