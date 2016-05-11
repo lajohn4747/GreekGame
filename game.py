@@ -377,7 +377,7 @@ def main():
 	"""
 
 	#hero sprite is 25 pixels wide, 40 tall											
-	scene1 = Scene(DISPLAYSURF, scene1People, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465], 3:[250,350,560,600], 4:[575,600,365,465]}, entranceTrigger = "startScene")
+	scene1 = Scene(DISPLAYSURF, scene1People, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465], 4:[575,600,365,465]}, entranceTrigger = "startScene")
 	scene2 = Scene(DISPLAYSURF, scene2People, first, background = pygame.image.load('fran_athens_city.png').convert(), transition_points = {2:[0,0,365,465], 3:[250,350,560,600], 4:[575,600,365,465]})
 	scene3 = Scene(DISPLAYSURF, {}, first, background = pygame.image.load('rightbottomL.png').convert(), transition_points = {2:[0,0,365,465], 3:[250,350,560,600]})
 	scene4 = Scene(DISPLAYSURF, {}, first, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465]}, entranceTrigger = "beginning")
