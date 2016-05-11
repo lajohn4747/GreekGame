@@ -68,6 +68,7 @@ class Hero(Person):
 	weapon = Weapon()
 
 	seenScene = {}
+	
 	def checkScene(self, scene):
 		seenScene[scene] = True
 	def setSurface(self, surface):

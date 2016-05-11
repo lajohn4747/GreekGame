@@ -2,7 +2,6 @@ import pygame, sys
 from pygame.locals import *
 
 BLUE = (0, 0, 255)
-BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 
@@ -33,11 +32,11 @@ class Question:
 						return self.triggers[chosen]
 
 			textSurface.fill(WHITE)
-			pygame.draw.rect(textSurface, ((BLACK)), (0, 0, textSurface.get_width(), textSurface.get_height()), 2)
-			pygame.draw.rect(textSurface, ((BLACK)), (80, arrowX, 15, 15), 2)
-			textSurface.blit(self.myfont.render(self.text, True, (BLACK)), (100, 30))
+			pygame.draw.rect(textSurface, ((RED)), (0, 0, textSurface.get_width(), textSurface.get_height()), 2)
+			pygame.draw.rect(textSurface, ((RED)), (80, arrowX, 15, 15), 2)
+			textSurface.blit(self.myfont.render(self.text, True, (RED)), (100, 30))
 			for i in range(len(self.choices)):
-				textSurface.blit(self.myfont.render(self.choices[i], True, (BLACK)), (100, 90+30*i))
+				textSurface.blit(self.myfont.render(self.choices[i], True, (RED)), (100, 90+30*i))
 
 			if currentLocation < 300:
 				surface.blit(textSurface, (0,400))

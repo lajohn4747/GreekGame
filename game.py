@@ -37,59 +37,59 @@ class Game:
                 self.surface = surface
                 self.hero = hero
         def reaction(self, trigger):
-
-        	if trigger == "guyThanks":
-        		self.sprites["guy"].addDialogue(Dialogue("Thanks"))
-        		self.sprites["guy"].goToLastDialogue()
-        		self.sprites["guy"].getTextBox(self.surface)
-        	elif trigger == "guyHates":
-        		react = Dialogue("You know that you suck")
-        		react.runText(self.surface)
+        	if trigger == "startScene":
+        		starting = CutScene(self.scenes[0], [(self.sprites["scaredM1"], "moveDownTogether", 370, [self.sprites["scaredW1"]]), (self.hero, "talk", "AHHHHH THE HYDRA HAS BEEN SEEN IN THE NORTH, RUNNN!!!!\
+        			You better get out of here. Use the DIRECTIONAL buttons to move far far away from here. Also if you meet new people try to tell about the Hydra with SPACEBAR"),\
+        		 (self.sprites["scaredM1"], "moveLeftTogether", 10, [self.sprites["scaredW1"]]), (self.sprites["scaredM1"], "leave", "scaredM1"), (self.sprites["scaredW1"], "leave", "scaredW1")])
+        		starting.runScene()
         	elif trigger == "beginning":
-        		starting = CutScene(self.scenes[0], [(self.sprites["guy"],"moveUp",self.hero.rect.top), \
+        		moveHero = CutScene(self.scenes[3], [(self.hero, "moveRight", 325),(self.hero, "moveDown", 450)])
+        		moveHero.runScene()
+        		self.scenes[3].addSprite(self.sprites["guy"],"guy")
+        		starting = CutScene(self.scenes[3], [(self.sprites["guy"],"moveUp",self.hero.rect.top),\
         			(self.sprites["guy"],"moveRight", self.hero.rect.left), (self.sprites["guy"],"talk"," Out of the way--out of the way, please! I need to hide.\
         		  Grey-eyed Athena have mercy, I must leave before the guards catch up! Let me pass! "), (self.hero, "question", "What do you say", ["Slow down. Tell me what happened", "I don't think so! What did you do?"],\
         		  ["beginning2-1", "beginning2-2"])])
         		starting.runScene()
         	elif trigger == "beginning2-1":
-        		react = CutScene(self.scenes[0], [(self.sprites["guy"], "talk", "Young man: They won’t listen to you, xenoi (foreigner), so I will tell you. I was starving so I stole some food from a slave.\
+        		react = CutScene(self.scenes[3], [(self.sprites["guy"], "talk", "Young man: They won’t listen to you, xenoi (foreigner), so I will tell you. I was starving so I stole some food from a slave.\
         		 They saw me, and I should have been quicker, so...I must hide until the merchant’s temper blows over.  It is in our custom for soldiers-in-training \
         		 to steal so they can eat, xenoi. The elder commanders say it makes us more wily. You must understand.")])
         		react.runScene()
-        		decisionAfter = CutScene(self.scenes[0], [(self.hero, "question", "Decision", ["Well as Spartan tradition says - DIE! (kill the thief)", \
+        		decisionAfter = CutScene(self.scenes[3], [(self.hero, "question", "Decision", ["Well as Spartan tradition says - DIE! (kill the thief)", \
         			"Custom? No you will face justice. (restrain the thief)", "Fine, I have not seen you here (let the thief pass)"], \
         			["beginning3-1","beginning3-2","beginning3-3"])])
         		decisionAfter.runScene()
         	elif trigger == "beginning2-2":
-        		react  = CutScene(self.scenes[0], [(self.sprites["guy"], "talk", "Young man: Please, xenoi (foreigner), I’ll talk! I was starving so I stole some food from a merchant. They saw me, and I should have been quicker,\
+        		react  = CutScene(self.scenes[3], [(self.sprites["guy"], "talk", "Young man: Please, xenoi (foreigner), I’ll talk! I was starving so I stole some food from a merchant. They saw me, and I should have been quicker,\
         		 so...I must hide until the merchant’s temper blows over. It is in our custom for soldiers-in-training to steal so they can eat, xenoi. \
         		 The elder commanders say it makes us more wily. You must understand.")])
-        		react.runText(self.surface)
-        		decisionAfter = CutScene(self.scenes[0], [(self.hero, "question", "Decision", ["Well as Spartan tradition says - DIE! (kill the thief)", \
+        		react.runScene()
+        		decisionAfter = CutScene(self.scenes[3], [(self.hero, "question", "Decision", ["Well as Spartan tradition says - DIE! (kill the thief)", \
         			"Custom? No you will face justice. (restrain the thief)", "Fine, I have not seen you here (let the thief pass)"], \
         			["beginning3-1","beginning3-2","beginning3-3"])])
         		decisionAfter.runScene()
         	elif trigger == "beginning3-1":
-        		starting = CutScene(self.scenes[0], [(self.sprites["guy"],"murder", 4), (self.sprites["guy"],"talk"," No please! Gyaaa----"), (self.hero, "leave", "guy")])
+        		starting = CutScene(self.scenes[3], [(self.sprites["guy"],"murder", 4), (self.sprites["guy"],"talk"," No please! Gyaaa----"), (self.hero, "leave", "guy")])
         		starting.runScene()
         		#self.scenes[0].addEnemy(self.sprites["soldier1"], "soldier1")
         		#self.scenes[0].addSprite(self.sprites["soldier2"], "soldier2")
         	elif trigger == "beginning3-2":
-        		self.scenes[0].addSprite(self.sprites["soldier1"], "soldier1")
-        		self.scenes[0].addSprite(self.sprites["soldier2"], "soldier2")
-        		starting = CutScene(self.scenes[0], [(self.sprites["soldier1"], "moveUpTogether", self.sprites["guy"].rect.y - 25, [self.sprites["soldier2"]]),\
+        		self.scenes[3].addSprite(self.sprites["soldier1"], "soldier1")
+        		self.scenes[3].addSprite(self.sprites["soldier2"], "soldier2")
+        		starting = CutScene(self.scenes[3], [(self.sprites["soldier1"], "moveUpTogether", self.sprites["guy"].rect.y - 25, [self.sprites["soldier2"]]),\
         		 (self.sprites["soldier1"], "moveRightTogether", self.sprites["guy"].rect.x + 10, [self.sprites["soldier2"]]),\
         		 (self.sprites["guy"], "talk", "Oh no!"), (self.sprites["guy"], "talk", "Boy you have failed, now come back to Sparta to face failure,\
         			 xenoi, let go of this boy and stay out of our affairs"), (self.sprites["soldier1"], "moveLeftTogether", 0, [self.sprites["soldier2"], self.sprites["guy"]]), \
         			 (self.sprites["guy"], "leave", "guy"), (self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2")])
         		starting.runScene()
         	elif trigger == "beginning3-3":
-        		starting = CutScene(self.scenes[0], [(self.sprites["guy"],"moveDown",400), (self.sprites["guy"],"moveRight", 600), \
+        		starting = CutScene(self.scenes[3], [(self.sprites["guy"],"moveDown",400), (self.sprites["guy"],"moveRight", 600), \
         		 (self.sprites["guy"], "leave", "guy")])
         		starting.runScene()
-        		self.scenes[0].addSprite(self.sprites["soldier1"], "soldier1")
-        		self.scenes[0].addSprite(self.sprites["soldier2"], "soldier2")
-        		nextCutScene = CutScene(self.scenes[0], [(self.sprites["soldier1"], "moveUpTogether",\
+        		self.scenes[3].addSprite(self.sprites["soldier1"], "soldier1")
+        		self.scenes[3].addSprite(self.sprites["soldier2"], "soldier2")
+        		nextCutScene = CutScene(self.scenes[3], [(self.sprites["soldier1"], "moveUpTogether",\
         			self.hero.rect.y - 25, [self.sprites["soldier2"]]), (self.sprites["soldier1"], "moveRightTogether", self.hero.rect.x - 25, [self.sprites["soldier2"]])])
         		nextCutScene.runScene()
         		self.sprites["soldier1"].addDialogue(Dialogue("Hahaha I see the excellent young boy, got away"))
@@ -176,6 +176,20 @@ def main():
 
 
 	'''
+	Important NPC's
+	'''
+	# The starting NPC's
+	scaredW1 = Person(30, 30, (280,0))
+	scaredM1 = Person(30, 30, (320,0))
+	allSprites["scaredW1"] = scaredW1
+	allSprites["scaredM1"] = scaredM1
+	scene1People = {}
+	scene1People["scaredW1"] = scaredW1
+	scene1People["scaredM1"] = scaredM1
+
+	Guide = Person(40, 40, (300,0))
+	allSprites["Guide"] = Guide
+	'''
 	Useless NPC's just giving information about the city, they have five different responses based on you likability
 	'''
 	# Spartan People
@@ -243,6 +257,7 @@ def main():
 	scene11People = {}
 	scene11People["delphiW1"] = delphiW1
 	scene11People["delphiM1"] = delphiM1
+	scene11People["Guide"] = Guide
 
 
 
@@ -286,10 +301,10 @@ def main():
 	"""
 
 	#hero sprite is 25 pixels wide, 40 tall											
-	scene1 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465], 3:[250,350,560,600], 4:[575,600,365,465]}, entranceTrigger = "beginning")
-	scene2 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('fran_athens_city.png').convert(), transition_points = {2:[0,0,365,465], 3:[250,350,560,600], 4:[575,600,365,465]})
-	scene3 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightbottomL.png').convert(), transition_points = {2:[0,0,365,465], 3:[250,350,560,600]})
-	scene4 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465]})
+	scene1 = Scene(DISPLAYSURF, scene1People, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465], 3:[250,350,560,600], 4:[575,600,365,465]}, entranceTrigger = "startScene")
+	scene2 = Scene(DISPLAYSURF, {}, first, background = pygame.image.load('fran_athens_city.png').convert(), transition_points = {2:[0,0,365,465], 3:[250,350,560,600], 4:[575,600,365,465]})
+	scene3 = Scene(DISPLAYSURF, {}, first, background = pygame.image.load('rightbottomL.png').convert(), transition_points = {2:[0,0,365,465], 3:[250,350,560,600]})
+	scene4 = Scene(DISPLAYSURF, {}, first, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465]}, entranceTrigger = "beginning")
 	scene5 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[250,350,0,0], 4:[575,600,365,465]})
 	#scene6 doesn't exist anymore, but left it there so we don't have to rename everything
 	scene6 = Scene(DISPLAYSURF, people2, first)
@@ -297,7 +312,7 @@ def main():
 	scene8 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[250,350,0,0], 4:[575,600,365,465]})
 	scene9 = Scene(DISPLAYSURF, scene9People, first, background = pygame.image.load('fran_sparta_helotfarm.png').convert(), transition_points = {3:[250,350,560,600], 4:[575,600,487,584]})
 	scene10= Scene(DISPLAYSURF, scene10People, first, background = pygame.image.load('fran_sparta_city.png').convert(), transition_points = {2:[0,0,487,584], 3:[250,350,560,600], 4:[575,600,365,465]})
-	scene11= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('fran_delphi_city.png').convert(), transition_points = {1:[250,350,0,0], 3:[250,350,560,600]})
+	scene11= Scene(DISPLAYSURF, scene11People, first, background = pygame.image.load('fran_delphi_city.png').convert(), transition_points = {1:[250,350,0,0], 3:[250,350,560,600]})
 	scene12= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('finalmonster_room_withopening.png').convert(), transition_points = {3:[250,350,560,600]})
 
 	scenes_list = [scene1, scene2, scene3, scene4, scene5, scene6, scene7, scene8, scene9, scene10, scene11, scene12]
