@@ -69,7 +69,7 @@ class Person(pygame.sprite.Sprite):
 		else:
 			return 
 		if isinstance(textToReturn, Dialogue):
-			textToReturn.runText(surface)
+			textToReturn.runText(surface, self.rect.y)
 		else:
 			trigger = textToReturn.runQuestion(surface)
 

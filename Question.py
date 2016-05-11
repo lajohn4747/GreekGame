@@ -14,7 +14,7 @@ class Question:
 		self.choices = choices
 		self.triggers = triggers
 
-	def runQuestion(self, surface):
+	def runQuestion(self, surface, currentLocation):
 		textSurface = pygame.Surface((surface.get_width(), 200))
 		arrowX = 90
 		chosen = 0
@@ -38,5 +38,9 @@ class Question:
 			textSurface.blit(self.myfont.render(self.text, True, (BLACK)), (100, 30))
 			for i in range(len(self.choices)):
 				textSurface.blit(self.myfont.render(self.choices[i], True, (BLACK)), (100, 90+30*i))
-			surface.blit(textSurface, (0,400))
+
+			if currentLocation < 300:
+				surface.blit(textSurface, (0,400))
+			else:
+				surface.blit(textSurface, (0,0))
 			pygame.display.update()

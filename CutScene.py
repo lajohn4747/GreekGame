@@ -108,10 +108,10 @@ class CutScene:
 
 			elif action == "talk":
 				talking = Dialogue(i[2])
-				talking.runText(self.mainSurface)
+				talking.runText(self.mainSurface, spriteToMove.rect.y)
 			elif action == "question":
 				question = Question(i[2],i[3],i[4])
-				trigger = question.runQuestion(self.mainSurface)
+				trigger = question.runQuestion(self.mainSurface, spriteToMove.rect.y)
 				self.level.reaction(trigger)
 			elif action == "leave":
 				self.scene.remove(i[2])

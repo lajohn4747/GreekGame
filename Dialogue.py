@@ -25,7 +25,7 @@ class Dialogue:
 			self.textboxes.append("")
 
 
-	def runText(self, surface):
+	def runText(self, surface, currentY):
 		textbox = pygame.Surface((surface.get_width(), 200))
 		currentWords = 0
 		while True:
@@ -43,6 +43,8 @@ class Dialogue:
 			textbox.blit(self.myfont.render(self.textboxes[currentWords + 1], True, (RED)), (80, 100))
 			textbox.blit(self.myfont.render(self.textboxes[currentWords + 2], True, (RED)), (80, 150))
 
-
-			surface.blit(textbox, (0,400))
+			if currentY < 300:
+				surface.blit(textbox, (0,400))
+			else:
+				surface.blit(textbox, (0,0))
 			pygame.display.update()
