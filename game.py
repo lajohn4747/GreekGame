@@ -141,11 +141,16 @@ def main():
 	allSprites  = {}
 
 
-	# Adding buildings 
-	#scene1TopLeftBlock = Building(200,200,(0,0))
-
 	#scene one buildings
-	scene1TopLeftBlock = Building(200,200,(0,0))
+	building1 = Building(210,50, (0,0))
+	building2 = Building(150, 100, (0,50))
+	building3 = Building(100, 140,(0,150))
+	building4 = Building(155, 50, (0,545))
+	building5 = Building(155,50,(445,545))
+	building6 = Building(150,190,(445,0))
+	building7 = Building(50, 50, (547,260))
+	building8 = Building(50, 50, (400,90))
+	building9 = Building(50,40, (400,0))
 
         #people
 	first = Hero(50, 50, (300,300))
@@ -178,7 +183,6 @@ def main():
 	scene10People['spartanM1'] = spartanM1
 
 
-	building = Building(80,80,(0,520))
 	second.addDialogue(Dialogue("Will you help me?"))
 	second.addDialogue(Question("Will you help?", ["Help", "Do not Help"], ["guyThanks", "guyHates"]), True)
 	allSprites["guy"] = second
@@ -190,7 +194,15 @@ def main():
 
 	people.add(third)
 	people2["guy"] = second
-	people2["building"] = building
+	people2["building1"] = building1
+	people2["building2"] = building2
+	people2["building3"] = building3
+	people2["building4"] = building4
+	people2["building5"] = building5
+	people2["building6"] = building6
+	people2["building7"] = building7
+	people2["building8"] = building8
+	people2["building9"] = building9
 	talk = False
 	img = pygame.image.load('background.png').convert()																			
 	scene1 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,324,0,0], 2:[0,0,350,400], 3:[290,350,550,600], 4:[500,600,325,399]}, entranceTrigger = "beginning")
