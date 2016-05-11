@@ -174,7 +174,44 @@ def main():
 	scene10People['spartanW1'] = spartanW1
 	scene10People['spartanM1'] = spartanM1
 
+	# Athens People
+	athensW1 = Person(30, 30, (250, 250))
+	athensW1.addDialogue(Dialogue("The blessed Athena believes justice should be settled by the people"))
+	athensW1.addDialogue(Dialogue("You are a lawless monster, how dare you tarnish this city with your presence"))
+	athensW1.addDialogue(Dialogue("You are truly the suymbol of justics, Athena blesses you"))
+	allSprites["athensW1"] = athensW1
 
+	athensM1 = Person(30, 30, (300, 400))
+	athensM1.addDialogue(Dialogue("Killing people may satisfy one's vengeance but it does not cleanse the soul"))
+	athensM1.addDialogue(Dialogue("Your anger consumes you. You must learn to control yourself before you fight the darkness"))
+	athensM1.addDialogue(Dialogue("Your reputation precedes you, I believe you are the true hero of Athens. Do not lose sight of justice"))
+	allSprites["athensM1"] = athensM1
+
+	scene2People = {}
+	scene2People["athensW1"] = athensW1
+	scene2People["athensM1"] = athensM1
+
+	# Delphi People
+	delphiW1 = Person(30, 30,(175, 445))
+	delphiW1.addDialogue(Dialogue("There is a monster out there in the north, I wonder who can stop him"))
+	delphiW1.addDialogue(Dialogue("I know you may be strong but I think you aren't fit to be a hero. Delphi will never vote for you"))
+	delphiW1.addDialogue(Dialogue("Hurry save us hero"))
+	allSprites["dephiW1"] = delphiW1
+
+	delphiM1 = Person(30, 30,(215, 135))
+	delphiM1.addDialogue(Dialogue("Many have left due to the attacks of the monsters, the cities are trying to determine who they should send. \
+		Perhaps it would be ideal if all cities liked a single person but they are so divided"))
+	delphiM1.addDialogue(Dialogue("I don't know what to say about Sparta and Athens but I know for sure that Delphi will never choose you as their hero with all your blasphehemy."))
+	delphiM1.addDialogue(Dialogue("I hope you were able to get Sparta and Athens to choose you, because the city of Delphi adores you and your holy blade"))
+	allSprites["dephiM1"] = delphiM1
+
+	scene11People = {}
+	scene11People["delphiW1"] = delphiW1
+	scene11People["delphiM1"] = delphiM1
+
+
+
+	# Add buildings for all the cities
 	building = Building(80,80,(0,520))
 	second.addDialogue(Dialogue("Will you help me?"))
 	second.addDialogue(Question("Will you help?", ["Help", "Do not Help"], ["guyThanks", "guyHates"]), True)
@@ -194,7 +231,7 @@ def main():
 	#scene1  = Scene(DISPLAYSURF, people2, first)
 	#scene2 = Scene(DISPLAYSURF, people2, first, people)																			
 	scene1 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,324,0,0], 2:[0,0,350,400], 3:[290,350,550,600], 4:[500,600,325,399]}, entranceTrigger = "beginning")
-	scene2 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('athens_city.png').convert(), transition_points = {2:[0,100,325,399], 3:[325,399,500,600], 4:[500,600,250,324]})
+	scene2 = Scene(DISPLAYSURF, scene2People, first, background = pygame.image.load('athens_city.png').convert(), transition_points = {2:[0,100,325,399], 3:[325,399,500,600], 4:[500,600,250,324]})
 	scene3 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('fran_copy_paste.png').convert(), transition_points = {2:[0,100,250,324], 3:[325,399,500,600]})
 	scene4 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[325,399,0,100], 2:[0,100,250,324]})
 	scene5 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[325,399,0,100], 2:[0,100,325,399], 4:[500,600,250,324]})
@@ -203,7 +240,7 @@ def main():
 	scene8 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[325,399,0,100], 4:[500,600,325,399]})
 	scene9 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('sparta_helotfarm.png').convert(), transition_points = {3:[325,399,500,600], 4:[500,600,325,399]})
 	scene10= Scene(DISPLAYSURF, scene10People, first, background = pygame.image.load('sparta_city.png').convert(), transition_points = {2:[0,100,325,399], 3:[325,399,500,600], 4:[500,600,250,324]})
-	scene11= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('delphi_city.png').convert(), transition_points = {1:[325,399,0,100], 3:[250,324,500,600]})
+	scene11= Scene(DISPLAYSURF, scene11People, first, background = pygame.image.load('delphi_city.png').convert(), transition_points = {1:[325,399,0,100], 3:[250,324,500,600]})
 	scene12= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('finalmonster_room_withopening.png').convert(), transition_points = {3:[325,399,500,600]})
 
 	scenes_list = [scene1, scene2, scene3, scene4, scene5, scene6, scene7, scene8, scene9, scene10, scene11, scene12]
