@@ -55,6 +55,9 @@ class Person(pygame.sprite.Sprite):
 	def setPosition(self, pos):
 		self.rect.topleft = pos
 
+	def getPosition(self):
+		return self.rect
+
 	'''
 	The way getTextBox works is that there should be a 2d array for dialogue, after pressing SPACE it would then go on to the next piece of 
 	dialogue. If there are choices call askDecision and then change choicePath. ChoicePath then determines what the character should say.

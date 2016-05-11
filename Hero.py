@@ -42,6 +42,23 @@ class Weapon(pygame.sprite.Sprite):
 
 
 class Hero(Person):
+	def __init__(self,width,height,pos):
+		self.words = []
+		self.dialogueNumber = 0
+		self.combine = {}
+		# Call the parent class (Sprite) constructor
+		pygame.sprite.Sprite.__init__(self)
+
+		# Create an image of the block, and fill it with a color.
+		# This could also be an image loaded from the disk.
+		self.image = pygame.image.load('hero_front.png').convert_alpha()
+
+		# Fetch the rectangle object that has the dimensions of the image
+		# Update the position of this object by setting the values of rect.x and rect.y
+		self.rect = self.image.get_rect()
+		self.rect.topleft = pos
+		
+
 	athensPoints = 0
 	spartaPoints = 0
 	delphiPoints = 0
