@@ -278,6 +278,19 @@ def main():
 	scene2People = {}
 	scene2People["athensW1"] = athensW1
 	scene2People["athensM1"] = athensM1
+	#buildings for scene 2
+	scene2People['buildingA1'] = buildingA1
+	scene2People['buildingA2'] = buildingA2
+	scene2People['buildingA3'] = buildingA3
+	scene2People['buildingA4'] = buildingA4
+	scene2People['buildingA5'] = buildingA5
+	scene2People['buildingA6'] = buildingA6
+	scene2People['buildingA7'] = buildingA7
+	scene2People['buildingA8'] = buildingA8
+	scene2People['buildingA9'] = buildingA9
+	scene2People['buildingA10'] = buildingA10
+	scene2People['buildingA11'] = buildingA11
+	scene2People['buildingA12'] = buildingA12
 
 	# Delphi People
 	delphiW1 = Person(30, 30,(175, 445))
