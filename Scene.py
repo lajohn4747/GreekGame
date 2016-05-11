@@ -98,8 +98,8 @@ class Scene:
         def setTrigger(self, trigger):
                 self.sceneTrigger = trigger
         # This is the function that runs the current scene
-        def run(self):
-                self.hero.setPosition((300,300))
+        def run(self, hero_coords):
+                self.hero.setPosition(hero_coords)
                 #talk = False
                 talk = False
 
@@ -108,7 +108,7 @@ class Scene:
                                 self.drawBackground()
                                 self.mainSurface.blit(self.hero.image, self.hero.rect)
                                 talk, change = self.checkMovement(talk)
-                                if change > 0:
+                                if change[0] > 0:
                                         return change
                                 self.drawAll()
                         for event in pygame.event.get():
@@ -223,8 +223,8 @@ class Scene:
                 if self.transition_points == None:
                         if self.hero.rect.bottom > 550 and self.hero.rect.x > 290 and self.hero.rect.x < 310:
                                 print("Transition Occurs")
-                                return 1
-                        return 0
+                                return (1, (self.hero.rect.x, self.hero.rect.y))
+                        return (0, None)
                 else:
                         for transition_point_key in self.transition_points:
                                 transition_point_list = self.transition_points[transition_point_key]
@@ -234,9 +234,10 @@ class Scene:
                                 top_y = transition_point_list[2] - 5
                                 bottom_y = transition_point_list[3] + 5
                                 if self.hero.rect.x >= left_x and self.hero.rect.x <= right_x and self.hero.rect.y >= top_y and self.hero.rect.y <= bottom_y:
-                                        print("Transition Occurs", transition_point_key)
-                                        return transition_point_key
-                        return 0
+                                        #print("Transition Occurs", transition_point_key)
+                                        #print(self.hero.rect.x, self.hero.rect.y)
+                                        return (transition_point_key, (self.hero.rect.x, self.hero.rect.y))
+                        return (0, None)
 
         def hitCollision(self, weapon):
                 if self.enemies:
@@ -268,107 +269,98 @@ class Scene:
                 del self.spriteGroup[sprite]
 
 
-def getNextScene(current_scene, border):
+def getNextScene(current_scene, border, last_hero_coords):
         #current_scene is the number of the current scene
         #border = 1 if the hero crossed the top border, 2 for left, 3 for bottom, 4 for right
         #returns number of next scene 1-12
         if current_scene==1:
                 if border==1:
-                        return 11
+                        return (11, (last_hero_coords[0], 550))
                 elif border==2:
-                        return 10
+                        return (10, (565, last_hero_coords[1]))
                 elif border==3:
-                        return 6
+                        return "error in scene 1 transition"
                 elif border==4:
-                        return 2
+                        return (2, (35, last_hero_coords[1]))
         elif current_scene==2:
                 if border==1:
                         return "error in scene 2 transition"
                 elif border==2:
-                        return 1
+                        return (1, (565, last_hero_coords[1]))
                 elif border==3:
-                        return 5
+                        return (5, (last_hero_coords[0], 50))
                 elif border==4:
-                        return 3
+                        return (3, (35, last_hero_coords[1]))
         elif current_scene==3:
                 if border==1:
                         return "error in scene 3 transition"
                 elif border==2:
-                        return 2
+                        return (2, (565, last_hero_coords[1]))
                 elif border==3:
-                        return 4
+                        return (4, (last_hero_coords[0], 50))
                 elif border==4:
                         return "error in scene 3 transition"
         elif current_scene==4:
                 if border==1:
-                        return 3
+                        return (3, (last_hero_coords[0], 550))
                 elif border==2:
-                        return 5
+                        return (5, (565, last_hero_coords[1]))
                 elif border==3:
                         return "error in scene 4 transition"
                 elif border==4:
                         return "error in scene 4 transition"
         elif current_scene==5:
                 if border==1:
-                        return 2
+                        return (2, (last_hero_coords[0], 550))
                 elif border==2:
-                        return 6
+                        return (6, (565, last_hero_coords[1]))
                 elif border==3:
                         return "error in scene 5 transition"
                 elif border==4:
-                        return 4
-        elif current_scene==6:
-                if border==1:
-                        return 1
-                elif border==2:
-                        return 7
-                elif border==3:
-                        return "error in scene 6 transition"
-                elif border==4:
-                        return 5
+                        return (4, (35, last_hero_coords[1]))
         elif current_scene==7:
                 if border==1:
-                        return 10
+                        return (10, (last_hero_coords[0], 550))
                 elif border==2:
-                        return 8
+                        return (8, (565, last_hero_coords[1]))
                 elif border==3:
                         return "error in scene 7 transition"
                 elif border==4:
-                        return 6
+                        return (6, (35, last_hero_coords[1]))
         elif current_scene==8:
                 if border==1:
-                        return 9
+                        return (9, (last_hero_coords[0], 550))
                 elif border==2:
                         return "error in scene 8 transition"
                 elif border==3:
                         return "error in scene 8 transition"
                 elif border==4:
-                        return 7
+                        return (7, (35, last_hero_coords[1]))
         elif current_scene==9:
                 if border==1:
                         return "error in scene 9 transition"
                 elif border==2:
                         return "error in scene 9 transition"
                 elif border==3:
-                        return 8
+                        return (8, (last_hero_coords[0], 50))
                 elif border==4:
-                        return 10
+                        return (10, (35, last_hero_coords[1]))
         elif current_scene==10:
                 if border==1:
                         return "error in scene 10 transition"
                 elif border==2:
-                        return 9
+                        return (9, (565, last_hero_coords[1]))
                 elif border==3:
-                        return 7
+                        return (7, (last_hero_coords[0], 50))
                 elif border==4:
-                        return 1
+                        return (1, (35, last_hero_coords[1]))
         elif current_scene==11:
                 if border==1:
-                        return 12
+                        return (12, (last_hero_coords[0], 550))
                 elif border==2:
                         return "error in scene 11 transition"
                 elif border==3:
-                        return 1
+                        return (1, (last_hero_coords[0], 50))
                 elif border==4:
                         return "error in scene 11 transition"
         elif current_scene==12:
@@ -377,7 +369,7 @@ def getNextScene(current_scene, border):
                 elif border==2:
                         return "error in scene 12 transition"
                 elif border==3:
-                        return 11
+                        return (11, (last_hero_coords[0], 50))
                 elif border==4:
                         return "error in scene 12 transition"
         return "error in scene transition"

@@ -141,12 +141,33 @@ def main():
 	allSprites  = {}
 
 
-	# Adding buildings 
-	scene1TopLeftBlock = Building(200,200,(0,0))
+	#scene one - eight buildings
+	building1 = Building(210,50, (0,0))
+	building2 = Building(150, 100, (0,50))
+	building3 = Building(100, 140,(0,150))
+	building4 = Building(155, 50, (0,545))
+	building5 = Building(155,50,(445,545))
+	building6 = Building(150,190,(445,0))
+	building7 = Building(50, 50, (547,260))
+	building8 = Building(50, 50, (400,90))
+	building9 = Building(50,40, (400,0))
 
+        #scene 9 buildings
+	building91 = Building(405,360,(0,100))
+	building92 = Building(100, 360, (495,100))
+
+	#scene 10 buildings
+	buildingS1 = Building(100, 130, (0,70))
+	buildingS2 = Building(100,200,(150,0))
+	buildingS3 = Building(205,80,(350,0))
+	buildingS4 = Building(250,230,(0,255))
+	buildingS5 = Building(105,120,(360,130))
+	buildingS6 = Building(105,40,(360,315))
+	buildingS7 = Building(85,80,(480,470))
+	buildingS8 = Building(65,105,(530,250))
+        #people
 	first = Hero(50, 50, (300,300))
 	first.setSurface(DISPLAYSURF)
-
 
 	second = Person(50, 50, (0,400))
 	soldier1 = Person(50, 50, (0,400))
@@ -155,7 +176,7 @@ def main():
 
 
 	'''
-	Useless NPC's just giving information abobut the city, they have five different responses based on you likability
+	Useless NPC's just giving information about the city, they have five different responses based on you likability
 	'''
 	# Spartan People
 	spartanW1 = Person(30, 30, (0, 245))
@@ -170,10 +191,25 @@ def main():
 	spartanM1.addDialogue(Dialogue("I speak for the rest of Sparta and I say that you are truly a hero!"))
 	allSprites["spartanM1"] = spartanM1
 
+        #stuff for scene 9
+	scene9People = {}
+	scene9People['building91'] = building91
+	scene9People['building92'] = building92
+	
+        #stuff for scene 10
 	scene10People = {}
 	scene10People['spartanW1'] = spartanW1
 	scene10People['spartanM1'] = spartanM1
+	scene10People['buildingS1'] = buildingS1
+	scene10People['buildingS2'] = buildingS2
+	scene10People['buildingS3'] = buildingS3
+	scene10People['buildingS4'] = buildingS4
+	scene10People['buildingS5'] = buildingS5
+	scene10People['buildingS6'] = buildingS6
+	scene10People['buildingS7'] = buildingS7
+	scene10People['buildingS8'] = buildingS8
 
+<<<<<<< HEAD
 	# Athens People
 	athensW1 = Person(30, 30, (250, 250))
 	athensW1.addDialogue(Dialogue("The blessed Athena believes justice should be settled by the people"))
@@ -213,6 +249,9 @@ def main():
 
 	# Add buildings for all the cities
 	building = Building(80,80,(0,520))
+=======
+
+>>>>>>> f7ba1560fbe9402b3e3f5c46747a7a9e02b04e89
 	second.addDialogue(Dialogue("Will you help me?"))
 	second.addDialogue(Question("Will you help?", ["Help", "Do not Help"], ["guyThanks", "guyHates"]), True)
 	allSprites["guy"] = second
@@ -223,10 +262,18 @@ def main():
 
 
 	people.add(third)
-	#people.append(third)
 	people2["guy"] = second
-	people2["building"] = building
+	people2["building1"] = building1
+	people2["building2"] = building2
+	people2["building3"] = building3
+	people2["building4"] = building4
+	people2["building5"] = building5
+	people2["building6"] = building6
+	people2["building7"] = building7
+	people2["building8"] = building8
+	people2["building9"] = building9
 	talk = False
+<<<<<<< HEAD
 	img = pygame.image.load('background.png').convert()
 	#scene1  = Scene(DISPLAYSURF, people2, first)
 	#scene2 = Scene(DISPLAYSURF, people2, first, people)																			
@@ -242,6 +289,23 @@ def main():
 	scene10= Scene(DISPLAYSURF, scene10People, first, background = pygame.image.load('sparta_city.png').convert(), transition_points = {2:[0,100,325,399], 3:[325,399,500,600], 4:[500,600,250,324]})
 	scene11= Scene(DISPLAYSURF, scene11People, first, background = pygame.image.load('delphi_city.png').convert(), transition_points = {1:[325,399,0,100], 3:[250,324,500,600]})
 	scene12= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('finalmonster_room_withopening.png').convert(), transition_points = {3:[325,399,500,600]})
+=======
+	
+	#hero sprite is 25 pixels wide, 40 tall											
+	scene1 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465], 3:[250,350,560,600], 4:[575,600,365,465]}, entranceTrigger = "beginning")
+	scene2 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('fran_athens_city.png').convert(), transition_points = {2:[0,0,365,465], 3:[250,350,560,600], 4:[575,600,365,465]})
+	scene3 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightbottomL.png').convert(), transition_points = {2:[0,0,365,465], 3:[250,350,560,600]})
+	scene4 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465]})
+	scene5 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[250,350,0,0], 4:[575,600,365,465]})
+	#scene6 doesn't exist anymore, but left it there so we don't have to rename everything
+	scene6 = Scene(DISPLAYSURF, people2, first)
+	scene7 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465]})
+	scene8 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[250,350,0,0], 4:[575,600,365,465]})
+	scene9 = Scene(DISPLAYSURF, scene9People, first, background = pygame.image.load('fran_sparta_helotfarm.png').convert(), transition_points = {3:[250,350,560,600], 4:[575,600,487,584]})
+	scene10= Scene(DISPLAYSURF, scene10People, first, background = pygame.image.load('fran_sparta_city.png').convert(), transition_points = {2:[0,0,487,584], 3:[250,350,560,600], 4:[575,600,365,465]})
+	scene11= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('fran_delphi_city.png').convert(), transition_points = {1:[250,350,0,0], 3:[250,350,560,600]})
+	scene12= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('finalmonster_room_withopening.png').convert(), transition_points = {3:[250,350,560,600]})
+>>>>>>> f7ba1560fbe9402b3e3f5c46747a7a9e02b04e89
 
 	scenes_list = [scene1, scene2, scene3, scene4, scene5, scene6, scene7, scene8, scene9, scene10, scene11, scene12]
 
@@ -249,12 +313,13 @@ def main():
 
 	current_scene = scenes_list[0]
 	current_scene_num = 1
+	current_hero_coords = (300,400)
 
 	while True:
-		print(current_scene_num)
-		state_of_current_scene = current_scene.run()
+		#print(current_scene_num)
+		state_of_current_scene, last_hero_coords = current_scene.run(current_hero_coords)
 		if state_of_current_scene > 0:
-			new_scene_num = getNextScene(current_scene_num, state_of_current_scene)
+			new_scene_num, current_hero_coords = getNextScene(current_scene_num, state_of_current_scene, last_hero_coords)
 			current_scene_num = new_scene_num
 			current_scene = scenes_list[new_scene_num-1]
 

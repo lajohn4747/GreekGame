@@ -14,9 +14,10 @@ The entire reason for this class is to give a immovable object thus making the s
 class Building(pygame.sprite.Sprite):
 	def __init__(self, width, height, pos):
 		pygame.sprite.Sprite.__init__(self)
-
-		self.image = pygame.Surface([width, height])
-		self.image.fill(RED)
+		#self.image = pygame.Surface([width, height])
+		self.image = pygame.Surface([width, height],pygame.SRCALPHA, 32)
+		self.image = self.image.convert_alpha()
+		#self.image.fill(RED)
 		self.rect = self.image.get_rect()
 		self.rect.topleft = pos
 
