@@ -141,7 +141,7 @@ def main():
 	allSprites  = {}
 
 
-	#scene one buildings
+	#scene one - eight buildings
 	building1 = Building(210,50, (0,0))
 	building2 = Building(150, 100, (0,50))
 	building3 = Building(100, 140,(0,150))
@@ -152,6 +152,19 @@ def main():
 	building8 = Building(50, 50, (400,90))
 	building9 = Building(50,40, (400,0))
 
+        #scene 9 buildings
+	building91 = Building(405,360,(0,100))
+	building92 = Building(100, 360, (495,100))
+
+	#scene 10 buildings
+	buildingS1 = Building(100, 130, (0,70))
+	buildingS2 = Building(100,200,(150,0))
+	buildingS3 = Building(205,80,(350,0))
+	buildingS4 = Building(250,230,(0,255))
+	buildingS5 = Building(105,120,(360,130))
+	buildingS6 = Building(105,40,(360,315))
+	buildingS7 = Building(85,80,(480,470))
+	buildingS8 = Building(65,105,(530,250))
         #people
 	first = Hero(50, 50, (300,300))
 	first.setSurface(DISPLAYSURF)
@@ -178,9 +191,23 @@ def main():
 	spartanM1.addDialogue(Dialogue("I speak for the rest of Sparta and I say that you are truly a hero!"))
 	allSprites["spartanM1"] = spartanM1
 
+        #stuff for scene 9
+	scene9People = {}
+	scene9People['building91'] = building91
+	scene9People['building92'] = building92
+	
+        #stuff for scene 10
 	scene10People = {}
 	scene10People['spartanW1'] = spartanW1
 	scene10People['spartanM1'] = spartanM1
+	scene10People['buildingS1'] = buildingS1
+	scene10People['buildingS2'] = buildingS2
+	scene10People['buildingS3'] = buildingS3
+	scene10People['buildingS4'] = buildingS4
+	scene10People['buildingS5'] = buildingS5
+	scene10People['buildingS6'] = buildingS6
+	scene10People['buildingS7'] = buildingS7
+	scene10People['buildingS8'] = buildingS8
 
 
 	second.addDialogue(Dialogue("Will you help me?"))
@@ -213,7 +240,7 @@ def main():
 	scene6 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('T-road.png').convert(), transition_points = {1:[325,399,0,100], 2:[0,100,250,324], 4:[500,600,325,399]})
 	scene7 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('horizontalroad.png').convert(), transition_points = {1:[325,399,0,100], 2:[0,100,325,399], 4:[500,600,250,324]})
 	scene8 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[325,399,0,100], 4:[500,600,325,399]})
-	scene9 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('sparta_helotfarm.png').convert(), transition_points = {3:[325,399,500,600], 4:[500,600,325,399]})
+	scene9 = Scene(DISPLAYSURF, scene9People, first, background = pygame.image.load('sparta_helotfarm.png').convert(), transition_points = {3:[325,399,500,600], 4:[500,600,325,399]})
 	scene10= Scene(DISPLAYSURF, scene10People, first, background = pygame.image.load('sparta_city.png').convert(), transition_points = {2:[0,100,325,399], 3:[325,399,500,600], 4:[500,600,250,324]})
 	scene11= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('delphi_city.png').convert(), transition_points = {1:[325,399,0,100], 3:[250,324,500,600]})
 	scene12= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('finalmonster_room_withopening.png').convert(), transition_points = {3:[325,399,500,600]})
