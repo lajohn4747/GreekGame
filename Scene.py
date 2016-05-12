@@ -43,7 +43,8 @@ class Scene:
                 self.hero = hero
                 self.background = background
                 self.mainSurface = mainSurface
-                self.enemies = enemyList
+                if not enemyList:
+                        self.enemies = []
                 self.transition_points = transition_points
                 self.pause = False
                         #dictionary of lists of transition points {1:[left_x, right_x, top_y, bottom_y]}
@@ -68,7 +69,8 @@ class Scene:
                 if name not in self.spriteGroup:
                         self.spriteGroup[name] = newPerson
 
-        #def addEnemy(self, newEnemy, enemy):
+        def addEnemy(self, enemy):
+                self.enemies.append(enemy)
 
         def paused(self):
                 if self.pause:
@@ -126,6 +128,8 @@ class Scene:
                                         self.mainSurface.blit(heartImg,(575,0))
                                 elif self.hero.health == 1:
                                         self.mainSurface.blit(heartImg,(575,0))
+                                elif self.hero.health == 0:
+                                        return "Dead", None
                                 talk, change = self.checkMovement(talk)
                                 if change[0] > 0:
                                         return change

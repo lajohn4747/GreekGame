@@ -9,7 +9,7 @@ RED = (255, 0, 0)
 
 class Enemy(pygame.sprite.Sprite):
 	
-	def __init__(self, pos, health, spriteGroup):
+	def __init__(self, pos, health, spriteGroup, L,R ,U, D, speed = 2):
 		self.width = 50
 		self.height = 50
 		# Call the parent class (Sprite) constructor
@@ -21,15 +21,16 @@ class Enemy(pygame.sprite.Sprite):
 		#self.image.fill(BLACK)
 		self.health = health
 		self.spriteGroup = spriteGroup
-		self.image = pygame.image.load('enemy_down.png').convert_alpha()
-		self.imagesL = [pygame.image.load('enemy_left.png'), pygame.image.load('enemy_left_L.png'), pygame.image.load('enemy_left_R.png')]
-		self.imagesR = [pygame.image.load('enemy_right.png'), pygame.image.load('enemy_right_L.png'), pygame.image.load('enemy_right_R.png')]
-		self.imagesU = [pygame.image.load('enemy_up.png'), pygame.image.load('enemy_up_L.png'), pygame.image.load('enemy_up_R.png')]
-		self.imagesD = [pygame.image.load('enemy_down.png'), pygame.image.load('enemy_down_L.png'), pygame.image.load('enemy_down_R.png')]
+		self.imagesL = L
+		self.imagesR = R
+		self.imagesU = U
+		self.imagesD = D
+		self.image = self.imagesD[0]
 		self.imageLeft = 0
 		self.imageRight = 0
 		self.imageDown = 0
 		self.imageUp = 0
+		self.speed = speed
 		# Fetch the rectangle object that has the dimensions of the image
 		# Update the position of this object by setting the values of rect.x and rect.y
 		self.rect = self.image.get_rect()
@@ -115,17 +116,16 @@ class Enemy(pygame.sprite.Sprite):
 		# find normalized direction vector (dx, dy) between enemy and player
 		dx, dy = self.rect.x - player.rect.x, self.rect.y - player.rect.y
 		dist = math.hypot(dx, dy) + 0.01
-		speed = 2
 		
 		if self.rect.x > player.rect.x:
-		    self.rect.x -= speed
+		    self.rect.x -= self.speed
 		elif self.rect.x < player.rect.x:
-		    self.rect.x += speed
+		    self.rect.x += self.speed
 		# Movement along y direction
 		if self.rect.y < player.rect.y:
-		    self.rect.y += speed
+		    self.rect.y += self.speed
 		elif self.rect.y > player.rect.y:
-		    self.rect.y -= speed
+		    self.rect.y -= self.speed
 		#change image
 		if math.fabs(dx) > math.fabs(dy) and dx > 0:
 			self.moveImage("left")

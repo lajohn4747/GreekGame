@@ -139,24 +139,20 @@ class CutScene:
 				fpsClock.tick(FPS)
 			elif action == "murder":
 				if i[2] == 1:
-					weapon = pygame.Surface([8, 50])
-					weapon.fill(BLACK)
+					weapon = pygame.image.load("swordUp.png")
 					self.mainSurface.blit(weapon, (self.hero.rect.left, self.hero.rect.top - 50))
 					pygame.display.update()
 				elif i[2] == 2:
-					weapon = pygame.Surface([50, 8])
-					weapon.fill(BLACK)
+					weapon = pygame.image.load("swordRight.png")
 					self.mainSurface.blit(weapon, (self.hero.rect.right, self.hero.rect.top))
 					pygame.display.update()
 				elif i[2] == 3:
-					weapon = pygame.Surface([8, 50])
-					weapon.fill(BLACK)
+					weapon = pygame.image.load("swordDown.png")
 					self.mainSurface.blit(weapon, (self.hero.rect.right, self.hero.rect.bottom))
 					pygame.display.update()
 				elif i[2] == 4:
-					weapon = pygame.Surface([50, 8])
-					weapon.fill(BLACK)
-					self.mainSurface.blit(weapon, (self.hero.rect.left - 50, self.hero.rect.bottom - 8))
+					weapon = pygame.image.load("swordLeft.png")
+					self.mainSurface.blit(weapon, (self.hero.rect.left - 30, self.hero.rect.bottom - 8))
 					pygame.display.update()
 				pygame.time.wait(200)
 

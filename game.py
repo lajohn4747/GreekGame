@@ -35,14 +35,21 @@ class Game:
                 self.sprites = people
                 self.surface = surface
                 self.hero = hero
+                self.hero.setLevel(self)
+
         def reaction(self, trigger):
         	checkHero = None
         	if trigger == "startScene":
         		starting = CutScene(self.scenes[0], [(self.hero, "turn", "up"), (self.sprites["scaredM1"], "moveDownTogether", 370, [self.sprites["scaredW1"]]), (self.hero, "talk", "AHHHHH THE HYDRA HAS BEEN SEEN IN THE NORTH, RUNNN!!!!\
-        			You better get out of here. Tell everyone you know with SPACEBAR. Use the DIRECTIONAL buttons to move far far away from here. If you get tired press P, to take a break and look how Greece sees you. So run, hopefully Greece can choose a hero to save us."),\
+        			You better get out of here. Tell everyone you know with SPACEBAR. Use the DIRECTIONAL buttons to move far far away from here. There are also monsters popping all over the place. So run, hopefully Greece can choose a hero to save us.\
+        			You don't look terrified maybe you could be that hero. Here is my sword, use your LEFT SHIFT key to use it. You will not be able to fight the hydra unless you get approval from the city-states, which you can look at by pressing P. Good Luck"),\
         		 (self.sprites["scaredM1"], "moveLeftTogether", 10, [self.sprites["scaredW1"]]), (self.sprites["scaredM1"], "leave", "scaredM1"), (self.sprites["scaredW1"], "leave", "scaredW1")])
         		starting.runScene()
 
+        	elif trigger == "Hydra":
+        		if "Guard1" in self.scenes[10].spriteGroup:
+        			cut = CutScene(self.scenes[10], [(self.sprites["Guard1"], "leave", "Guard1"), (self.sprites["Guard2"], "leave", "Guard2")])
+        			cut.runScene()
 
         	elif trigger == "poorFarmer":
         		starting = CutScene(self.scenes[8], [(self.sprites["poorFarmer"],"moveDown",self.hero.rect.bottom),(self.sprites["poorFarmer"],"moveRight", self.hero.rect.left), (self.hero, "turn","left"), \
@@ -73,6 +80,18 @@ class Game:
         		  soldier until he has killed, and our first targets have always been the Helots. It is the only way to keep them from attempting to revolt and destroy our city."), (self.hero, "talk", "Farmer: Please help me stranger"),\
         		(self.hero, "question", "What do you say", ["I do not care for your practice Spartans", "I see, I know Athenians wouldn't approve but these are your laws", "You are mistaken, this man is from Menelaos"], ["farmerFight", "poorFarmerDeath", "poorFarmerSaved"]) ])
         		cut2.runScene()
+        	elif trigger == "farmerFight":
+        		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Ahhhh, please do not hurt me"),(self.sprites["poorFarmer"], "moveLeft", 10), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
+        		cut.runScene()
+        		checkHero = self.hero.increasePoints("sparta", -2)
+        		checkHero = self.hero.increasePoints("delphi", 2)
+        		self.updateDialogue(checkHero)
+        		self.sprites["soldier1Enemy"].setPosition((self.sprites["soldier1"].rect.x, self.sprites["soldier1"].rect.y))
+        		self.sprites["soldier2Enemy"].setPosition((self.sprites["soldier2"].rect.x, self.sprites["soldier2"].rect.y))
+        		self.scenes[8].addEnemy(self.sprites["soldier1Enemy"])
+        		self.scenes[8].addEnemy(self.sprites["soldier2Enemy"])
+        		cut2 = CutScene(self.scenes[8], [(self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2"), (self.hero, "talk", "Prepare to fight foreigner")])
+        		cut2.runScene()
         	elif trigger == "poorFarmerDeath":
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Farmer: NOOOOO!!! Please help!!...."), (self.sprites["soldier1"], "moveLeftTogether", 15, [self.sprites["soldier2"], self.sprites["poorFarmer"]]),\
         			(self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2"), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
@@ -85,12 +104,21 @@ class Game:
         		cut = CutScene(self.scenes[8], [(self.sprites["soldier1"], "talk", "Soldier1: He does not look like he is from Menelaos, but we do not have time to squabble with news of the Hydra. Slaves are riled up since the arrival of the beast. Only\
         			 a hero from Sparta can bring peace. Go home strangers if you know what is best."), (self.sprites["soldier2"], "moveLeftTogether", 10, [self.sprites["soldier1"]]),\
         		(self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2")]) 
-        		cut2 = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Thank you sir. Such a noble act you have done me. Here is a token of my appreciation. I think I will be safe for a while, I will wait for my family here."),\
+        		cut2 = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Thank you sir. Such a noble act you have done me. I think I will be safe for a while, I will wait for my family here."),\
         		(self.sprites["poorFarmer"], "moveLeft", 50)])
         		cut.runScene()
         		cut2.runScene()
         		checkHero = self.hero.increasePoints("delphi", 2)
         		self.updateDialogue(checkHero)
+
+
+        	elif trigger == "LooseApprentence":
+        		self.sprites["oldManQuest"].clearDialogueQuest("Excellent he should be hiding somewhere nearby")
+        		checkHero = self.hero.increasePoints("sparta", 3)
+        		self.updateDialogue(checkHero)
+        		self.scenes[0].addEnemy(self.sprites["apprentence"])
+        		cut = CutScene(self.scenes[9], [(self.hero, "talk", "He should be near by, beware he is a quickone")])
+        		cut.runScene()
 
         	elif trigger == "NoApprentence":
         		self.sprites["oldManQuest"].clearDialogueQuest("I am sorry, my anger has strayed from the gods. I should let the people exact justice upon him. Maybe this is why the Hydra has attacked us.")
@@ -132,6 +160,11 @@ class Game:
         		starting.runScene()
         		checkHero = self.hero.increasePoints("sparta", -3)
         		self.updateDialogue(checkHero)
+        		self.scenes[3].addEnemy(self.sprites["soldier3Enemy"])
+        		self.scenes[3].addEnemy(self.sprites["soldier4Enemy"])
+        		cut2 = CutScene(self.scenes[3], [(self.hero, "talk", "How dare you kill a spartan! Prepare to die foreigner")])
+        		cut2.runScene()
+        		
 
         	elif trigger == "beginning3-2":
         		self.scenes[3].addSprite(self.sprites["soldier1"], "soldier1")
@@ -198,7 +231,6 @@ def main():
 	DISPLAYSURF = pygame.display.set_mode((600, 600))
 	pygame.display.set_caption('Hero of Greece') # Title
 	DISPLAYSURF.fill(WHITE)
-	people = pygame.sprite.Group()
 	people2 = {}
 	allSprites  = {}
 
@@ -222,6 +254,11 @@ def main():
 	soldierR = [pygame.image.load('Soldier_right.png'), pygame.image.load('Soldier_right_L.png'), pygame.image.load('Soldier_right_R.png')]
 	soldierU = [pygame.image.load('Soldier_up.png'), pygame.image.load('Soldier_up_L.png'), pygame.image.load('Soldier_up_R.png')]
 	soldierD = [pygame.image.load('Soldier_down.png'), pygame.image.load('Soldier_down_L.png'), pygame.image.load('Soldier_down_R.png')]
+
+	enemyL = [pygame.image.load('enemy_left.png'), pygame.image.load('enemy_left_L.png'), pygame.image.load('enemy_left_R.png')]
+	enemyR = [pygame.image.load('enemy_right.png'), pygame.image.load('enemy_right_L.png'), pygame.image.load('enemy_right_R.png')]
+	enemyD = [pygame.image.load('enemy_up.png'), pygame.image.load('enemy_up_L.png'), pygame.image.load('enemy_up_R.png')]
+	enemyU = [pygame.image.load('enemy_down.png'), pygame.image.load('enemy_down_L.png'), pygame.image.load('enemy_down_R.png')]
 
 	#scene one - eight buildings
 	building1 = Building(210,50, (0,0))
@@ -268,7 +305,6 @@ def main():
 	second = Person((0,400), soldierL, soldierR, soldierU, soldierD)
 	soldier1 = Person((0,400), soldierL, soldierR, soldierU, soldierD)
 	soldier2 = Person((0,470), soldierL, soldierR, soldierU, soldierD)
-	third = Enemy((400,200), 5, people2)
 
 
 	'''
@@ -292,8 +328,16 @@ def main():
 	scene1People["building8"] = building8
 	scene1People["building9"] = building9
 
-	Guide = Person((300,0), soldierL, soldierR, soldierU, soldierD)
-	allSprites["Guide"] = Guide
+	Guard1 = Person((310,0), soldierL, soldierR, soldierU, soldierD)
+	Guard2 = Person((260,0), soldierL, soldierR, soldierU, soldierD)
+	Guard1.addDialogue(Dialogue("You cannot pass until you have the people's favor. We need a true champion to fight the beast."))
+	Guard1.addDialogue(Dialogue("You cannot pass until you have the people's favor. We need a true champion to fight the beast."))
+	Guard1.addDialogue(Dialogue("You cannot pass until you have the people's favor. We need a true champion to fight the beast."))
+	Guard2.addDialogue(Dialogue("You cannot pass until you have the people's favor. We need a true champion to fight the beast."))
+	Guard2.addDialogue(Dialogue("You cannot pass until you have the people's favor. We need a true champion to fight the beast."))
+	Guard2.addDialogue(Dialogue("You cannot pass until you have the people's favor. We need a true champion to fight the beast."))
+	allSprites["Guard1"] = Guard1
+	allSprites["Guard2"] = Guard2
 	'''
 	Useless NPC's just giving information about the city, they have five different responses based on you likability
 	'''
@@ -398,7 +442,8 @@ def main():
 	scene11People = {}
 	scene11People["delphiW1"] = delphiW1
 	scene11People["delphiM1"] = delphiM1
-	scene11People["Guide"] = Guide
+	scene11People["Guard1"] = Guard1
+	scene11People["Guard2"] = Guard2
 	scene11People["oldManQuest"] = oldManQuest
 	#scene 11 buildings
 	buildingD1 = Building(205, 85, (0,0))
@@ -427,7 +472,17 @@ def main():
 	scene11People["buildingD12"] = buildingD12
 
 	#Scene 7 enemies
-	enemy = Enemy((300,300),6,people2)
+	enemy = Enemy((300,300),6, people2, enemyL, enemyR, enemyU, enemyD)
+	soldier1Enemy = Enemy((0,0), 20, scene9People, soldierL, soldierR, soldierU, soldierD, 3)
+	soldier2Enemy = Enemy((0,0), 20, scene9People, soldierL, soldierR, soldierU, soldierD)
+	soldier3Enemy = Enemy((0,360), 10, {}, soldierL, soldierR, soldierU, soldierD,4)
+	soldier4Enemy = Enemy((0,410), 16, {}, soldierL, soldierR, soldierU, soldierD,3)
+	apprentence = Enemy((300, 300), 8, {},  npcL, npcR, npcU, npcD, 10)
+	allSprites['apprentence'] = apprentence
+	allSprites['soldier1Enemy'] = soldier1Enemy
+	allSprites['soldier2Enemy'] = soldier2Enemy
+	allSprites['soldier3Enemy'] = soldier3Enemy
+	allSprites['soldier4Enemy'] = soldier4Enemy
 	enemies = [enemy]
 
 
@@ -437,13 +492,11 @@ def main():
 	second.addDialogue(Dialogue("Will you help me?"))
 	second.addDialogue(Question("Will you help?", ["Help", "Do not Help"], ["guyThanks", "guyHates"]), True)
 	allSprites["guy"] = second
-	allSprites["enemy1"] = third
 	allSprites["Hero"] = first
 	allSprites["soldier1"] = soldier1
 	allSprites["soldier2"] = soldier2
 
 
-	people.add(third)
 	people2["building1"] = building1
 	people2["building2"] = building2
 	people2["building3"] = building3
@@ -481,10 +534,16 @@ def main():
 	while True:
 		#print(current_scene_num)
 		state_of_current_scene, last_hero_coords = current_scene.run(current_hero_coords)
+		if state_of_current_scene == "Dead":
+			break
 		if state_of_current_scene > 0:
 			new_scene_num, current_hero_coords = getNextScene(current_scene_num, state_of_current_scene, last_hero_coords)
 			current_scene_num = new_scene_num
 			current_scene = scenes_list[new_scene_num-1]
+	DISPLAYSURF.fill(WHITE)
+	DISPLAYSURF.blit(pygame.font.Font(None, 22).render("You Lose", True, BLACK), (300, 300))
+	pygame.display.update()
+	pygame.time.wait(2000)
 
 
 if __name__ == "__main__":

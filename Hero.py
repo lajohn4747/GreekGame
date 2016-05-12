@@ -54,6 +54,7 @@ class Weapon(pygame.sprite.Sprite):
 
 class Hero(Person):
 	def __init__(self,width,height,pos):
+		self.level = None
 		self.words = []
 		self.dialogueNumber = 0
 		self.combine = {}
@@ -87,6 +88,8 @@ class Hero(Person):
 	weapon = Weapon()
 
 	seenScene = {}
+	def setLevel(self, level):
+		self.level = level
 	def resetImage(self, direction):
 		if direction == "left":
 			self.imageRight = 0
@@ -140,6 +143,9 @@ class Hero(Person):
 		pass
 
 	def increasePoints(self, city, number):
+		if self.spartaPoints >= 4 and self.athensPoints >=4 and self.delphiPoints >= 4:
+			self.level.reaction("Hydra")
+
 		if city == "sparta":
 			self.spartaPoints += number
 			if self.spartaPoints <= -5:
