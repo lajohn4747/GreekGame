@@ -63,7 +63,7 @@ class Game:
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Home?! That will be the first place they look! I should have known better than to ask a foreigner for help."),\
         			(self.sprites["poorFarmer"], "moveLeft", 20), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
         		cut.runScene()
-        		checkHero = self.hero.increasePoints("sparta", 3)
+        		checkHero = self.hero.increasePoints("sparta", 5)
         		self.updateDialogue(checkHero)
         		checkHero = self.hero.increasePoints("delphi", -1)
         		self.updateDialogue(checkHero)
@@ -84,7 +84,7 @@ class Game:
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Ahhhh, please do not hurt me"),(self.sprites["poorFarmer"], "moveLeft", 10), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
         		cut.runScene()
         		checkHero = self.hero.increasePoints("sparta", -2)
-        		checkHero = self.hero.increasePoints("delphi", 2)
+        		checkHero = self.hero.increasePoints("delphi", 4)
         		self.updateDialogue(checkHero)
         		self.sprites["soldier1Enemy"].setPosition((self.sprites["soldier1"].rect.x, self.sprites["soldier1"].rect.y))
         		self.sprites["soldier2Enemy"].setPosition((self.sprites["soldier2"].rect.x, self.sprites["soldier2"].rect.y))
@@ -96,9 +96,9 @@ class Game:
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Farmer: NOOOOO!!! Please help!!...."), (self.sprites["soldier1"], "moveLeftTogether", 15, [self.sprites["soldier2"], self.sprites["poorFarmer"]]),\
         			(self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2"), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
         		cut.runScene()
-        		checkHero = self.hero.increasePoints("sparta", 2)
+        		checkHero = self.hero.increasePoints("sparta", 4)
         		self.updateDialogue(checkHero)
-        		checkHero = self.hero.increasePoints("delphi", -1)
+        		checkHero = self.hero.increasePoints("delphi", -2)
         		self.updateDialogue(checkHero)
         	elif trigger == "poorFarmerSaved":
         		cut = CutScene(self.scenes[8], [(self.sprites["soldier1"], "talk", "Soldier1: He does not look like he is from Menelaos, but we do not have time to squabble with news of the Hydra. Slaves are riled up since the arrival of the beast. Only\
@@ -108,13 +108,13 @@ class Game:
         		(self.sprites["poorFarmer"], "moveLeft", 50)])
         		cut.runScene()
         		cut2.runScene()
-        		checkHero = self.hero.increasePoints("delphi", 2)
+        		checkHero = self.hero.increasePoints("delphi", 4)
         		self.updateDialogue(checkHero)
 
 
         	elif trigger == "LooseApprentence":
         		self.sprites["oldManQuest"].clearDialogueQuest("Excellent he should be hiding somewhere nearby")
-        		checkHero = self.hero.increasePoints("sparta", 3)
+        		checkHero = self.hero.increasePoints("sparta", 4)
         		self.updateDialogue(checkHero)
         		self.scenes[0].addEnemy(self.sprites["apprentence"])
         		cut = CutScene(self.scenes[9], [(self.hero, "talk", "He should be near by, beware he is a quickone")])
@@ -123,9 +123,9 @@ class Game:
         	elif trigger == "NoApprentence":
         		self.sprites["oldManQuest"].clearDialogueQuest("I am sorry, my anger has strayed from the gods. I should let the people exact justice upon him. Maybe this is why the Hydra has attacked us.")
         		self.sprites["oldManQuest"].getTextBox(self.surface, self.hero.rect.y)
-        		checkHero = self.hero.increasePoints("athens", 3)
+        		checkHero = self.hero.increasePoints("athens", 5)
         		self.updateDialogue(checkHero)
-        		checkHero = self.hero.increasePoints("delphi", 2)
+        		checkHero = self.hero.increasePoints("delphi", 5)
         		self.updateDialogue(checkHero)
 
         	elif trigger == "beginning":
@@ -177,7 +177,7 @@ class Game:
         		starting.runScene()
         		checkHero =self.hero.increasePoints("sparta", -2)
         		self.updateDialogue(checkHero)
-        		checkHero = self.hero.increasePoints("athens", 2)
+        		checkHero = self.hero.increasePoints("athens", 4)
         		self.updateDialogue(checkHero)
         	elif trigger == "beginning3-3":
         		starting = CutScene(self.scenes[3], [(self.sprites["guy"],"moveDown",400), (self.sprites["guy"],"moveRight", 600), \
@@ -191,7 +191,7 @@ class Game:
         		self.sprites["soldier1"].addDialogue(Dialogue("Hahaha I see the excellent young boy, got away"))
         		self.sprites["soldier2"].addDialogue(Dialogue("Hahaha I know you assisted my boy, and as a Spartan I thank you"))
         		self.sprites["soldier1"].getTextBox(self.surface)
-        		checkHero = self.hero.increasePoints("sparta", 2)
+        		checkHero = self.hero.increasePoints("sparta", 5)
         		self.updateDialogue(checkHero)
 
         def updateDialogue(self, checkHero):
