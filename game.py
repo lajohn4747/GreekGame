@@ -384,6 +384,10 @@ def main():
 	scene11People["buildingD11"] = buildingD11
 	scene11People["buildingD12"] = buildingD12
 
+	#Scene 7 enemies
+	enemy = Enemy((300,300),2)
+	enemies = [enemy]
+
 
 	# Add buildings for all the cities
 	building = Building(80,80,(0,520))
@@ -418,7 +422,7 @@ def main():
 	scene5 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[250,350,0,0], 4:[575,600,365,465]})
 	#scene6 doesn't exist anymore, but left it there so we don't have to rename everything
 	scene6 = Scene(DISPLAYSURF, people2, first)
-	scene7 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465]})
+	scene7 = Scene(DISPLAYSURF, people2, first, enemies, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465]})
 	scene8 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[250,350,0,0], 4:[575,600,365,465]})
 	scene9 = Scene(DISPLAYSURF, scene9People, first, background = pygame.image.load('fran_sparta_helotfarm.png').convert(), transition_points = {3:[250,350,560,600], 4:[575,600,487,584]}, entranceTrigger = "poorFarmer")
 	scene10= Scene(DISPLAYSURF, scene10People, first, background = pygame.image.load('fran_sparta_city.png').convert(), transition_points = {2:[0,0,487,584], 3:[250,350,560,600], 4:[575,600,365,465]})
