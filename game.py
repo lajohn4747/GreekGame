@@ -56,7 +56,9 @@ class Game:
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Home?! That will be the first place they look! I should have known better than to ask a foreigner for help."),\
         			(self.sprites["poorFarmer"], "moveLeft", 20), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
         		cut.runScene()
-        		checkHero = self.hero.increasePoints("sparta", 1)
+        		checkHero = self.hero.increasePoints("sparta", 3)
+        		self.updateDialogue(checkHero)
+        		checkHero = self.hero.increasePoints("delphi", -1)
         		self.updateDialogue(checkHero)
         	elif trigger == "poorFarmer2-2":
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "My only option is to move my family towards Menelaos--the district is safe, and the Krypteia will not follow us there. But the Spartans are everywhere, \
@@ -75,7 +77,9 @@ class Game:
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Farmer: NOOOOO!!! Please help!!...."), (self.sprites["soldier1"], "moveLeftTogether", 15, [self.sprites["soldier2"], self.sprites["poorFarmer"]]),\
         			(self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2"), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
         		cut.runScene()
-        		checkHero = self.hero.increasePoints("sparta", 1)
+        		checkHero = self.hero.increasePoints("sparta", 2)
+        		self.updateDialogue(checkHero)
+        		checkHero = self.hero.increasePoints("delphi", -1)
         		self.updateDialogue(checkHero)
         	elif trigger == "poorFarmerSaved":
         		cut = CutScene(self.scenes[8], [(self.sprites["soldier1"], "talk", "Soldier1: He does not look like he is from Menelaos, but we do not have time to squabble with news of the Hydra. Slaves are riled up since the arrival of the beast. Only\
@@ -85,7 +89,7 @@ class Game:
         		(self.sprites["poorFarmer"], "moveLeft", 50)])
         		cut.runScene()
         		cut2.runScene()
-        		checkHero = self.hero.increasePoints("delphi", 1)
+        		checkHero = self.hero.increasePoints("delphi", 2)
         		self.updateDialogue(checkHero)
 
         	elif trigger == "NoApprentence":
@@ -126,10 +130,9 @@ class Game:
         	elif trigger == "beginning3-1":
         		starting = CutScene(self.scenes[3], [(self.sprites["guy"],"murder", 4), (self.sprites["guy"],"talk"," No please! Gyaaa----"), (self.hero, "leave", "guy")])
         		starting.runScene()
-        		checkHero = self.hero.increasePoints("sparta", -2)
+        		checkHero = self.hero.increasePoints("sparta", -3)
         		self.updateDialogue(checkHero)
-        		#self.scenes[0].addEnemy(self.sprites["soldier1"], "soldier1")
-        		#self.scenes[0].addSprite(self.sprites["soldier2"], "soldier2")
+
         	elif trigger == "beginning3-2":
         		self.scenes[3].addSprite(self.sprites["soldier1"], "soldier1")
         		self.scenes[3].addSprite(self.sprites["soldier2"], "soldier2")
@@ -139,7 +142,7 @@ class Game:
         			 xenoi, let go of this boy and stay out of our affairs"), (self.sprites["soldier1"], "moveLeftTogether", 0, [self.sprites["soldier2"], self.sprites["guy"]]), \
         			 (self.sprites["guy"], "leave", "guy"), (self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2")])
         		starting.runScene()
-        		checkHero =self.hero.increasePoints("sparta", -1)
+        		checkHero =self.hero.increasePoints("sparta", -2)
         		self.updateDialogue(checkHero)
         		checkHero = self.hero.increasePoints("athens", 2)
         		self.updateDialogue(checkHero)
