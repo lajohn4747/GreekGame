@@ -60,6 +60,12 @@ class Person(pygame.sprite.Sprite):
 
 	def goToLastDialogue(self):
 		self.dialogueNumber = len(self.words) - 1
+	def clearDialogueQuest(self, text):
+		self.dialogueNumber = 0
+		del self.words[:]
+		self.combine.clear()
+		for i in range(2):
+			self.words.append(Dialogue(text))
 	# Setting the position of a person in the case they move to a different location
 	def setPosition(self, pos):
 		self.rect.topleft = pos

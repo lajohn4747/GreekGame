@@ -81,7 +81,7 @@ class Game:
         		cut = CutScene(self.scenes[8], [(self.sprites["soldier1"], "talk", "Soldier1: He does not look like he is from Menelaos, but we do not have time to squabble with news of the Hydra. Slaves are riled up since the arrival of the beast. Only\
         			 a hero from Sparta can bring peace. Go home strangers if you know what is best."), (self.sprites["soldier2"], "moveLeftTogether", 10, [self.sprites["soldier1"]]),\
         		(self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2")]) 
-        		cut2 = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Thank you sir. Such a noble act you have done me. Here is a token of my appreciation. I think I will be safe for a while, I will wait for my family here"),\
+        		cut2 = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Thank you sir. Such a noble act you have done me. Here is a token of my appreciation. I think I will be safe for a while, I will wait for my family here."),\
         		(self.sprites["poorFarmer"], "moveLeft", 50)])
         		cut.runScene()
         		cut2.runScene()
@@ -89,8 +89,7 @@ class Game:
         		self.updateDialogue(checkHero)
 
         	elif trigger == "NoApprentence":
-        		self.sprites["oldManQuest"].addDialogue(Dialogue("I am sorry, my anger has strayed from the gods. I should let the people exact justice upon him. Maybe this is why the Hydra has attacked us"))
-        		self.sprites["oldManQuest"].goToLastDialogue()
+        		self.sprites["oldManQuest"].clearDialogueQuest("I am sorry, my anger has strayed from the gods. I should let the people exact justice upon him. Maybe this is why the Hydra has attacked us.")
         		self.sprites["oldManQuest"].getTextBox(self.surface, self.hero.rect.y)
         		checkHero = self.hero.increasePoints("athens", 3)
         		self.updateDialogue(checkHero)
@@ -161,10 +160,30 @@ class Game:
 
         def updateDialogue(self, checkHero):
         	if checkHero:
-        		if checkHero == "Athens3":
+        		if checkHero == "Athens5":
         			athenSprites = self.scenes[1].spriteGroup
         			for a in athenSprites:
         				athenSprites[a].dialogueNumber = 2
+        		elif checkHero == "Athens-5":
+        			athenSprites = self.scenes[1].spriteGroup
+        			for a in athenSprites:
+        				athenSprites[a].dialogueNumber = 1
+        		elif checkHero == "Spartan5":
+        			athenSprites = self.scenes[9].spriteGroup
+        			for a in athenSprites:
+        				athenSprites[a].dialogueNumber = 2
+        		elif checkHero == "Spartan-5":
+        			athenSprites = self.scenes[9].spriteGroup
+        			for a in athenSprites:
+        				athenSprites[a].dialogueNumber = 1
+        		elif checkHero == "Delphi5":
+        			athenSprites = self.scenes[10].spriteGroup
+        			for a in athenSprites:
+        				athenSprites[a].dialogueNumber = 2
+        		elif checkHero == "Delphi-5":
+        			athenSprites = self.scenes[10].spriteGroup
+        			for a in athenSprites:
+        				athenSprites[a].dialogueNumber = 1
 
 
 
@@ -268,16 +287,6 @@ def main():
 	spartanM1.addDialogue(Dialogue("I speak for the rest of Sparta and I say that you are truly a hero!"))
 	allSprites["spartanM1"] = spartanM1
 
-    #stuff for scene 9
-	poorFarmer = Person(30, 30, (150, 150))
-	poorFarmer.addDialogue(Dialogue("Thank you, maybe you are the Greece needs in order to destroy the Hydra"))
-	allSprites['poorFarmer'] = poorFarmer
-	scene9People = {}
-	scene9People['building91'] = building91
-	scene9People['building92'] = building92
-	scene9People['poorFarmer'] = poorFarmer
-	
-        #stuff for scene 10
 	scene10People = {}
 	scene10People['spartanW1'] = spartanW1
 	scene10People['spartanM1'] = spartanM1
@@ -290,6 +299,15 @@ def main():
 	scene10People['buildingS7'] = buildingS7
 	scene10People['buildingS8'] = buildingS8
 
+    #stuff for scene 9
+	poorFarmer = Person(30, 30, (150, 150))
+	poorFarmer.addDialogue(Dialogue("Thank you, maybe you are the Greece needs in order to destroy the Hydra"))
+	allSprites['poorFarmer'] = poorFarmer
+	scene9People = {}
+	scene9People['building91'] = building91
+	scene9People['building92'] = building92
+	scene9People['poorFarmer'] = poorFarmer
+	
 	#stuff for scene 2
 	scene2People = {}
 	scene2People['buildingA1'] = buildingA1

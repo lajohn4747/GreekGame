@@ -131,18 +131,28 @@ class Hero(Person):
 	def increasePoints(self, city, number):
 		if city == "sparta":
 			self.spartaPoints += number
-			if self.spartaPoints > 3:
-				return "Spartan3"
+			if self.spartaPoints <= -5:
+				return "Spartan-5"
+			elif self.spartaPoints >= 5:
+				return "Spartan5"
 			else:
-				return None
+				return "Normal"
 		elif city == "athens":
 			self.athensPoints += number
-			if self.athensPoints >= 3:
-				return "Athens3"
+			if self.athensPoints <= -5:
+				return "Athen-5"
+			elif self.athensPoints >= 5:
+				return "Athen5"
 			else:
-				return None
+				return "Normal"
 		elif city == "delphi":
 			self.delphiPoints += number
+			if self.delphiPoints <= -5:
+				return "Delphi-5"
+			elif self.delphiPoints >= 5:
+				return "Delphi5"
+			else:
+				return "Normal"
 
 	def getAction(self):
 		if(self.direction == 1):
