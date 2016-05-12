@@ -73,6 +73,8 @@ class CutScene:
 				while spriteToMove.rect.left > i[2]:
 					for j in i[3]:
 						j.rect.left -= 5
+						j.moveImage("left")
+					spriteToMove.moveImage("left")
 					spriteToMove.rect.left -= 5
 					self.scene.drawBackground()
 					self.mainSurface.blit(self.hero.image, self.hero.rect)
@@ -83,6 +85,8 @@ class CutScene:
 				while spriteToMove.rect.right < i[2]:
 					for j in i[3]:
 						j.rect.right += 5
+						j.moveImage("right")
+					spriteToMove.moveImage("right")
 					spriteToMove.rect.right += 5
 					self.scene.drawBackground()
 					self.mainSurface.blit(self.hero.image, self.hero.rect)
@@ -93,6 +97,8 @@ class CutScene:
 				while spriteToMove.rect.bottom < i[2]:
 					for j in i[3]:
 						j.rect.bottom += 5
+						j.moveImage("down")
+					spriteToMove.moveImage("down")
 					spriteToMove.rect.bottom += 5
 					self.scene.drawBackground()
 					self.mainSurface.blit(self.hero.image, self.hero.rect)
@@ -103,6 +109,8 @@ class CutScene:
 				while spriteToMove.rect.top > i[2]:
 					for j in i[3]:
 						j.rect.top -= 5
+						j.moveImage("up")
+					spriteToMove.moveImage("up")
 					spriteToMove.rect.top -=5
 					self.scene.drawBackground()
 					self.mainSurface.blit(self.hero.image, self.hero.rect)

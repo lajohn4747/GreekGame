@@ -178,8 +178,7 @@ class Scene:
                         talk = False
                         if self.wallCollide() or self.walkCollision():
                                 self.hero.rect.y += 5
-                        else:
-                                self.hero.moveImage("up")
+                        self.hero.moveImage("up")
                         talkingTo = self.talkCollisions()
                         if talkingTo:
                                 talk = True
@@ -192,8 +191,7 @@ class Scene:
                         talk = False
                         if self.wallCollide() or self.walkCollision():
                                 self.hero.rect.y -= 5
-                        else:
-                                self.hero.moveImage("down")
+                        self.hero.moveImage("down")
                         talkingTo = self.talkCollisions()
                         if talkingTo:
                                 talk = True
@@ -206,8 +204,7 @@ class Scene:
                         talk = False
                         if self.wallCollide() or self.walkCollision():
                                 self.hero.rect.x -= 5
-                        else:
-                                self.hero.moveImage("right")
+                        self.hero.moveImage("right")
                         talkingTo = self.talkCollisions()
                         if talkingTo:
                                 talk = True
@@ -220,8 +217,7 @@ class Scene:
                         talk = False
                         if self.wallCollide() or self.walkCollision():
                                 self.hero.rect.x += 5
-                        else:
-                                self.hero.moveImage("left")
+                        self.hero.moveImage("left")
                         talkingTo = self.talkCollisions()
                         if talkingTo:
                                 talk = True
