@@ -403,7 +403,6 @@ def main():
 
 
 	people.add(third)
-	people2["guy"] = second
 	people2["building1"] = building1
 	people2["building2"] = building2
 	people2["building3"] = building3
