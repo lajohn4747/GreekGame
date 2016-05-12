@@ -13,10 +13,13 @@ class Weapon(pygame.sprite.Sprite):
 		self.pos = (0,0)
 		# Create an image of the block, and fill it with a color.
 		# This could also be an image loaded from the disk.
-		self.image = pygame.Surface([8, 50])
-		self.sideImage = pygame.Surface([50,8])
-		self.topImage = pygame.Surface([8,50])
-		self.image.fill(RED)
+		#self.image = pygame.Surface([8, 50])
+		self.image = pygame.image.load("sword.png")
+		#self.sideImage = pygame.Surface([50,8])
+		#self.topImage = pygame.Surface([8,50])
+		self.topImage = pygame.image.load("sword.png")
+		self.sideImage = pygame.image.load("swordSide.png")
+		#self.image.fill(RED)
 		self.health = 10
 
 		# Fetch the rectangle object that has the dimensions of the image
