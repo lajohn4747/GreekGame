@@ -16,7 +16,7 @@ largeFont = pygame.font.SysFont(None, 36)
 #images
 heartImg = pygame.image.load("heart.png")
 
-FPS = 60
+FPS = 30
 fpsClock = pygame.time.Clock()
 
 '''
