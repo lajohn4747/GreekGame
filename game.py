@@ -39,7 +39,7 @@ class Game:
         def reaction(self, trigger):
         	if trigger == "startScene":
         		starting = CutScene(self.scenes[0], [(self.sprites["scaredM1"], "moveDownTogether", 370, [self.sprites["scaredW1"]]), (self.hero, "talk", "AHHHHH THE HYDRA HAS BEEN SEEN IN THE NORTH, RUNNN!!!!\
-        			You better get out of here. Tell everyone you know with SPACEBAR. Use the DIRECTIONAL buttons to move far far away from here. If you get tired press P, to take a break. So run, hopefully Greece can choose a hero to save us."),\
+        			You better get out of here. Tell everyone you know with SPACEBAR. Use the DIRECTIONAL buttons to move far far away from here. If you get tired press P, to take a break and look how Greece sees you. So run, hopefully Greece can choose a hero to save us."),\
         		 (self.sprites["scaredM1"], "moveLeftTogether", 10, [self.sprites["scaredW1"]]), (self.sprites["scaredM1"], "leave", "scaredM1"), (self.sprites["scaredW1"], "leave", "scaredW1")])
         		starting.runScene()
         	elif trigger == "poorFarmer":
