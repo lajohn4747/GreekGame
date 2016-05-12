@@ -41,6 +41,11 @@ class Person(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.topleft = pos
 
+	def resetImage(self, direction):
+		pass
+
+	def moveImage(self, direction):
+		pass
 	# Function to give this person a dialogue script
 	def addDialogue(self, dialogue, combine = False):
 		if combine:

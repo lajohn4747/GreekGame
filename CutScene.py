@@ -36,6 +36,7 @@ class CutScene:
 			if action == "moveLeft":
 				while spriteToMove.rect.left > i[2]:
 					spriteToMove.rect.left -= 5
+					spriteToMove.moveImage("left")
 					self.scene.drawBackground()
 					self.mainSurface.blit(self.hero.image, self.hero.rect)
 					self.scene.drawAll()
@@ -44,6 +45,7 @@ class CutScene:
 			elif action == "moveRight":
 				while spriteToMove.rect.right < i[2]:
 					spriteToMove.rect.right += 5
+					spriteToMove.moveImage("right")
 					self.scene.drawBackground()
 					self.mainSurface.blit(self.hero.image, self.hero.rect)
 					self.scene.drawAll()
@@ -52,6 +54,7 @@ class CutScene:
 			elif action == "moveDown":
 				while spriteToMove.rect.bottom < i[2]:
 					spriteToMove.rect.bottom += 5
+					spriteToMove.moveImage("down")
 					self.scene.drawBackground()
 					self.mainSurface.blit(self.hero.image, self.hero.rect)
 					self.scene.drawAll()
@@ -60,6 +63,7 @@ class CutScene:
 			elif action == "moveUp":
 				while spriteToMove.rect.top > i[2]:
 					spriteToMove.rect.top -=5
+					spriteToMove.moveImage("up")
 					self.scene.drawBackground()
 					self.mainSurface.blit(self.hero.image, self.hero.rect)
 					self.scene.drawAll()
@@ -69,6 +73,8 @@ class CutScene:
 				while spriteToMove.rect.left > i[2]:
 					for j in i[3]:
 						j.rect.left -= 5
+						j.moveImage("left")
+					spriteToMove.moveImage("left")
 					spriteToMove.rect.left -= 5
 					self.scene.drawBackground()
 					self.mainSurface.blit(self.hero.image, self.hero.rect)
@@ -79,6 +85,8 @@ class CutScene:
 				while spriteToMove.rect.right < i[2]:
 					for j in i[3]:
 						j.rect.right += 5
+						j.moveImage("right")
+					spriteToMove.moveImage("right")
 					spriteToMove.rect.right += 5
 					self.scene.drawBackground()
 					self.mainSurface.blit(self.hero.image, self.hero.rect)
@@ -89,6 +97,8 @@ class CutScene:
 				while spriteToMove.rect.bottom < i[2]:
 					for j in i[3]:
 						j.rect.bottom += 5
+						j.moveImage("down")
+					spriteToMove.moveImage("down")
 					spriteToMove.rect.bottom += 5
 					self.scene.drawBackground()
 					self.mainSurface.blit(self.hero.image, self.hero.rect)
@@ -99,13 +109,20 @@ class CutScene:
 				while spriteToMove.rect.top > i[2]:
 					for j in i[3]:
 						j.rect.top -= 5
+						j.moveImage("up")
+					spriteToMove.moveImage("up")
 					spriteToMove.rect.top -=5
 					self.scene.drawBackground()
 					self.mainSurface.blit(self.hero.image, self.hero.rect)
 					self.scene.drawAll()
 					pygame.display.update()
 					fpsClock.tick(FPS)
-
+			elif action == "turn":
+					spriteToMove.moveImage(i[2])
+					self.scene.drawBackground()
+					self.mainSurface.blit(self.hero.image, self.hero.rect)
+					self.scene.drawAll()
+					pygame.display.update()
 			elif action == "talk":
 				talking = Dialogue(i[2])
 				talking.runText(self.mainSurface, spriteToMove.rect.y)
