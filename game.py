@@ -39,7 +39,7 @@ class Game:
         def reaction(self, trigger):
         	if trigger == "startScene":
         		starting = CutScene(self.scenes[0], [(self.sprites["scaredM1"], "moveDownTogether", 370, [self.sprites["scaredW1"]]), (self.hero, "talk", "AHHHHH THE HYDRA HAS BEEN SEEN IN THE NORTH, RUNNN!!!!\
-        			You better get out of here. Use the DIRECTIONAL buttons to move far far away from here. Also if you meet new people try to tell about the Hydra with SPACEBAR"),\
+        			You better get out of here. Tell everyone you know with SPACEBAR. Use the DIRECTIONAL buttons to move far far away from here. So run, hopefully Greece can choose a hero to save us."),\
         		 (self.sprites["scaredM1"], "moveLeftTogether", 10, [self.sprites["scaredW1"]]), (self.sprites["scaredM1"], "leave", "scaredM1"), (self.sprites["scaredW1"], "leave", "scaredW1")])
         		starting.runScene()
         	elif trigger == "poorFarmer":
@@ -54,6 +54,7 @@ class Game:
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Home?! That will be the first place they look! I should have known better than to ask a foreigner for help."),\
         			(self.sprites["poorFarmer"], "moveLeft", 20), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
         		cut.runScene()
+        		self.hero.increasePoints("sparta", 1)
         	elif trigger == "poorFarmer2-2":
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "My only option is to move my family towards Menelaos--the district is safe, and the Krypteia will not follow us there. But the Spartans are everywhere, \
         			and I do not know how I can convince them that we are from Menelaos!")])
@@ -71,6 +72,7 @@ class Game:
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Farmer: NOOOOO!!! Please help!!...."), (self.sprites["soldier1"], "moveLeftTogether", 15, [self.sprites["soldier2"], self.sprites["poorFarmer"]]),\
         			(self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2"), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
         		cut.runScene()
+        		self.hero.increasePoints("sparta", 1)
         	elif trigger == "poorFarmerSaved":
         		cut = CutScene(self.scenes[8], [(self.sprites["soldier1"], "talk", "Soldier1: He does not look like he is from Menelaos, but we do not have time to squabble with news of the Hydra. Slaves are riled up since the arrival of the beast. Only\
         			 a hero from Sparta can bring peace. Go home strangers if you know what is best."), (self.sprites["soldier2"], "moveLeftTogether", 10, [self.sprites["soldier1"]]),\
@@ -79,6 +81,7 @@ class Game:
         		(self.sprites["poorFarmer"], "moveLeft", 50)])
         		cut.runScene()
         		cut2.runScene()
+        		self.hero.increasePoints("delphi", 1)
         	elif trigger == "beginning":
         		moveHero = CutScene(self.scenes[3], [(self.hero, "moveRight", 325),(self.hero, "moveDown", 450)])
         		moveHero.runScene()
