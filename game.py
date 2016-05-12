@@ -44,12 +44,39 @@ class Game:
         		starting.runScene()
         	elif trigger == "poorFarmer":
         		starting = CutScene(self.scenes[8], [(self.sprites["poorFarmer"],"moveDown",self.hero.rect.bottom),\
-        			(self.sprites["poorFarmer"],"moveRight", self.hero.rect.left), (self.sprites["poorFarmer"],"talk",": You’re--you’re not a Spartan, right? You don’t look like you’re from around here! [The man seems very out of breath,\
+        			(self.sprites["poorFarmer"],"moveRight", self.hero.rect.left), (self.sprites["poorFarmer"],"talk","You’re--you’re not a Spartan, right? You don’t look like you’re from around here! [The man seems very out of breath,\
         			 and unusually pale.] It’s autumn--it is the time for the young Spartan soldiers of the Krypteia to slaughter us like cattle! Please, I need help. We are slaves, and have no ability to resist. \
         			 The Spartans see them as their finest trainees, but they’re truly no better than thugs, happily terrorizing us Helots whenever they wish. They even declare war on us every year so they may justify killing all of the slaves they want!\
         			  The Krypteia even prefer killing the strongest and best of us--I have three sons on the cusp of manhood, I cannot let their blood stain Spartan hands!"), (self.hero, "question", "What do you say?",\
         			   ["I’m sorry, ask someone else. Hide in your home for now", "What a horrid practice! What can I do? "],["poorFarmer2-1", "poorFarmer2-2"])])
         		starting.runScene()
+        	elif trigger == "poorFarmer2-1":
+        		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Home?! That will be the first place they look! I should have known better than to ask a foreigner for help."),\
+        			(self.sprites["poorFarmer"], "moveLeft", 20), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
+        		cut.runScene()
+        	elif trigger == "poorFarmer2-2":
+        		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "My only option is to move my family towards Menelaos--the district is safe, and the Krypteia will not follow us there. But the Spartans are everywhere, \
+        			and I do not know how I can convince them that we are from Menelaos!")])
+        		cut.runScene()
+        		self.scenes[8].addSprite(self.sprites["soldier1"], "soldier1")
+        		self.scenes[8].addSprite(self.sprites["soldier2"], "soldier2")
+        		self.sprites["soldier1"].setPosition((0,490))
+        		self.sprites["soldier2"].setPosition((0,525))
+        		cut2 = CutScene(self.scenes[8], [(self.sprites["soldier1"], "moveRightTogether", self.hero.rect.left - 35, [self.sprites["soldier2"]]), (self.hero, "talk", "Soldier: It is dangerous for you to be here, foreigner. We expect much bloodshed\
+        		 in this district once we are done with the slaves. We may escort you out, if you wish. This may deem it barbaric and rightfully so, but it has been our tradition for many generations. A soldier is not a true\
+        		  soldier until he has killed, and our first targets have always been the Helots. It is the only way to keep them from attempting to revolt and destroy our city."), (self.hero, "talk", "Farmer: Please help me stranger"),\
+        		(self.hero, "question", "What do you say", ["I do not care for your practice Spartans", "I see, I know Athenians wouldn't approve but these are your laws", "You are mistaken, this man is from Menelaos"], ["farmerFight", "poorFarmerDeath", "poorFarmerSaved"]) ])
+        		cut2.runScene()
+        	elif trigger == "poorFarmerDeath":
+        		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Farmer: NOOOOO!!! Please help!!...."), (self.sprites["soldier1"], "moveLeftTogether", 15, [self.sprites["soldier2"], self.sprites["poorFarmer"]]),\
+        			(self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2"), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
+        		cut.runScene()
+        	elif trigger == "poorFarmerSaved":
+        		cut = CutScene(self.scenes[8], [(self.sprites["soldier1"], "talk", "Soldier1: He does not look like he is from Menelaos, but we do not have time to squabble with news of the Hydra. Slaves are riled up since the arrival of the beast. Only\
+        			 a hero from Sparta can bring peace. Go home strangers if you know what is best."), (self.sprites["soldier2"], "moveLeftTogether", 10, [self.sprites["soldier1"]]),\
+        		(self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2"), (self.sprites["poorFarmer"], "talk", "Thank you sir. Such a noble act you have done me. Here is a token of my appreciation. I think I will be safe for a while, I will wait for my family here"),\
+        		(self.sprites["poorFarmer"], "moveLeft", 50)])
+        		cut.runScene()
         	elif trigger == "beginning":
         		moveHero = CutScene(self.scenes[3], [(self.hero, "moveRight", 325),(self.hero, "moveDown", 450)])
         		moveHero.runScene()
@@ -192,8 +219,8 @@ def main():
 	first = Hero(50, 50, (300,300))
 	first.setSurface(DISPLAYSURF)
 	second = Person(50, 50, (0,400))
-	soldier1 = Person(50, 50, (0,400))
-	soldier2 = Person(50, 50, (0,470))
+	soldier1 = Person(30, 30, (0,400))
+	soldier2 = Person(30, 30, (0,470))
 	third = Enemy((400,200), 5)
 
 
@@ -238,6 +265,7 @@ def main():
 
     #stuff for scene 9
 	poorFarmer = Person(30, 30, (150, 150))
+	poorFarmer.addDialogue(Dialogue("Thank you, maybe you are the Greece needs in order to destroy the Hydra"))
 	allSprites['poorFarmer'] = poorFarmer
 	scene9People = {}
 	scene9People['poorFarmer'] = poorFarmer

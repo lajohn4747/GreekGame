@@ -115,6 +115,7 @@ class CutScene:
 				self.level.reaction(trigger)
 			elif action == "leave":
 				self.scene.remove(i[2])
+				pygame.display.update()
 			elif action == "murder":
 				if i[2] == 1:
 					weapon = pygame.Surface([8, 50])
