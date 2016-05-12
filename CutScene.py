@@ -109,7 +109,12 @@ class CutScene:
 					self.scene.drawAll()
 					pygame.display.update()
 					fpsClock.tick(FPS)
-
+			elif action == "turn":
+					spriteToMove.moveImage(i[2])
+					self.scene.drawBackground()
+					self.mainSurface.blit(self.hero.image, self.hero.rect)
+					self.scene.drawAll()
+					pygame.display.update()
 			elif action == "talk":
 				talking = Dialogue(i[2])
 				talking.runText(self.mainSurface, spriteToMove.rect.y)
