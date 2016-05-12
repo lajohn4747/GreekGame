@@ -60,8 +60,7 @@ class Hero(Person):
 		self.athensPoints = 0
 		self.spartaPoints = 0
 		self.delphiPoints = 0
-		
-
+		self.health = 3
 	
 	direction = 1
 	weaponSide = pygame.Surface([50,8])

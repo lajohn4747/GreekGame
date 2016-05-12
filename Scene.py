@@ -13,6 +13,8 @@ BLUE = (0, 0, 255)
 #Font
 basicFont = pygame.font.SysFont(None, 24)
 largeFont = pygame.font.SysFont(None, 36)
+#images
+heartImg = pygame.image.load("heart.png")
 
 FPS = 60
 fpsClock = pygame.time.Clock()
@@ -74,19 +76,19 @@ class Scene:
                         pygame.draw.rect(self.mainSurface, BLACK, (100,100,400,300),0)
                         #Title
                         meterLabel = largeFont.render('Hero Meter', True, WHITE)
-                        self.mainSurface.blit(meterLabel, (240,150))
+                        self.mainSurface.blit(meterLabel, (235,150))
                         #Athens's bar
-                        pygame.draw.rect(self.mainSurface, BLUE, (230,200,75,25), 0)
+                        pygame.draw.rect(self.mainSurface, BLUE, (230,200,(self.hero.athensPoints +10) * 10,25), 0)
                         pygame.draw.rect(self.mainSurface, BLUE, (230,200,200,25), 5)
                         athensLabel = basicFont.render('Athens', True, BLUE)
                         self.mainSurface.blit(athensLabel, (160,205))
                         #Sparta's bar
-                        pygame.draw.rect(self.mainSurface, RED, (230,240,75,25), 0)
+                        pygame.draw.rect(self.mainSurface, RED, (230,240,(self.hero.spartaPoints +10) * 10,25), 0)
                         pygame.draw.rect(self.mainSurface, RED, (230,240,200,25), 5)
                         spartaLabel = basicFont.render('Sparta', True, RED)
                         self.mainSurface.blit(spartaLabel, (160,245))
                         #Delphi's bar
-                        pygame.draw.rect(self.mainSurface, GREEN, (230,280,75,25), 0)
+                        pygame.draw.rect(self.mainSurface, GREEN, (230,280,(self.hero.delphiPoints +10) * 10,25), 0)
                         pygame.draw.rect(self.mainSurface, GREEN, (230,280,200,25), 5)
                         delphiLabel = basicFont.render('Delphi', True, GREEN)
                         self.mainSurface.blit(delphiLabel, (160,285))
@@ -107,6 +109,16 @@ class Scene:
                         if not self.pause:
                                 self.drawBackground()
                                 self.mainSurface.blit(self.hero.image, self.hero.rect)
+                                #health
+                                if(self.hero.health == 3):
+                                        self.mainSurface.blit(heartImg,(535,0))
+                                        self.mainSurface.blit(heartImg,(555,0))
+                                        self.mainSurface.blit(heartImg,(575,0))
+                                elif self.hero.health == 2:
+                                        self.mainSurface.blit(heartImg,(555,0))
+                                        self.mainSurface.blit(heartImg,(575,0))
+                                elif self.hero.health == 1:
+                                        self.mainSurface.blit(heartImg,(575,0))
                                 talk, change = self.checkMovement(talk)
                                 if change[0] > 0:
                                         return change
