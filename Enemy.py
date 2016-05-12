@@ -85,8 +85,8 @@ class Enemy(pygame.sprite.Sprite):
 		return False
 	
 	def wallCollide(self):
-                return  self.rect.left < 0 or self.rect.right > 600 or self.rect.top < 0 or self.rect.bottom > 600
-        
+		return  self.rect.left < 0 or self.rect.right > 600 or self.rect.top < 0 or self.rect.bottom > 600
+	
 	def chasePlayer(self, player):
 		# find normalized direction vector (dx, dy) between enemy and player
 		dx, dy = self.rect.x - player.rect.x, self.rect.y - player.rect.y
@@ -95,20 +95,20 @@ class Enemy(pygame.sprite.Sprite):
 		# move along this normalized vector towards the player at current speed
 		self.rect.x += dx * 0.5
 		self.rect.y += dy * 0.5
-                #change image
+		#change image
 		if math.abs(dx) > math.abs(dy) and dx > 0:
-                        self.moveImage("right")
-                        if self.wallCollide():
-                                self.rect.x -= 3
-                elif math.abs(dx) > math.abs(dy) and dx <= 0:
-                        self.moveImage("left")
-                        if self.wallCollide():
-                                self.rect.x += 3
-                if math.abs(dy) > math.abs(dx) and dy > 0:
-                        self.moveImage("up")
-                        if self.wallCollide():
-                                self.rect.y += 3
-                elif math.abs(dy) > math.abs(dx) and dy <= 0:
-                        self.moveImage("down")
-                        if self.wallCollide():
-                                self.rect.y -= 3
+			self.moveImage("right")
+			if self.wallCollide():
+				self.rect.x -= 3
+		elif math.abs(dx) > math.abs(dy) and dx <= 0:
+			self.moveImage("left")
+			if self.wallCollide():
+				self.rect.x += 3
+		if math.abs(dy) > math.abs(dx) and dy > 0:
+			self.moveImage("up")
+			if self.wallCollide():
+				self.rect.y += 3
+		elif math.abs(dy) > math.abs(dx) and dy <= 0:
+			self.moveImage("down")
+			if self.wallCollide():
+				self.rect.y -= 3
