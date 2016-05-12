@@ -166,6 +166,7 @@ class Scene:
                                                 if trigger:
                                                         self.level.reaction(trigger)
                                                 trigger = None
+                                                self.hero.checkHero()
                                         elif event.key == K_LSHIFT:
                                                 weapon = self.hero.getAction()
                                                 if weapon:

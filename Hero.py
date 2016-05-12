@@ -142,8 +142,12 @@ class Hero(Person):
 	def getTextBox(self, surface):
 		pass
 
+	def checkHero(self):
+		if self.spartaPoints >= 3 and self.athensPoints >=3 and self.delphiPoints >= 3:
+			self.level.reaction("Hydra")
+			
 	def increasePoints(self, city, number):
-		if self.spartaPoints >= 4 and self.athensPoints >=4 and self.delphiPoints >= 4:
+		if self.spartaPoints >= 3 and self.athensPoints >=3 and self.delphiPoints >= 3:
 			self.level.reaction("Hydra")
 
 		if city == "sparta":
