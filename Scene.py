@@ -144,6 +144,18 @@ class Scene:
                                                 else:
                                                         self.unpaused()
                                         if event.key == K_SPACE and talk and self.talkingTo:
+                                                if self.hero.direction == 1:
+                                                        self.talkingTo.turn("down")
+                                                elif self.hero.direction == 2:
+                                                        self.talkingTo.turn("left")
+                                                elif self.hero.direction == 3:
+                                                        self.talkingTo.turn("up")
+                                                elif self.hero.direction == 4:
+                                                        self.talkingTo.turn("right")
+                                                pygame.display.update()
+                                                self.drawBackground()
+                                                self.mainSurface.blit(self.hero.image, self.hero.rect)
+                                                self.drawAll()
                                                 trigger = self.talkingTo.getTextBox(self.mainSurface)
                                                 if trigger:
                                                         self.level.reaction(trigger)

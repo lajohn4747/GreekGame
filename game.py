@@ -202,6 +202,26 @@ def main():
 	people2 = {}
 	allSprites  = {}
 
+	#Loading up NPC's images
+	npcL = [pygame.image.load('npc_left.png'), pygame.image.load('npc_left_L.png'), pygame.image.load('npc_left_R.png')]
+	npcR = [pygame.image.load('npc_right.png'), pygame.image.load('npc_right_L.png'), pygame.image.load('npc_right_R.png')]
+	npcU = [pygame.image.load('npc_up.png'), pygame.image.load('npc_up_L.png'), pygame.image.load('npc_up_R.png')]
+	npcD = [pygame.image.load('npc_down.png'), pygame.image.load('npc_down_L.png'), pygame.image.load('npc_down_R.png')]
+
+	npc2L = [pygame.image.load('npc2_left.png'), pygame.image.load('npc2_left_L.png'), pygame.image.load('npc2_left_R.png')]
+	npc2R = [pygame.image.load('npc2_right.png'), pygame.image.load('npc2_right_L.png'), pygame.image.load('npc2_right_R.png')]
+	npc2U = [pygame.image.load('npc2_up.png'), pygame.image.load('npc2_up_L.png'), pygame.image.load('npc2_up_R.png')]
+	npc2D = [pygame.image.load('npc2_down.png'), pygame.image.load('npc2_down_L.png'), pygame.image.load('npc2_down_R.png')]
+
+	farmerL = [pygame.image.load('helot_farmer_left.png'), pygame.image.load('helot_farmer_left_L.png'), pygame.image.load('helot_farmer_left_R.png')]
+	farmerR = [pygame.image.load('helot_farmer_right.png'), pygame.image.load('helot_farmer_right_L.png'), pygame.image.load('npc_right_R.png')]
+	farmerU = [pygame.image.load('helot_farmer_up.png'), pygame.image.load('helot_farmer_up_L.png'), pygame.image.load('helot_farmer_up_R.png')]
+	farmerD = [pygame.image.load('helot_farmer.png'), pygame.image.load('helot_farmer_down_L.png'), pygame.image.load('helot_farmer_down_R.png')]
+
+	soldierL = [pygame.image.load('Soldier_left.png'), pygame.image.load('Soldier_left_L.png'), pygame.image.load('Soldier_left_R.png')]
+	soldierR = [pygame.image.load('Soldier_right.png'), pygame.image.load('Soldier_right_L.png'), pygame.image.load('Soldier_right_R.png')]
+	soldierU = [pygame.image.load('Soldier_up.png'), pygame.image.load('Soldier_up_L.png'), pygame.image.load('Soldier_up_R.png')]
+	soldierD = [pygame.image.load('Soldier_down.png'), pygame.image.load('Soldier_down_L.png'), pygame.image.load('Soldier_down_R.png')]
 
 	#scene one - eight buildings
 	building1 = Building(210,50, (0,0))
@@ -242,12 +262,12 @@ def main():
 	buildingA11 = Building(150, 130, (350,100))
 	buildingA12 = Building(110, 140, (390,230))
 	
-        #people
+    #people
 	first = Hero(50, 50, (300,300))
 	first.setSurface(DISPLAYSURF)
-	second = Person(50, 50, (0,400))
-	soldier1 = Person(30, 30, (0,400))
-	soldier2 = Person(30, 30, (0,470))
+	second = Person((0,400), soldierL, soldierR, soldierU, soldierD)
+	soldier1 = Person((0,400), soldierL, soldierR, soldierU, soldierD)
+	soldier2 = Person((0,470), soldierL, soldierR, soldierU, soldierD)
 	third = Enemy((400,200), 5, people2)
 
 
@@ -255,8 +275,8 @@ def main():
 	Important NPC's
 	'''
 	# The starting NPC's
-	scaredW1 = Person(30, 30, (280,0))
-	scaredM1 = Person(30, 30, (320,0))
+	scaredW1 = Person((280,0), npcL, npcR, npcU, npcD)
+	scaredM1 = Person((320,0), npc2L, npc2R, npc2U, npc2D)
 	allSprites["scaredW1"] = scaredW1
 	allSprites["scaredM1"] = scaredM1
 	scene1People = {}
@@ -272,19 +292,19 @@ def main():
 	scene1People["building8"] = building8
 	scene1People["building9"] = building9
 
-	Guide = Person(40, 40, (300,0))
+	Guide = Person((300,0), soldierL, soldierR, soldierU, soldierD)
 	allSprites["Guide"] = Guide
 	'''
 	Useless NPC's just giving information about the city, they have five different responses based on you likability
 	'''
 	# Spartan People
-	spartanW1 = Person(30, 30, (0, 245))
+	spartanW1 = Person((0, 245), npcL, npcR, npcU, npcD)
 	spartanW1.addDialogue(Dialogue("Spartans are a people of honor, maybe you should understand that before entering this city"))
 	spartanW1.addDialogue(Dialogue("You are a scum without honor, how dare you show your face here"))
 	spartanW1.addDialogue(Dialogue("Hello fine warrior, I cannot believe that you are not a native spartan"))
 	allSprites["spartanW1"] = spartanW1
 
-	spartanM1 = Person(30, 30, (200, 500))
+	spartanM1 = Person((200, 500), npc2L, npc2R, npc2U, npc2D)
 	spartanM1.addDialogue(Dialogue("Hmmm if only were you a more suitable fighter, Sparta would honor you as a hero."))
 	spartanM1.addDialogue(Dialogue("You consider yourself a hero? More a coward than anything."))
 	spartanM1.addDialogue(Dialogue("I speak for the rest of Sparta and I say that you are truly a hero!"))
@@ -303,7 +323,7 @@ def main():
 	scene10People['buildingS8'] = buildingS8
 
     #stuff for scene 9
-	poorFarmer = Person(30, 30, (150, 150))
+	poorFarmer = Person((150, 150), farmerL, farmerR, farmerU, farmerD)
 	poorFarmer.addDialogue(Dialogue("Thank you, maybe you are the Greece needs in order to destroy the Hydra"))
 	allSprites['poorFarmer'] = poorFarmer
 	scene9People = {}
@@ -327,13 +347,13 @@ def main():
 	scene2People['buildingA12'] = buildingA12
 
 	# Athens People
-	athensW1 = Person(30, 30, (250, 250))
+	athensW1 = Person((250, 250), npcL, npcR, npcU, npcD)
 	athensW1.addDialogue(Dialogue("The blessed Athena believes justice should be settled by the people"))
 	athensW1.addDialogue(Dialogue("You are a lawless monster, how dare you tarnish this city with your presence"))
 	athensW1.addDialogue(Dialogue("You are truly the suymbol of justics, Athena blesses you"))
 	allSprites["athensW1"] = athensW1
 
-	athensM1 = Person(30, 30, (300, 400))
+	athensM1 = Person((300, 400), npc2L, npc2R, npc2U, npc2D)
 	athensM1.addDialogue(Dialogue("Killing people may satisfy one's vengeance but it does not cleanse the soul"))
 	athensM1.addDialogue(Dialogue("Your anger consumes you. You must learn to control yourself before you fight the darkness"))
 	athensM1.addDialogue(Dialogue("Your reputation precedes you, I believe you are the true hero of Athens. Do not lose sight of justice"))
@@ -357,18 +377,18 @@ def main():
 	scene2People['buildingA12'] = buildingA12
 
 	# Delphi People
-	delphiW1 = Person(30, 30,(175, 445))
+	delphiW1 = Person((175, 445), npcL, npcR, npcU, npcD)
 	delphiW1.addDialogue(Dialogue("There is a monster out there in the north, I wonder who can stop him"))
 	delphiW1.addDialogue(Dialogue("I know you may be strong but I think you aren't fit to be a hero. Delphi will never vote for you"))
 	delphiW1.addDialogue(Dialogue("Hurry save us hero"))
 	allSprites["dephiW1"] = delphiW1
 
-	oldManQuest = Person(30, 30,(480, 115))
+	oldManQuest = Person((480, 115), npc2L, npc2R, npc2U, npc2D)
 	oldManQuest.addDialogue(Dialogue("I am a great philosopher and I have great deciples but one of them has went rogue and killed my son. Athenian law wants to stop him but I want to make sure he pays"))
 	oldManQuest.addDialogue(Question("Will you exact my vengeance", ["Yes", "No"], ["LooseApprentence", "NoApprentence"]), True)
 	allSprites["oldManQuest"] = oldManQuest
 
-	delphiM1 = Person(30, 30,(215, 135))
+	delphiM1 = Person((215, 135), farmerL, farmerR, farmerU, farmerD)
 	delphiM1.addDialogue(Dialogue("Many have left due to the attacks of the monsters, the cities are trying to determine who they should send. \
 		Perhaps it would be ideal if all cities liked a single person but they are so divided"))
 	delphiM1.addDialogue(Dialogue("I don't know what to say about Sparta and Athens but I know for sure that Delphi will never choose you as their hero with all your blasphehemy."))

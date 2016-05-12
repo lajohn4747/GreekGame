@@ -35,6 +35,12 @@ class Enemy(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.topleft = pos
 
+	def changeImage(self,U,R,D,L):
+		self.imagesL = L
+		self.imagesR = R
+		self.imagesU = U
+		self.imagesD = D
+
 	def resetImage(self, direction):
 		if direction == "left":
 			self.imageRight = 0

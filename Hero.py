@@ -17,8 +17,10 @@ class Weapon(pygame.sprite.Sprite):
 		self.image = pygame.image.load("sword.png")
 		#self.sideImage = pygame.Surface([50,8])
 		#self.topImage = pygame.Surface([8,50])
-		self.topImage = pygame.image.load("sword.png")
-		self.sideImage = pygame.image.load("swordSide.png")
+		self.topImage = pygame.image.load("swordUp.png")
+		self.botImage = pygame.image.load("swordDown.png")
+		self.RsideImage = pygame.image.load("swordRight.png")
+		self.LsideImage = pygame.image.load("swordLeft.png")
 		#self.image.fill(RED)
 		self.health = 10
 
@@ -28,18 +30,24 @@ class Weapon(pygame.sprite.Sprite):
 		self.rect.topleft = self.pos
 
 	def setPositionVertical(self, pos, direction):
-		self.image = self.topImage
-		self.rect = self.image.get_rect()
 		if direction == 1:
+			self.image = self.topImage
+			self.rect = self.image.get_rect()
 			pos[1] -= 50
+		else:
+			self.image = self.botImage
+			self.rect = self.image.get_rect()
 		self.rect.topleft = tuple(pos)
 
 	def setPositionHorizontal(self, pos, direction):
-		self.image = self.sideImage
-		self.rect = self.sideImage.get_rect()
 		if direction == 4:
+			self.image = self.LsideImage
+			self.rect = self.LsideImage.get_rect()
 			pos[0] -= 50
-			pos[1] -= 8
+			#pos[1] -= 8
+		else:
+			self.image = self.RsideImage
+			self.rect = self.RsideImage.get_rect()
 		self.rect.topleft = tuple(pos)
 
 
@@ -159,16 +167,16 @@ class Hero(Person):
 
 	def getAction(self):
 		if(self.direction == 1):
-			self.weapon.setPositionVertical([self.rect.x, self.rect.top], self.direction)
+			self.weapon.setPositionVertical([self.rect.x, self.rect.y + 8], self.direction)
 			self.surface.blit(self.weapon.image, self.weapon.rect)
 		elif(self.direction == 2):
-			self.weapon.setPositionHorizontal([self.rect.right, self.rect.y], self.direction)
+			self.weapon.setPositionHorizontal([self.rect.x + 20, self.rect.y + 8], self.direction)
 			self.surface.blit(self.weapon.image, self.weapon.rect)
 		elif(self.direction == 3):
-			self.weapon.setPositionVertical([self.rect.x, self.rect.bottom], self.direction)
+			self.weapon.setPositionVertical([self.rect.x, self.rect.y + 20], self.direction)
 			self.surface.blit(self.weapon.image, self.weapon.rect)
 		elif(self.direction == 4):
-			self.weapon.setPositionHorizontal([self.rect.left, self.rect.bottom], self.direction)
+			self.weapon.setPositionHorizontal([self.rect.x + 8, self.rect.y + 8], self.direction)
 			self.surface.blit(self.weapon.image, self.weapon.rect)
 		else:
 			return None

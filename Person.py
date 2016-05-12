@@ -24,7 +24,7 @@ class Person(pygame.sprite.Sprite):
 	'''
 	Initialize a person with their position and width and height to scale according to screen size
 	'''
-	def __init__(self,width,height,pos):
+	def __init__(self,pos, L , R , U , D ):
 		self.words = []
 		self.dialogueNumber = 0
 		self.combine = {}
@@ -33,9 +33,16 @@ class Person(pygame.sprite.Sprite):
 
 		# Create an image of the block, and fill it with a color.
 		# This could also be an image loaded from the disk.
-		self.image = pygame.Surface([width, height])
-		self.image.fill(BLUE)
 
+		self.imagesL = L
+		self.imagesR = R
+		self.imagesU = U
+		self.imagesD = D
+		self.imageLeft = 0
+		self.imageRight = 0
+		self.imageDown = 0
+		self.imageUp = 0
+		self.image = self.imagesD[0]
 		# Fetch the rectangle object that has the dimensions of the image
 		# Update the position of this object by setting the values of rect.x and rect.y
 		self.rect = self.image.get_rect()
@@ -46,10 +53,56 @@ class Person(pygame.sprite.Sprite):
 		self.talkReaction = triggerWord
 
 	def resetImage(self, direction):
-		pass
+		if direction == "left":
+			self.imageRight = 0
+			self.imageDown = 0
+			self.imageUp = 0
+		elif direction == "right":
+			self.imageLeft = 0
+			self.imageDown = 0
+			self.imageUp = 0
+		elif direction == "down":
+			self.imageRight = 0
+			self.imageLeft = 0
+			self.imageUp = 0
+		elif direction == "up":
+			self.imageRight = 0
+			self.imageDown = 0
+			self.imageLeft = 0
 
 	def moveImage(self, direction):
-		pass
+		self.resetImage(direction)
+		if direction == "left":
+			self.imageLeft += 1
+			if self.imageLeft > 2:
+				self.imageLeft = 0
+			self.image = self.imagesL[self.imageLeft]
+		elif direction == "right":
+			self.imageRight += 1
+			if self.imageRight > 2:
+				self.imageRight = 0
+			self.image = self.imagesR[self.imageRight]
+		elif direction == "down":
+			self.imageDown += 1
+			if self.imageDown > 2:
+				self.imageDown = 0
+			self.image = self.imagesD[self.imageDown]
+		elif direction == "up":
+			self.imageUp += 1
+			if self.imageUp > 2:
+				self.imageUp = 0
+			self.image = self.imagesU[self.imageUp]
+
+	def turn(self, direction):
+		if direction == "left":
+			self.image = self.imagesL[0]
+		elif direction == "right":
+			self.image = self.imagesR[0]
+		elif direction == "up":
+			self.image = self.imagesU[0]
+		elif direction == "down":
+			self.image = self.imagesD[0]
+
 	# Function to give this person a dialogue script
 	def addDialogue(self, dialogue, combine = False):
 		if combine:
