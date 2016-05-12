@@ -113,11 +113,11 @@ class Enemy(pygame.sprite.Sprite):
 		if math.fabs(dx) > math.fabs(dy) and dx > 0:
 			self.moveImage("left")
 			if self.wallCollide() or self.objectCollisions() or dist < 20 :
-				self.rect.x -= 40
+				self.rect.x += 40
 		elif math.fabs(dx) > math.fabs(dy) and dx <= 0:
 			self.moveImage("right")
 			if self.wallCollide() or self.objectCollisions() or dist < 20:
-				self.rect.x += 40
+				self.rect.x -= 40
 		if math.fabs(dy) > math.fabs(dx) and dy > 0:
 			self.moveImage("up")
 			if self.wallCollide() or self.objectCollisions() or dist < 20:
