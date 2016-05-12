@@ -13,6 +13,8 @@ BLUE = (0, 0, 255)
 #Font
 basicFont = pygame.font.SysFont(None, 24)
 largeFont = pygame.font.SysFont(None, 36)
+#images
+heartImg = pygame.image.load("heart.png")
 
 FPS = 60
 fpsClock = pygame.time.Clock()
@@ -107,6 +109,16 @@ class Scene:
                         if not self.pause:
                                 self.drawBackground()
                                 self.mainSurface.blit(self.hero.image, self.hero.rect)
+                                #health
+                                if(self.hero.health == 3):
+                                        self.mainSurface.blit(heartImg,(535,0))
+                                        self.mainSurface.blit(heartImg,(555,0))
+                                        self.mainSurface.blit(heartImg,(575,0))
+                                elif self.hero.health == 2:
+                                        self.mainSurface.blit(heartImg,(555,0))
+                                        self.mainSurface.blit(heartImg,(575,0))
+                                elif self.hero.health == 1:
+                                        self.mainSurface.blit(heartImg,(575,0))
                                 talk, change = self.checkMovement(talk)
                                 if change[0] > 0:
                                         return change
