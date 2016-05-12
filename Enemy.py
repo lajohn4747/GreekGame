@@ -97,18 +97,18 @@ class Enemy(pygame.sprite.Sprite):
 		self.rect.y += dy * 0.5
                 #change image
 		if math.abs(dx) > math.abs(dy) and dx > 0:
-                        self.moveImage("right")
-                        if self.wallCollide():
-                                self.rect.x -= 3
-                elif math.abs(dx) > math.abs(dy) and dx <= 0:
-                        self.moveImage("left")
-                        if self.wallCollide():
-                                self.rect.x += 3
-                if math.abs(dy) > math.abs(dx) and dy > 0:
-                        self.moveImage("up")
-                        if self.wallCollide():
-                                self.rect.y += 3
-                elif math.abs(dy) > math.abs(dx) and dy <= 0:
-                        self.moveImage("down")
-                        if self.wallCollide():
-                                self.rect.y -= 3
+			self.moveImage("right")
+			if self.wallCollide():
+				self.rect.x -= 3
+			elif math.abs(dx) > math.abs(dy) and dx <= 0:
+				self.moveImage("left")
+				if self.wallCollide():
+					self.rect.x += 3
+			elif math.abs(dy) > math.abs(dx) and dy > 0:
+				self.moveImage("up")
+				if self.wallCollide():
+					self.rect.y += 3
+			elif math.abs(dy) > math.abs(dx) and dy <= 0:
+				self.moveImage("down")
+				if self.wallCollide():
+					self.rect.y -= 3
