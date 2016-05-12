@@ -24,3 +24,6 @@ class Building(pygame.sprite.Sprite):
 
 	def getTextBox(self, surface):
 		pass
+
+	def turn(self, direction):
+		pass
