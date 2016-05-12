@@ -235,6 +235,7 @@ def main():
 	allSprites  = {}
 
 	#Loading up NPC's images
+	hydraPic = [pygame.image.load('hydra.png'), pygame.image.load('hydra.png'), pygame.image.load('hydra.png')]
 	npcL = [pygame.image.load('npc_left.png'), pygame.image.load('npc_left_L.png'), pygame.image.load('npc_left_R.png')]
 	npcR = [pygame.image.load('npc_right.png'), pygame.image.load('npc_right_L.png'), pygame.image.load('npc_right_R.png')]
 	npcU = [pygame.image.load('npc_up.png'), pygame.image.load('npc_up_L.png'), pygame.image.load('npc_up_R.png')]
@@ -479,6 +480,10 @@ def main():
 	soldier3Enemy = Enemy((0,360), 10, {}, soldierL, soldierR, soldierU, soldierD,4)
 	soldier4Enemy = Enemy((0,410), 16, {}, soldierL, soldierR, soldierU, soldierD,3)
 	apprentence = Enemy((300, 300), 8, {},  npcL, npcR, npcU, npcD, 10)
+
+	hydra = Enemy((300, 100), 40, {}, hydraPic, hydraPic, hydraPic, hydraPic, 12)
+	boss = [hydra]
+
 	allSprites['apprentence'] = apprentence
 	allSprites['soldier1Enemy'] = soldier1Enemy
 	allSprites['soldier2Enemy'] = soldier2Enemy
@@ -536,7 +541,7 @@ def main():
 	scene9 = Scene(DISPLAYSURF, scene9People, first, background = pygame.image.load('fran_sparta_helotfarm.png').convert(), transition_points = {3:[250,350,560,600], 4:[575,600,487,584]}, entranceTrigger = "poorFarmer")
 	scene10= Scene(DISPLAYSURF, scene10People, first, background = pygame.image.load('fran_sparta_city.png').convert(), transition_points = {2:[0,0,487,584], 3:[250,350,560,600], 4:[575,600,365,465]})
 	scene11= Scene(DISPLAYSURF, scene11People, first, background = pygame.image.load('fran_delphi_city.png').convert(), transition_points = {1:[250,350,0,0], 3:[250,350,560,600]})
-	scene12= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('finalmonster_room_withopening.png').convert(), transition_points = {3:[250,350,560,600]})
+	scene12= Scene(DISPLAYSURF, people2, first, boss, background = pygame.image.load('finalmonster_room_withopening.png').convert(), transition_points = {3:[250,350,560,600]})
 
 	scenes_list = [scene1, scene2, scene3, scene4, scene5, scene6, scene7, scene8, scene9, scene10, scene11, scene12]
 
