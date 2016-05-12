@@ -108,6 +108,8 @@ class Scene:
                 while True:
                         if not self.pause:
                                 self.drawBackground()
+                                #for enemy in self.enemies:
+                                        #enemy.chasePlayer(self.hero)
                                 self.mainSurface.blit(self.hero.image, self.hero.rect)
                                 #health
                                 if(self.hero.health == 3):
