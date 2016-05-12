@@ -122,7 +122,9 @@ class Scene:
                                 talk, change = self.checkMovement(talk)
                                 if change[0] > 0:
                                         return change
-                                self.drawAll()
+
+                        self.drawAll()
+                        
                         for event in pygame.event.get():
                                 if event.type == QUIT:
                                         pygame.quit()

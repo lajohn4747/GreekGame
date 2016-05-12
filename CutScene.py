@@ -115,7 +115,11 @@ class CutScene:
 				self.level.reaction(trigger)
 			elif action == "leave":
 				self.scene.remove(i[2])
+				self.scene.drawBackground()
+				self.mainSurface.blit(self.hero.image, self.hero.rect)
+				self.scene.drawAll()
 				pygame.display.update()
+				fpsClock.tick(FPS)
 			elif action == "murder":
 				if i[2] == 1:
 					weapon = pygame.Surface([8, 50])

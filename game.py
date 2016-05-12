@@ -74,9 +74,11 @@ class Game:
         	elif trigger == "poorFarmerSaved":
         		cut = CutScene(self.scenes[8], [(self.sprites["soldier1"], "talk", "Soldier1: He does not look like he is from Menelaos, but we do not have time to squabble with news of the Hydra. Slaves are riled up since the arrival of the beast. Only\
         			 a hero from Sparta can bring peace. Go home strangers if you know what is best."), (self.sprites["soldier2"], "moveLeftTogether", 10, [self.sprites["soldier1"]]),\
-        		(self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2"), (self.sprites["poorFarmer"], "talk", "Thank you sir. Such a noble act you have done me. Here is a token of my appreciation. I think I will be safe for a while, I will wait for my family here"),\
+        		(self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2")]) 
+        		cut2 = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Thank you sir. Such a noble act you have done me. Here is a token of my appreciation. I think I will be safe for a while, I will wait for my family here"),\
         		(self.sprites["poorFarmer"], "moveLeft", 50)])
         		cut.runScene()
+        		cut2.runScene()
         	elif trigger == "beginning":
         		moveHero = CutScene(self.scenes[3], [(self.hero, "moveRight", 325),(self.hero, "moveDown", 450)])
         		moveHero.runScene()
@@ -270,6 +272,7 @@ def main():
 	scene9People = {}
 	scene9People['building91'] = building91
 	scene9People['building92'] = building92
+	scene9People['poorFarmer'] = poorFarmer
 	
         #stuff for scene 10
 	scene10People = {}
@@ -398,20 +401,6 @@ def main():
 	people2["building8"] = building8
 	people2["building9"] = building9
 
-	"""																		
-	scene1 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,324,0,0], 2:[0,0,350,400], 3:[290,350,550,600], 4:[500,600,325,399]}, entranceTrigger = "beginning")
-	scene2 = Scene(DISPLAYSURF, scene2People, first, background = pygame.image.load('athens_city.png').convert(), transition_points = {2:[0,100,325,399], 3:[325,399,500,600], 4:[500,600,250,324]})
-	scene3 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('fran_copy_paste.png').convert(), transition_points = {2:[0,100,250,324], 3:[325,399,500,600]})
-	scene4 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[325,399,0,100], 2:[0,100,250,324]})
-	scene5 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[325,399,0,100], 2:[0,100,325,399], 4:[500,600,250,324]})
-	scene6 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('T-road.png').convert(), transition_points = {1:[325,399,0,100], 2:[0,100,250,324], 4:[500,600,325,399]})
-	scene7 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('horizontalroad.png').convert(), transition_points = {1:[325,399,0,100], 2:[0,100,325,399], 4:[500,600,250,324]})
-	scene8 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[325,399,0,100], 4:[500,600,325,399]})
-	scene9 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('sparta_helotfarm.png').convert(), transition_points = {3:[325,399,500,600], 4:[500,600,325,399]})
-	scene10= Scene(DISPLAYSURF, scene10People, first, background = pygame.image.load('sparta_city.png').convert(), transition_points = {2:[0,100,325,399], 3:[325,399,500,600], 4:[500,600,250,324]})
-	scene11= Scene(DISPLAYSURF, scene11People, first, background = pygame.image.load('delphi_city.png').convert(), transition_points = {1:[325,399,0,100], 3:[250,324,500,600]})
-	scene12= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('finalmonster_room_withopening.png').convert(), transition_points = {3:[325,399,500,600]})
-	"""
 
 	#hero sprite is 25 pixels wide, 40 tall											
 	scene1 = Scene(DISPLAYSURF, scene1People, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465], 4:[575,600,365,465]}, entranceTrigger = "startScene")
@@ -423,7 +412,7 @@ def main():
 	scene6 = Scene(DISPLAYSURF, people2, first)
 	scene7 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465]})
 	scene8 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[250,350,0,0], 4:[575,600,365,465]})
-	scene9 = Scene(DISPLAYSURF, scene9People, first, background = pygame.image.load('fran_sparta_helotfarm.png').convert(), transition_points = {3:[250,350,560,600], 4:[575,600,487,584]})
+	scene9 = Scene(DISPLAYSURF, scene9People, first, background = pygame.image.load('fran_sparta_helotfarm.png').convert(), transition_points = {3:[250,350,560,600], 4:[575,600,487,584]}, entranceTrigger = "poorFarmer")
 	scene10= Scene(DISPLAYSURF, scene10People, first, background = pygame.image.load('fran_sparta_city.png').convert(), transition_points = {2:[0,0,487,584], 3:[250,350,560,600], 4:[575,600,365,465]})
 	scene11= Scene(DISPLAYSURF, scene11People, first, background = pygame.image.load('fran_delphi_city.png').convert(), transition_points = {1:[250,350,0,0], 3:[250,350,560,600]})
 	scene12= Scene(DISPLAYSURF, people2, first, background = pygame.image.load('finalmonster_room_withopening.png').convert(), transition_points = {3:[250,350,560,600]})
