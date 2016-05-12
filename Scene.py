@@ -108,6 +108,9 @@ class Scene:
                 while True:
                         if not self.pause:
                                 self.drawBackground()
+                                if self.enemies is not None:
+                                        for enemy in self.enemies:
+                                                enemy.chasePlayer(self.hero)
                                 self.mainSurface.blit(self.hero.image, self.hero.rect)
                                 #health
                                 if(self.hero.health == 3):
@@ -140,7 +143,6 @@ class Scene:
                                                 trigger = self.talkingTo.getTextBox(self.mainSurface)
                                                 if trigger:
                                                         self.level.reaction(trigger)
-                                                        self.talkingTo.talkReaction = None
                                                 trigger = None
                                         elif event.key == K_LSHIFT:
                                                 weapon = self.hero.getAction()
@@ -235,7 +237,9 @@ class Scene:
                         self.spriteGroup[i].update()
                         self.mainSurface.blit(self.spriteGroup[i].image,self.spriteGroup[i].rect)
                 if self.enemies:
-                        self.enemies.draw(self.mainSurface)
+                        for enemy in self.enemies:
+                                enemy.update()
+                                self.mainSurface.blit(enemy.image,enemy.rect)
 
         def transistion(self):
                 if self.transition_points == None:
