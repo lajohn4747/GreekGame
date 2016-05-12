@@ -140,6 +140,7 @@ class Scene:
                                                 trigger = self.talkingTo.getTextBox(self.mainSurface)
                                                 if trigger:
                                                         self.level.reaction(trigger)
+                                                        self.talkingTo.talkReaction = None
                                                 trigger = None
                                         elif event.key == K_LSHIFT:
                                                 weapon = self.hero.getAction()

@@ -40,7 +40,11 @@ class Person(pygame.sprite.Sprite):
 		# Update the position of this object by setting the values of rect.x and rect.y
 		self.rect = self.image.get_rect()
 		self.rect.topleft = pos
+		self.talkReaction = None
 
+	def giveTalkTrigger(self, triggerWord):
+		self.talkReaction = triggerWord
+		
 	def resetImage(self, direction):
 		pass
 
@@ -67,7 +71,7 @@ class Person(pygame.sprite.Sprite):
 	The way getTextBox works is that there should be a 2d array for dialogue, after pressing SPACE it would then go on to the next piece of 
 	dialogue. If there are choices call askDecision and then change choicePath. ChoicePath then determines what the character should say.
 	'''
-	def getTextBox(self, surface):
+	def getTextBox(self, surface, activate = False):
 		trigger = None
 		if len(self.words) > 0:
 			textToReturn = self.words[self.dialogueNumber]
@@ -86,6 +90,7 @@ class Person(pygame.sprite.Sprite):
 				textToReturn.runText(surface)
 			else:
 				trigger = textToReturn.runQuestion(surface)
-
+		if activate:
+			return self.talkReaction
 		return trigger
 

@@ -346,6 +346,9 @@ def main():
 	delphiW1.addDialogue(Dialogue("Hurry save us hero"))
 	allSprites["dephiW1"] = delphiW1
 
+	oldManQuest = Person(30, 30,(480, 115))
+	#oldManQuest.addDialogue()
+
 	delphiM1 = Person(30, 30,(215, 135))
 	delphiM1.addDialogue(Dialogue("Many have left due to the attacks of the monsters, the cities are trying to determine who they should send. \
 		Perhaps it would be ideal if all cities liked a single person but they are so divided"))
