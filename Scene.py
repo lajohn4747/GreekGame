@@ -122,8 +122,7 @@ class Scene:
                                 talk, change = self.checkMovement(talk)
                                 if change[0] > 0:
                                         return change
-
-                        self.drawAll()
+                                self.drawAll()
 
                         for event in pygame.event.get():
                                 if event.type == QUIT:
@@ -184,7 +183,7 @@ class Scene:
                         talkingTo = self.talkCollisions()
                         if talkingTo:
                                 talk = True
-                                self.hero.rect.y += 3
+                                self.hero.rect.y += 5
                                 self.talkingTo = talkingTo
 
                 elif keys[pygame.K_DOWN]:

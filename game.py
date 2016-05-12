@@ -112,6 +112,7 @@ class Game:
         	elif trigger == "beginning3-1":
         		starting = CutScene(self.scenes[3], [(self.sprites["guy"],"murder", 4), (self.sprites["guy"],"talk"," No please! Gyaaa----"), (self.hero, "leave", "guy")])
         		starting.runScene()
+        		self.hero.increasePoints("sparta", -2)
         		#self.scenes[0].addEnemy(self.sprites["soldier1"], "soldier1")
         		#self.scenes[0].addSprite(self.sprites["soldier2"], "soldier2")
         	elif trigger == "beginning3-2":
@@ -123,6 +124,8 @@ class Game:
         			 xenoi, let go of this boy and stay out of our affairs"), (self.sprites["soldier1"], "moveLeftTogether", 0, [self.sprites["soldier2"], self.sprites["guy"]]), \
         			 (self.sprites["guy"], "leave", "guy"), (self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2")])
         		starting.runScene()
+        		self.hero.increasePoints("sparta", -1)
+        		self.hero.increasePoints("athens", 2)
         	elif trigger == "beginning3-3":
         		starting = CutScene(self.scenes[3], [(self.sprites["guy"],"moveDown",400), (self.sprites["guy"],"moveRight", 600), \
         		 (self.sprites["guy"], "leave", "guy")])
@@ -135,6 +138,7 @@ class Game:
         		self.sprites["soldier1"].addDialogue(Dialogue("Hahaha I see the excellent young boy, got away"))
         		self.sprites["soldier2"].addDialogue(Dialogue("Hahaha I know you assisted my boy, and as a Spartan I thank you"))
         		self.sprites["soldier1"].getTextBox(self.surface)
+        		self.hero.increasePoints("sparta", 2)
 
         	elif trigger == "Spartan7":
         		pass
@@ -192,7 +196,7 @@ def main():
 	building8 = Building(50, 50, (400,90))
 	building9 = Building(50,40, (400,0))
 
-        #scene 9 buildings
+    #scene 9 buildings
 	building91 = Building(405,360,(0,100))
 	building92 = Building(100, 360, (495,100))
 
