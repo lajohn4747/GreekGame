@@ -164,6 +164,26 @@ class Game:
         			athenSprites = self.scenes[1].spriteGroup
         			for a in athenSprites:
         				athenSprites[a].dialogueNumber = 2
+        		elif checkHero == "Athens-5":
+        			athenSprites = self.scenes[1].spriteGroup
+        			for a in athenSprites:
+        				athenSprites[a].dialogueNumber = 1
+        		elif checkHero == "Spartan5":
+        			athenSprites = self.scenes[9].spriteGroup
+        			for a in athenSprites:
+        				athenSprites[a].dialogueNumber = 2
+        		elif checkHero == "Spartan-5":
+        			athenSprites = self.scenes[9].spriteGroup
+        			for a in athenSprites:
+        				athenSprites[a].dialogueNumber = 1
+        		elif checkHero == "Delphi5":
+        			athenSprites = self.scenes[10].spriteGroup
+        			for a in athenSprites:
+        				athenSprites[a].dialogueNumber = 2
+        		elif checkHero == "Delphi-5":
+        			athenSprites = self.scenes[10].spriteGroup
+        			for a in athenSprites:
+        				athenSprites[a].dialogueNumber = 1
 
 
 
@@ -267,16 +287,6 @@ def main():
 	spartanM1.addDialogue(Dialogue("I speak for the rest of Sparta and I say that you are truly a hero!"))
 	allSprites["spartanM1"] = spartanM1
 
-    #stuff for scene 9
-	poorFarmer = Person(30, 30, (150, 150))
-	poorFarmer.addDialogue(Dialogue("Thank you, maybe you are the Greece needs in order to destroy the Hydra"))
-	allSprites['poorFarmer'] = poorFarmer
-	scene9People = {}
-	scene9People['building91'] = building91
-	scene9People['building92'] = building92
-	scene9People['poorFarmer'] = poorFarmer
-	
-        #stuff for scene 10
 	scene10People = {}
 	scene10People['spartanW1'] = spartanW1
 	scene10People['spartanM1'] = spartanM1
@@ -289,6 +299,15 @@ def main():
 	scene10People['buildingS7'] = buildingS7
 	scene10People['buildingS8'] = buildingS8
 
+    #stuff for scene 9
+	poorFarmer = Person(30, 30, (150, 150))
+	poorFarmer.addDialogue(Dialogue("Thank you, maybe you are the Greece needs in order to destroy the Hydra"))
+	allSprites['poorFarmer'] = poorFarmer
+	scene9People = {}
+	scene9People['building91'] = building91
+	scene9People['building92'] = building92
+	scene9People['poorFarmer'] = poorFarmer
+	
 	#stuff for scene 2
 	scene2People = {}
 	scene2People['buildingA1'] = buildingA1
