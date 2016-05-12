@@ -472,7 +472,8 @@ def main():
 	scene11People["buildingD12"] = buildingD12
 
 	#Scene 7 enemies
-	enemy = Enemy((300,300),6, people2, enemyL, enemyR, enemyU, enemyD)
+	enemy1 = Enemy((200,300),6, people2, enemyL, enemyR, enemyD, enemyU)
+	enemy2 = Enemy((400,300),6, people2, enemyL, enemyR, enemyD, enemyU)
 	soldier1Enemy = Enemy((0,0), 20, scene9People, soldierL, soldierR, soldierU, soldierD, 3)
 	soldier2Enemy = Enemy((0,0), 20, scene9People, soldierL, soldierR, soldierU, soldierD)
 	soldier3Enemy = Enemy((0,360), 10, {}, soldierL, soldierR, soldierU, soldierD,4)
@@ -483,8 +484,22 @@ def main():
 	allSprites['soldier2Enemy'] = soldier2Enemy
 	allSprites['soldier3Enemy'] = soldier3Enemy
 	allSprites['soldier4Enemy'] = soldier4Enemy
-	enemies = [enemy]
+	enemies7 = [enemy1, enemy2]
 
+        #scene 8 enemy
+	enemy3 = Enemy((100,400),6, people2, enemyL, enemyR, enemyD, enemyU)
+	enemy8 = Enemy((300,200),6, people2, enemyL, enemyR, enemyD, enemyU)
+	enemies8 = [enemy3,enemy8]
+
+	#scene 3 enemy
+	enemy4 = Enemy((500,400),6, people2, enemyL, enemyR, enemyD, enemyU)
+	enemy7 = Enemy((300,200),6, people2, enemyL, enemyR, enemyD, enemyU)
+	enemies3 = [enemy4,enemy7]
+
+	#scene 5 enemies
+	enemy5 = Enemy((200,325),6, people2, enemyL, enemyR, enemyD, enemyU)
+	enemy6 = Enemy((100,400),6, people2, enemyL, enemyR, enemyD, enemyU)
+	enemies5 = [enemy5, enemy6]
 
 	# Add buildings for all the cities
 	building = Building(80,80,(0,520))
@@ -511,13 +526,13 @@ def main():
 	#hero sprite is 25 pixels wide, 40 tall											
 	scene1 = Scene(DISPLAYSURF, scene1People, first, background = pygame.image.load('midpoint.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465], 4:[575,600,365,465]}, entranceTrigger = "startScene")
 	scene2 = Scene(DISPLAYSURF, scene2People, first, background = pygame.image.load('fran_athens_city.png').convert(), transition_points = {2:[0,0,365,465], 3:[250,350,560,600], 4:[575,600,365,465]})
-	scene3 = Scene(DISPLAYSURF, {}, first, background = pygame.image.load('rightbottomL.png').convert(), transition_points = {2:[0,0,365,465], 3:[250,350,560,600]})
+	scene3 = Scene(DISPLAYSURF, {}, first, enemies3, background = pygame.image.load('rightbottomL.png').convert(), transition_points = {2:[0,0,365,465], 3:[250,350,560,600]})
 	scene4 = Scene(DISPLAYSURF, {}, first, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465]}, entranceTrigger = "beginning")
-	scene5 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[250,350,0,0], 4:[575,600,365,465]})
+	scene5 = Scene(DISPLAYSURF, people2, first, enemies5, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[250,350,0,0], 4:[575,600,365,465]})
 	#scene6 doesn't exist anymore, but left it there so we don't have to rename everything
 	scene6 = Scene(DISPLAYSURF, people2, first)
-	scene7 = Scene(DISPLAYSURF, people2, first, enemies, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465]})
-	scene8 = Scene(DISPLAYSURF, people2, first, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[250,350,0,0], 4:[575,600,365,465]})
+	scene7 = Scene(DISPLAYSURF, people2, first, enemies7, background = pygame.image.load('leftLroad.png').convert(), transition_points = {1:[250,350,0,0], 2:[0,0,365,465]})
+	scene8 = Scene(DISPLAYSURF, people2, first, enemies8, background = pygame.image.load('rightLroad.png').convert(), transition_points = {1:[250,350,0,0], 4:[575,600,365,465]})
 	scene9 = Scene(DISPLAYSURF, scene9People, first, background = pygame.image.load('fran_sparta_helotfarm.png').convert(), transition_points = {3:[250,350,560,600], 4:[575,600,487,584]}, entranceTrigger = "poorFarmer")
 	scene10= Scene(DISPLAYSURF, scene10People, first, background = pygame.image.load('fran_sparta_city.png').convert(), transition_points = {2:[0,0,487,584], 3:[250,350,560,600], 4:[575,600,365,465]})
 	scene11= Scene(DISPLAYSURF, scene11People, first, background = pygame.image.load('fran_delphi_city.png').convert(), transition_points = {1:[250,350,0,0], 3:[250,350,560,600]})

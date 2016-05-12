@@ -45,6 +45,8 @@ class Scene:
                 self.mainSurface = mainSurface
                 if not enemyList:
                         self.enemies = []
+                else:
+                        self.enemies = enemyList
                 self.transition_points = transition_points
                 self.pause = False
                         #dictionary of lists of transition points {1:[left_x, right_x, top_y, bottom_y]}
