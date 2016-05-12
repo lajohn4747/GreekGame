@@ -9,7 +9,7 @@ RED = (255, 0, 0)
 
 class Enemy(pygame.sprite.Sprite):
 	
-	def __init__(self, pos, health):
+	def __init__(self, pos, health, spriteGroup):
 		self.width = 50
 		self.height = 50
 		# Call the parent class (Sprite) constructor
@@ -20,6 +20,7 @@ class Enemy(pygame.sprite.Sprite):
 		#self.image = pygame.Surface([self.width, self.height])
 		#self.image.fill(BLACK)
 		#self.health = health
+		self.spriteGroup = spriteGroup
 		self.image = pygame.image.load('enemy_down.png').convert_alpha()
 		self.imagesL = [pygame.image.load('enemy_left.png'), pygame.image.load('enemy_left_L.png'), pygame.image.load('enemy_left_R.png')]
 		self.imagesR = [pygame.image.load('enemy_right.png'), pygame.image.load('enemy_right_L.png'), pygame.image.load('enemy_right_R.png')]
@@ -86,13 +87,18 @@ class Enemy(pygame.sprite.Sprite):
 	
 	def wallCollide(self):
 		return  self.rect.left < 0 or self.rect.right > 600 or self.rect.top < 0 or self.rect.bottom > 600
-	
+
+	def objectCollisions(self):
+                for sprite in self.spriteGroup:
+                        if pygame.sprite.collide_rect(self, self.spriteGroup[sprite]):
+                                return True
+                return None
+        
 	def chasePlayer(self, player):
 		# find normalized direction vector (dx, dy) between enemy and player
 		dx, dy = self.rect.x - player.rect.x, self.rect.y - player.rect.y
-		dist = math.hypot(dx, dy)
-		dx, dy = dx / dist, dy / dist
-		speed = 1
+		dist = math.hypot(dx, dy) + 0.01
+		speed = 2
 		
 		if self.rect.x > player.rect.x:
 		    self.rect.x -= speed
@@ -106,18 +112,21 @@ class Enemy(pygame.sprite.Sprite):
 		#change image
 		if math.fabs(dx) > math.fabs(dy) and dx > 0:
 			self.moveImage("left")
-			if self.wallCollide():
-				self.rect.x -= 3
+			if self.wallCollide() or self.objectCollisions() or dist < 20 :
+				self.rect.x -= 40
 		elif math.fabs(dx) > math.fabs(dy) and dx <= 0:
 			self.moveImage("right")
-			if self.wallCollide():
-				self.rect.x += 3
+			if self.wallCollide() or self.objectCollisions() or dist < 20:
+				self.rect.x += 40
 		if math.fabs(dy) > math.fabs(dx) and dy > 0:
 			self.moveImage("up")
-			if self.wallCollide():
-				self.rect.y += 3
+			if self.wallCollide() or self.objectCollisions() or dist < 20:
+				self.rect.y += 40
 		elif math.fabs(dy) > math.fabs(dx) and dy <= 0:
 			self.moveImage("down")
-			if self.wallCollide():
-				self.rect.y -= 3
+			if self.wallCollide() or self.objectCollisions() or dist < 20:
+				self.rect.y -= 40
+
+		if dist < 20:
+                        player.health -= 1
 
