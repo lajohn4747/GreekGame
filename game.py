@@ -84,6 +84,7 @@ class Game:
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Ahhhh, please do not hurt me"),(self.sprites["poorFarmer"], "moveLeft", 10), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
         		cut.runScene()
         		checkHero = self.hero.increasePoints("sparta", -2)
+        		self.updateDialogue(checkHero)
         		checkHero = self.hero.increasePoints("delphi", 4)
         		self.updateDialogue(checkHero)
         		self.sprites["soldier1Enemy"].setPosition((self.sprites["soldier1"].rect.x, self.sprites["soldier1"].rect.y))
@@ -96,7 +97,9 @@ class Game:
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Farmer: NOOOOO!!! Please help!!...."), (self.sprites["soldier1"], "moveLeftTogether", 15, [self.sprites["soldier2"], self.sprites["poorFarmer"]]),\
         			(self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2"), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
         		cut.runScene()
-        		checkHero = self.hero.increasePoints("sparta", 4)
+        		checkHero = self.hero.increasePoints("sparta", 6)
+        		self.updateDialogue(checkHero)
+        		checkHero = self.hero.increasePoints("athens", 4)
         		self.updateDialogue(checkHero)
         		checkHero = self.hero.increasePoints("delphi", -2)
         		self.updateDialogue(checkHero)
@@ -177,7 +180,7 @@ class Game:
         		starting.runScene()
         		checkHero =self.hero.increasePoints("sparta", -2)
         		self.updateDialogue(checkHero)
-        		checkHero = self.hero.increasePoints("athens", 4)
+        		checkHero = self.hero.increasePoints("athens", 6)
         		self.updateDialogue(checkHero)
         	elif trigger == "beginning3-3":
         		starting = CutScene(self.scenes[3], [(self.sprites["guy"],"moveDown",400), (self.sprites["guy"],"moveRight", 600), \
@@ -191,7 +194,9 @@ class Game:
         		self.sprites["soldier1"].addDialogue(Dialogue("Hahaha I see the excellent young boy, got away"))
         		self.sprites["soldier2"].addDialogue(Dialogue("Hahaha I know you assisted my boy, and as a Spartan I thank you"))
         		self.sprites["soldier1"].getTextBox(self.surface)
-        		checkHero = self.hero.increasePoints("sparta", 5)
+        		checkHero = self.hero.increasePoints("athens", 4)
+        		self.updateDialogue(checkHero)
+        		checkHero = self.hero.increasePoints("sparta", 2)
         		self.updateDialogue(checkHero)
 
         def updateDialogue(self, checkHero):
