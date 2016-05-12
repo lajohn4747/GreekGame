@@ -116,7 +116,7 @@ class Hero(Person):
 			if self.imageUp > 2:
 				self.imageUp = 0
 			self.image = self.imagesU[self.imageUp]
-	
+
 	def checkScene(self, scene):
 		seenScene[scene] = True
 	def setSurface(self, surface):
@@ -131,10 +131,18 @@ class Hero(Person):
 	def increasePoints(self, city, number):
 		if city == "sparta":
 			self.spartaPoints += number
+			if self.spartaPoints > 3:
+				return "Spartan3"
+			else:
+				return None
 		elif city == "athens":
 			self.athensPoints += number
+			if self.athensPoints >= 3:
+				return "Athens3"
+			else:
+				return None
 		elif city == "delphi":
-			self.delphiaPoints += number
+			self.delphiPoints += number
 
 	def getAction(self):
 		if(self.direction == 1):

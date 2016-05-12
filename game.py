@@ -27,7 +27,6 @@ FPS = 60
 fpsClock = pygame.time.Clock()
 
 
-
 class Game:
         def __init__(self, scenes, people, surface, hero):
                 self.scenes = scenes
@@ -37,12 +36,14 @@ class Game:
                 self.surface = surface
                 self.hero = hero
         def reaction(self, trigger):
+        	checkHero = None
         	if trigger == "startScene":
-
         		starting = CutScene(self.scenes[0], [(self.hero, "turn", "up"), (self.sprites["scaredM1"], "moveDownTogether", 370, [self.sprites["scaredW1"]]), (self.hero, "talk", "AHHHHH THE HYDRA HAS BEEN SEEN IN THE NORTH, RUNNN!!!!\
         			You better get out of here. Tell everyone you know with SPACEBAR. Use the DIRECTIONAL buttons to move far far away from here. If you get tired press P, to take a break and look how Greece sees you. So run, hopefully Greece can choose a hero to save us."),\
         		 (self.sprites["scaredM1"], "moveLeftTogether", 10, [self.sprites["scaredW1"]]), (self.sprites["scaredM1"], "leave", "scaredM1"), (self.sprites["scaredW1"], "leave", "scaredW1")])
         		starting.runScene()
+
+
         	elif trigger == "poorFarmer":
         		starting = CutScene(self.scenes[8], [(self.sprites["poorFarmer"],"moveDown",self.hero.rect.bottom),(self.sprites["poorFarmer"],"moveRight", self.hero.rect.left), (self.hero, "turn","left"), \
         			(self.sprites["poorFarmer"],"talk","You’re--you’re not a Spartan, right? You don’t look like you’re from around here! [The man seems very out of breath,\
@@ -55,7 +56,8 @@ class Game:
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Home?! That will be the first place they look! I should have known better than to ask a foreigner for help."),\
         			(self.sprites["poorFarmer"], "moveLeft", 20), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
         		cut.runScene()
-        		self.hero.increasePoints("sparta", 1)
+        		checkHero = self.hero.increasePoints("sparta", 1)
+        		self.updateDialogue(checkHero)
         	elif trigger == "poorFarmer2-2":
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "My only option is to move my family towards Menelaos--the district is safe, and the Krypteia will not follow us there. But the Spartans are everywhere, \
         			and I do not know how I can convince them that we are from Menelaos!")])
@@ -73,7 +75,8 @@ class Game:
         		cut = CutScene(self.scenes[8], [(self.sprites["poorFarmer"], "talk", "Farmer: NOOOOO!!! Please help!!...."), (self.sprites["soldier1"], "moveLeftTogether", 15, [self.sprites["soldier2"], self.sprites["poorFarmer"]]),\
         			(self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2"), (self.sprites["poorFarmer"], "leave", "poorFarmer")])
         		cut.runScene()
-        		self.hero.increasePoints("sparta", 1)
+        		checkHero = self.hero.increasePoints("sparta", 1)
+        		self.updateDialogue(checkHero)
         	elif trigger == "poorFarmerSaved":
         		cut = CutScene(self.scenes[8], [(self.sprites["soldier1"], "talk", "Soldier1: He does not look like he is from Menelaos, but we do not have time to squabble with news of the Hydra. Slaves are riled up since the arrival of the beast. Only\
         			 a hero from Sparta can bring peace. Go home strangers if you know what is best."), (self.sprites["soldier2"], "moveLeftTogether", 10, [self.sprites["soldier1"]]),\
@@ -82,7 +85,18 @@ class Game:
         		(self.sprites["poorFarmer"], "moveLeft", 50)])
         		cut.runScene()
         		cut2.runScene()
-        		self.hero.increasePoints("delphi", 1)
+        		checkHero = self.hero.increasePoints("delphi", 1)
+        		self.updateDialogue(checkHero)
+
+        	elif trigger == "NoApprentence":
+        		self.sprites["oldManQuest"].addDialogue(Dialogue("I am sorry, my anger has strayed from the gods. I should let the people exact justice upon him. Maybe this is why the Hydra has attacked us"))
+        		self.sprites["oldManQuest"].goToLastDialogue()
+        		self.sprites["oldManQuest"].getTextBox(self.surface, self.hero.rect.y)
+        		checkHero = self.hero.increasePoints("athens", 3)
+        		self.updateDialogue(checkHero)
+        		checkHero = self.hero.increasePoints("delphi", 2)
+        		self.updateDialogue(checkHero)
+
         	elif trigger == "beginning":
         		moveHero = CutScene(self.scenes[3], [(self.hero, "moveRight", 325),(self.hero, "moveDown", 450)])
         		moveHero.runScene()
@@ -113,7 +127,8 @@ class Game:
         	elif trigger == "beginning3-1":
         		starting = CutScene(self.scenes[3], [(self.sprites["guy"],"murder", 4), (self.sprites["guy"],"talk"," No please! Gyaaa----"), (self.hero, "leave", "guy")])
         		starting.runScene()
-        		self.hero.increasePoints("sparta", -2)
+        		checkHero = self.hero.increasePoints("sparta", -2)
+        		self.updateDialogue(checkHero)
         		#self.scenes[0].addEnemy(self.sprites["soldier1"], "soldier1")
         		#self.scenes[0].addSprite(self.sprites["soldier2"], "soldier2")
         	elif trigger == "beginning3-2":
@@ -125,8 +140,10 @@ class Game:
         			 xenoi, let go of this boy and stay out of our affairs"), (self.sprites["soldier1"], "moveLeftTogether", 0, [self.sprites["soldier2"], self.sprites["guy"]]), \
         			 (self.sprites["guy"], "leave", "guy"), (self.sprites["soldier1"], "leave", "soldier1"), (self.sprites["soldier2"], "leave", "soldier2")])
         		starting.runScene()
-        		self.hero.increasePoints("sparta", -1)
-        		self.hero.increasePoints("athens", 2)
+        		checkHero =self.hero.increasePoints("sparta", -1)
+        		self.updateDialogue(checkHero)
+        		checkHero = self.hero.increasePoints("athens", 2)
+        		self.updateDialogue(checkHero)
         	elif trigger == "beginning3-3":
         		starting = CutScene(self.scenes[3], [(self.sprites["guy"],"moveDown",400), (self.sprites["guy"],"moveRight", 600), \
         		 (self.sprites["guy"], "leave", "guy")])
@@ -139,38 +156,16 @@ class Game:
         		self.sprites["soldier1"].addDialogue(Dialogue("Hahaha I see the excellent young boy, got away"))
         		self.sprites["soldier2"].addDialogue(Dialogue("Hahaha I know you assisted my boy, and as a Spartan I thank you"))
         		self.sprites["soldier1"].getTextBox(self.surface)
-        		self.hero.increasePoints("sparta", 2)
+        		checkHero = self.hero.increasePoints("sparta", 2)
+        		self.updateDialogue(checkHero)
 
-        	elif trigger == "Spartan7":
-        		pass
-        	elif trigger == "Spartan3":
-        		pass
-        	elif trigger == "Spartan0":
-        		pass
-        	elif trigger == "Spartan-3":
-        		pass
-        	elif trigger == "Spartan-7":
-        		pass
-        	elif trigger == "Athens7":
-        		pass
-        	elif trigger == "Athens3":
-        		pass
-        	elif trigger == "Athens0":
-        		pass
-        	elif trigger == "Athens-3":
-        		pass
-        	elif trigger == "Athens-7":
-        		pass
-        	elif trigger == "Delphi7":
-        		pass
-        	elif trigger == "Delphi3":
-        		pass
-        	elif trigger == "Delphi0":
-        		pass
-        	elif trigger == "Delphi-3":
-        		pass
-        	elif trigger == "Delphi-7":
-        		pass
+        def updateDialogue(self, checkHero):
+        	if checkHero:
+        		if checkHero == "Athens3":
+        			athenSprites = self.scenes[1].spriteGroup
+        			for a in athenSprites:
+        				athenSprites[a].dialogueNumber = 2
+
 
 
 # The main game loop
@@ -348,7 +343,9 @@ def main():
 	allSprites["dephiW1"] = delphiW1
 
 	oldManQuest = Person(30, 30,(480, 115))
-	#oldManQuest.addDialogue()
+	oldManQuest.addDialogue(Dialogue("I am a great philosopher and I have great deciples but one of them has went rogue and killed my son. Athenian law wants to stop him but I want to make sure he pays"))
+	oldManQuest.addDialogue(Question("Will you exact my vengeance", ["Yes", "No"], ["LooseApprentence", "NoApprentence"]), True)
+	allSprites["oldManQuest"] = oldManQuest
 
 	delphiM1 = Person(30, 30,(215, 135))
 	delphiM1.addDialogue(Dialogue("Many have left due to the attacks of the monsters, the cities are trying to determine who they should send. \
@@ -361,6 +358,7 @@ def main():
 	scene11People["delphiW1"] = delphiW1
 	scene11People["delphiM1"] = delphiM1
 	scene11People["Guide"] = Guide
+	scene11People["oldManQuest"] = oldManQuest
 	#scene 11 buildings
 	buildingD1 = Building(205, 85, (0,0))
 	buildingD2 = Building(100, 95, (355,0))

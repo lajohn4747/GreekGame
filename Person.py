@@ -44,7 +44,7 @@ class Person(pygame.sprite.Sprite):
 
 	def giveTalkTrigger(self, triggerWord):
 		self.talkReaction = triggerWord
-		
+
 	def resetImage(self, direction):
 		pass
 
@@ -80,16 +80,16 @@ class Person(pygame.sprite.Sprite):
 		if isinstance(textToReturn, Dialogue):
 			textToReturn.runText(surface, self.rect.y)
 		else:
-			trigger = textToReturn.runQuestion(surface)
+			trigger = textToReturn.runQuestion(surface, self.rect.y)
 
 		keepRunning = self.dialogueNumber
 		while keepRunning in self.combine:
 			keepRunning += 1
 			textToReturn = self.words[keepRunning]
 			if isinstance(textToReturn, Dialogue):
-				textToReturn.runText(surface)
+				textToReturn.runText(surface, self.rect.y)
 			else:
-				trigger = textToReturn.runQuestion(surface)
+				trigger = textToReturn.runQuestion(surface, self.rect.y)
 		if activate:
 			return self.talkReaction
 		return trigger
