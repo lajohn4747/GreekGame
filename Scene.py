@@ -266,13 +266,16 @@ class Scene:
                         return (0, None)
 
         def hitCollision(self, weapon):
+                remove = []
                 if self.enemies:
                         for enemy in self.enemies:
                                 if(pygame.sprite.collide_rect(weapon, enemy)):
                                         dead = enemy.changeHealth(2)
-                                        print(enemy.health)
+                                        enemy.pushBack(self.hero.direction)
                                         if dead:
-                                                enemy.kill()
+                                                remove.append(enemy)
+                        for e in remove:
+                                self.enemies.remove(e)
 
         def walkCollision(self):
                 if self.enemies:

@@ -407,7 +407,7 @@ def main():
 	scene11People["buildingD12"] = buildingD12
 
 	#Scene 7 enemies
-	enemy = Enemy((300,300),2,people2)
+	enemy = Enemy((300,300),6,people2)
 	enemies = [enemy]
 
 

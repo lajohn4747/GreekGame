@@ -19,7 +19,7 @@ class Enemy(pygame.sprite.Sprite):
 		# This could also be an image loaded from the disk.
 		#self.image = pygame.Surface([self.width, self.height])
 		#self.image.fill(BLACK)
-		#self.health = health
+		self.health = health
 		self.spriteGroup = spriteGroup
 		self.image = pygame.image.load('enemy_down.png').convert_alpha()
 		self.imagesL = [pygame.image.load('enemy_left.png'), pygame.image.load('enemy_left_L.png'), pygame.image.load('enemy_left_R.png')]
@@ -81,7 +81,7 @@ class Enemy(pygame.sprite.Sprite):
 
 	def changeHealth(self, healthChange):
 		self.health -= healthChange
-		if self.health < 0 :
+		if self.health <= 0 :
 			return True
 		return False
 	
@@ -93,7 +93,18 @@ class Enemy(pygame.sprite.Sprite):
                         if pygame.sprite.collide_rect(self, self.spriteGroup[sprite]):
                                 return True
                 return None
-        
+
+	def pushBack(self, direction):
+		if direction == 1:
+			self.rect.y -= 40
+		elif direction == 2:
+			self.rect.x += 40
+		elif direction == 4:
+			self.rect.x -= 40
+		elif direction == 3:
+			self.rect.y += 40
+
+
 	def chasePlayer(self, player):
 		# find normalized direction vector (dx, dy) between enemy and player
 		dx, dy = self.rect.x - player.rect.x, self.rect.y - player.rect.y
