@@ -174,11 +174,11 @@ class Scene:
                 keys = pygame.key.get_pressed()
                 
                 if keys[pygame.K_UP] :
-                        self.hero.rect.y -= 3
+                        self.hero.rect.y -= 5
                         self.hero.direction = 1
                         talk = False
                         if self.wallCollide() or self.walkCollision():
-                                self.hero.rect.y += 3
+                                self.hero.rect.y += 5
                         else:
                                 self.hero.moveImage("up")
                         talkingTo = self.talkCollisions()
@@ -188,45 +188,45 @@ class Scene:
                                 self.talkingTo = talkingTo
 
                 elif keys[pygame.K_DOWN]:
-                        self.hero.rect.y += 3
+                        self.hero.rect.y += 5
                         self.hero.direction = 3
                         talk = False
                         if self.wallCollide() or self.walkCollision():
-                                self.hero.rect.y -= 3
+                                self.hero.rect.y -= 5
                         else:
                                 self.hero.moveImage("down")
                         talkingTo = self.talkCollisions()
                         if talkingTo:
                                 talk = True
-                                self.hero.rect.y -= 3
+                                self.hero.rect.y -= 5
                                 self.talkingTo = talkingTo
 
                 elif keys[pygame.K_RIGHT]:
-                        self.hero.rect.x += 3
+                        self.hero.rect.x += 5
                         self.hero.direction = 2
                         talk = False
                         if self.wallCollide() or self.walkCollision():
-                                self.hero.rect.x -= 3
+                                self.hero.rect.x -= 5
                         else:
                                 self.hero.moveImage("right")
                         talkingTo = self.talkCollisions()
                         if talkingTo:
                                 talk = True
-                                self.hero.rect.x -= 3
+                                self.hero.rect.x -= 5
                                 self.talkingTo = talkingTo
 
                 elif keys[pygame.K_LEFT]:
-                        self.hero.rect.x -= 3
+                        self.hero.rect.x -= 5
                         self.hero.direction = 4
                         talk = False
                         if self.wallCollide() or self.walkCollision():
-                                self.hero.rect.x += 3
+                                self.hero.rect.x += 5
                         else:
                                 self.hero.moveImage("left")
                         talkingTo = self.talkCollisions()
                         if talkingTo:
                                 talk = True
-                                self.hero.rect.x += 3
+                                self.hero.rect.x += 5
                                 self.talkingTo = talkingTo
 
                 #print(self.hero.rect.bottom, self.hero.rect.x)

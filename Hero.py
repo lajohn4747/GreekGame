@@ -116,6 +116,7 @@ class Hero(Person):
 			if self.imageUp > 2:
 				self.imageUp = 0
 			self.image = self.imagesU[self.imageUp]
+	
 	def checkScene(self, scene):
 		seenScene[scene] = True
 	def setSurface(self, surface):
