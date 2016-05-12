@@ -104,13 +104,17 @@ class Scene:
                 self.hero.setPosition(hero_coords)
                 #talk = False
                 talk = False
+                enemyChase = 0
 
                 while True:
                         if not self.pause:
                                 self.drawBackground()
                                 if self.enemies is not None:
-                                        for enemy in self.enemies:
-                                                enemy.chasePlayer(self.hero)
+                                        enemyChase += 1
+                                        if enemyChase == 3:
+                                                for enemy in self.enemies:
+                                                        enemy.chasePlayer(self.hero)
+                                                enemyChase = 0
                                 self.mainSurface.blit(self.hero.image, self.hero.rect)
                                 #health
                                 if(self.hero.health == 3):
@@ -250,11 +254,14 @@ class Scene:
                 else:
                         for transition_point_key in self.transition_points:
                                 transition_point_list = self.transition_points[transition_point_key]
+                                #[left_x, right_x, top_y, bottom_y]
                                 left_x = transition_point_list[0] - 5
                                 right_x = transition_point_list[1]
                                 top_y = transition_point_list[2] - 5
                                 bottom_y = transition_point_list[3] + 5
                                 if self.hero.rect.x >= left_x and self.hero.rect.x <= right_x and self.hero.rect.y >= top_y and self.hero.rect.y <= bottom_y:
+                                        #print("Transition Occurs", transition_point_key)
+                                        #print(self.hero.rect.x, self.hero.rect.y)
                                         return (transition_point_key, (self.hero.rect.x, self.hero.rect.y))
                         return (0, None)
 
@@ -279,7 +286,7 @@ class Scene:
                         if pygame.sprite.collide_rect(self.hero, self.spriteGroup[sprite]):
                                 return self.spriteGroup[sprite]
                 return None
-
+        
         def wallCollide(self):
                 return  self.hero.rect.left < 0 or self.hero.rect.right > self.mainSurface.get_width() or self.hero.rect.top < 0 or self.hero.rect.bottom > self.mainSurface.get_height()
 

@@ -248,7 +248,7 @@ def main():
 	second = Person(50, 50, (0,400))
 	soldier1 = Person(30, 30, (0,400))
 	soldier2 = Person(30, 30, (0,470))
-	third = Enemy((400,200), 5)
+	third = Enemy((400,200), 5, people2)
 
 
 	'''
@@ -407,7 +407,7 @@ def main():
 	scene11People["buildingD12"] = buildingD12
 
 	#Scene 7 enemies
-	enemy = Enemy((300,300),2)
+	enemy = Enemy((300,300),2,people2)
 	enemies = [enemy]
 
 
